@@ -7,6 +7,7 @@
 ### Implemented version
   + Original version + (OpenCV instead of matplotlib), **69.3/15.9FPS** (w, w/o display) on NVIDIA Jetson TX2
   + C++ Ubuntu version => ***200 times faster*** than Python(original) version, **2718/4790FPS** (w, w/o display) on NVIDIA Jetson TX2
+    + Just few lines were edited from *Windows version*
   + ROS version implemented
 
 <br>
@@ -69,7 +70,8 @@
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT/python.JPG" width="600"/>
   </p>
-  + C++ version **Video [here](https://youtu.be/vkucBw3mQ7Y)**
+  
+  + Cpp version **Video [here](https://youtu.be/vkucBw3mQ7Y)**
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT/cpp.JPG" width="600"/>
   </p>
