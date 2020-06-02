@@ -31,6 +31,9 @@
   # Run the demo with the --display flag
   $ python3 sort.py --display
   ~~~
+  
+  <br>
+  
   + Python using OpenCV verison
   ~~~shell
   # need same dataset as above
@@ -38,7 +41,13 @@
   $ cd ros-yolov3-sort/SORT/python_original
   $ python3 sort-opencv.py --display
   ~~~
+  
+  <br>
+  
   + C++ Windows version : refer [here](https://github.com/mcximing/sort-cpp)
+  
+  <br>
+  
   + C++ Ubuntu version
     + running the code using **Pre-Detected bounding boxes from [Faster RCNN](https://github.com/ShaoqingRen/faster_rcnn)**
   ~~~shell
