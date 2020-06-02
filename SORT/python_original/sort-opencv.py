@@ -307,12 +307,13 @@ if __name__ == '__main__':
 
         if(display):
           fn = 'mot_benchmark/%s/%s/img1/%06d.jpg'%(phase, seq, frame)
+          msg1 = '%s/%06d.jpg'%(seq, frame)
           img = cv2.imread(fn, cv2.IMREAD_COLOR)
 
         start_time = time.time()
         trackers = mot_tracker.update(dets)
         cycle_time = time.time() - start_time
-        msg1="current FPS : %.2f"%(1/cycle_time)
+        msg2="current FPS : %.2f"%(1/cycle_time)
         total_time += cycle_time
 
         for d in trackers:
@@ -322,9 +323,9 @@ if __name__ == '__main__':
             rgb=colours[d[4]%32,:]*255
             cv2.rectangle(img, (d[0],d[1]), (d[2],d[3]), (rgb[0],rgb[1],rgb[2]), 2)
         if(display):
-            img2 = cv2.resize(img, dsize=(640, 480), interpolation=cv2.INTER_AREA)
-            cv2.putText(img2, fn+' (%dx%d)'%(img.shape[1],img.shape[0]), (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,45,200), 1)
-            cv2.putText(img2, msg1, (10,40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,45,200), 1)
+            img2 = cv2.resize(img, dsize=(800, 600), interpolation=cv2.INTER_AREA)
+            cv2.putText(img2, msg1+' (%dx%d)'%(img.shape[1],img.shape[0]), (10,25), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,85,200), 2)
+            cv2.putText(img2, msg2, (10,45), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,85,200), 2)
             cv2.imshow('SORT_test',img2)
             cv2.waitKey(1)
 
