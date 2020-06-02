@@ -96,15 +96,15 @@ pkg-config --libs --cflags opencv
 + **Result [video 1](https://youtu.be/w3Em89Z58og)** with ***default cfg, default weights, default trained model***
   + on the monitor playing youtube [video for detection](https://www.youtube.com/watch?v=wqctLW0Hb_0&feature=youtu.be)
   <p align="center">
-  <img src="https://github.com/engcang/YOLOv3-application/blob/master/yolo.png" width="600"/>
+  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/YOLOv3/yolo.png" width="600"/>
   </p>
 
 <br>
 
 + on Test image with ***default cfg, default weights, default trained model***
   <p align="center">
-  <img src="https://github.com/engcang/YOLOv3-application/blob/master/tiny.png" width="600"/>
+  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/YOLOv3/tiny.png" width="600"/>
   </p>
   <p align="center">
-  <img src="https://github.com/engcang/YOLOv3-application/blob/master/dog.png" width="600"/>
+  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/YOLOv3/dog.png" width="600"/>
   </p>
