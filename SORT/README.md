@@ -5,8 +5,8 @@
 <br>
 
 ### Implemented version
-  + Original version + (OpenCV instead of matplotlib), **15.9FPS** on NVIDIA Jetson TX2
-  + C++ Ubuntu version => ***200 times faster*** than Python(original) version, **4790FPS** on NVIDIA Jetson TX2
+  + Original version + (OpenCV instead of matplotlib), **69.3/15.9FPS** (w, w/o display) on NVIDIA Jetson TX2
+  + C++ Ubuntu version => ***200 times faster*** than Python(original) version, **2718/4790FPS** (w, w/o display) on NVIDIA Jetson TX2
   + ROS version implemented
 
 <br>
