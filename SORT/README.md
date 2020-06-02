@@ -14,7 +14,7 @@
 ## Installation
 #### Please install *pip packages on Python 3*
   + Original version : referred [here](https://github.com/abewley/sort)
-    + running the code using **Detected bounding boxes from [Faster RCNN](https://github.com/ShaoqingRen/faster_rcnn)**
+    + running the code using **Pre-Detected bounding boxes from [Faster RCNN](https://github.com/ShaoqingRen/faster_rcnn)**
   ~~~shell
   # Dependencies
   $ python3 -m pip install -r requirements.txt
@@ -23,7 +23,6 @@
   $ python3 sort.py
   ~~~
   + To display the results you need to Download the [2D MOT 2015 benchmark dataset](https://motchallenge.net/data/2D_MOT_2015/#download)
-    + running the code using **Detected bounding boxes from [Faster RCNN](https://github.com/ShaoqingRen/faster_rcnn)**
     + using *matplotlib* library, slow
   ~~~shell
   $ cd <sort_directory>
@@ -41,6 +40,7 @@
   ~~~
   + C++ Windows version : refer [here](https://github.com/mcximing/sort-cpp)
   + C++ Ubuntu version
+    + running the code using **Pre-Detected bounding boxes from [Faster RCNN](https://github.com/ShaoqingRen/faster_rcnn)**
   ~~~shell
   $ git clone https://github.com/engcang/ros-yolov3-sort.git
   $ cd ros-yolov3-sort/SORT/cpp_ubuntu/build
