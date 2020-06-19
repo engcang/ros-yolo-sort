@@ -1,6 +1,9 @@
+### Original repo : [here](https://github.com/leggedrobotics/darknet_ros)
++ Just explanation for installation
 
+<br>
 
-
+### Installation
 + build OpenCV with CUDA as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version-1)
 + build cv_bridge as I did for VINS-Fusion [here](https://github.com/engcang/vins-application#-installation-1)
 ~~~shell
@@ -9,7 +12,7 @@ $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_openc
 $ cd vision_opencv && git checkout origin/melodic
 $ gedit vision_opencv/cv_bridge/CMakeLists.txt
 ~~~
-Edit OpenCV PATHS in CMakeLists and include cmake file
++ Edit OpenCV PATHS in CMakeLists and include cmake file
 ~~~txt
 #when error, try both lines
 #find_package(OpenCV 3 REQUIRED PATHS /usr/local/share/OpenCV NO_DEFAULT_PATH
@@ -25,6 +28,8 @@ include(/usr/local/share/OpenCV/OpenCVConfig.cmake) #under catkin_python_setup()
 ~~~shell
 $ cd .. && catkin build cv_bridge
 ~~~
+
+<br>
 <br>
 
 + Get and build Darknet_ROS version from [here](https://github.com/leggedrobotics/darknet_ros)
@@ -36,7 +41,7 @@ $ cd ../
 $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 + or it also can be done using https:// address
-~~shell
+~~~shell
 $ cd catkin_workspace/src
 $ git clone https://github.com/leggedrobotics/darknet_ros
 $ cd darknet_ros/ && git submodule update --init --recursive
