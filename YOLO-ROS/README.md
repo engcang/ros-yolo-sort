@@ -56,8 +56,22 @@ $ cd ~/catkin_workspace
 $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
+### Running
++ To run, need and cfg files from [darknet homepage](https://github.com/pjreddie/darknet/tree/master/cfg)
++ need weights file
+~~~shell
+$ wget https://pjreddie.com/media/files/yolov3-tiny.weights
+~~~
++ and use the proper .yaml file and .launch files as attached in this repo
+
+~~~shell
+$ roslaunch darknet_ros yolov3tiny.launch
+~~~
+
+<br>
+
 ### Results
-+ with [USB-Camera ROS driver](http://wiki.ros.org/usb_cam), Logitech c930e Video clip [here]()
++ with [USB-Camera ROS driver](http://wiki.ros.org/usb_cam), Logitech c930e Video clip [here](https://youtu.be/nfPVkNXSs-A)
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/YOLO-ROS/YOLO%20V3_screenshot_20.06.2020.png" width="600"/>
   </p>
