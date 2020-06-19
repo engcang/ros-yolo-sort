@@ -7,7 +7,7 @@
 
 #### ● OpenCV version >= 3.4 is needed to run YOLO v3
 ### ● OpenCV build
-+ For **Jetson Xavier NX** board -> just build same as Desktop PC as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version)
++ For **Jetson Xavier NX** board -> just build same as Desktop PC as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version-1)
 + Jetsonhacks build OpenCV on TX2 [here](https://github.com/jetsonhacks/buildOpenCVTX2)
   + before run the .sh script file, please refer [this file change](https://github.com/jetsonhacks/buildOpenCVTX2/pull/34/files) ***For JetPack >= 4.3***
 
