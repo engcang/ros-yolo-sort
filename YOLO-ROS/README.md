@@ -5,6 +5,8 @@
 
 ### Installation
 + build OpenCV with CUDA as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version-1)
+  + **Recommend version is 3.4.0** because darknet has to use C API with OpenCV [refer](https://github.com/pjreddie/darknet/issues/551)
+  + or **Patch as [here](https://github.com/opencv/opencv/issues/10963)** to use other version
 + build cv_bridge as I did for VINS-Fusion [here](https://github.com/engcang/vins-application#-installation-1)
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
