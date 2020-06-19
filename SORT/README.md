@@ -40,6 +40,8 @@
   # need same dataset as above
   $ git clone https://github.com/engcang/ros-yolov3-sort.git
   $ cd ros-yolov3-sort/SORT/python_original
+  # Create a symbolic link to the dataset
+  $ ln -s /path/to/MOT2015_challenge/data/2DMOT2015 mot_benchmark
   $ python3 sort-opencv.py --display
   ~~~
   
@@ -66,12 +68,14 @@
 
 ## Result
 + on MOT benchmark dataset
-  + Python version **Video [here](https://youtu.be/MYbjjg_Mics)**
+  + Python version **TX2 Video [here](https://youtu.be/MYbjjg_Mics)**
+  + **Xavier NX Video [here](https://youtu.be/iruvwU7yveA)**
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT/python.JPG" width="600"/>
   </p>
   
-  + Cpp version **Video [here](https://youtu.be/vkucBw3mQ7Y)**
+  + Cpp version **TX2 Video [here](https://youtu.be/vkucBw3mQ7Y)**
+  + **Xavier NX Video [here](https://youtu.be/xKaU3FE9PoI)**
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT/cpp.JPG" width="600"/>
   </p>
