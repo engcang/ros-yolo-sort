@@ -10,19 +10,19 @@ project(sort_cpp)
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-std=c++11")
 
-find_package(catkin REQUIRED)
+# find_package(catkin REQUIRED)
 find_package(OpenCV REQUIRED)
 if(NOT OpenCV_FOUND)
     message(FATAL_ERROR "OpenCV not found")
 endif()
 
 
-catkin_package(
+# catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES sort_cpp
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
-)
+#)
 
 include_directories(
 ${CMAKE_SOURCE_DIR}/src
