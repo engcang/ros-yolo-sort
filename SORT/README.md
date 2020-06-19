@@ -58,6 +58,7 @@
   $ cd ros-yolov3-sort/SORT/cpp_ubuntu/build
   $ cmake .. && make
   $ cd .. 
+  $ ln -s /path/to/MOT2015_challenge/data/2DMOT2015 mot_benchmark
   $ ./sort_cpp_node 1 (with OpenCV image)
   $ ./sort_cpp_node 0 (without image)
   ~~~
