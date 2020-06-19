@@ -7,7 +7,7 @@
 + build OpenCV with CUDA as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version-1)
   + **Recommend version is 3.4.0** because darknet has to use C API with OpenCV [refer](https://github.com/pjreddie/darknet/issues/551)
   + or **Patch as [here](https://github.com/opencv/opencv/issues/10963)** to use other version 
-    + should comment the /usr/local/include/opencv2/highgui/highgui_c.h line 119 [as here](https://stackoverflow.com/questions/48611228/yolo-compilation-with-opencv-1-fails)
+    + should **comment** the /usr/local/include/opencv2/highgui/highgui_c.h line 119 [as here](https://stackoverflow.com/questions/48611228/yolo-compilation-with-opencv-1-fails)
 + build cv_bridge as I did for VINS-Fusion [here](https://github.com/engcang/vins-application#-installation-1)
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
