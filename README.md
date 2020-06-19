@@ -1,2 +1,5 @@
-# ros-yolov3-sort
-YOLO v3 + SORT tracking + ROS platform, SORT supports python(original) and C++. Not Deep SORT
+# YOLO and SORT, and ROS version of them
++ YOLO installation
++ YOLO-ROS version installation
++ SORT installation + C++ version
++ working on SORT ROS verison
