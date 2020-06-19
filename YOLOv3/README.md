@@ -94,7 +94,8 @@ pkg-config --libs --cflags opencv
 
 <br>
 
-+ **Result [video 1](https://youtu.be/w3Em89Z58og)** with ***default cfg, default weights, default trained model***
++ **Result [Video on Xavier NX](https://youtu.be/Rqkp7XEiQqU)
++ **Result [video on TX2 using USB cam](https://youtu.be/w3Em89Z58og)** with ***default cfg, default weights, default trained model***
   + on the monitor playing youtube [video for detection](https://www.youtube.com/watch?v=wqctLW0Hb_0&feature=youtu.be)
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/YOLOv3/yolo.png" width="600"/>
