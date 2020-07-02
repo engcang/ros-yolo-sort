@@ -4,7 +4,8 @@
   
   <!-- Use YOLOv3 -->
   <arg name="network_param_file"         default="$(find darknet_ros)/config/yolov3tiny.yaml"/>
-  <arg name="image" default="usb_cam/image_raw" />
+  <!--arg name="image" default="usb_cam/image_raw" /-->
+  <arg name="image" default="pi_cam" />
 
 
   <!-- Include main launch file -->
