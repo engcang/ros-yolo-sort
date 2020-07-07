@@ -57,7 +57,7 @@ $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
 ### Running
-+ To run, need and cfg files from [darknet homepage](https://github.com/pjreddie/darknet/tree/master/cfg)
++ To run, need cfg files from [darknet homepage](https://github.com/pjreddie/darknet/tree/master/cfg)
 + need weights file
 ~~~shell
 $ wget https://pjreddie.com/media/files/yolov3-tiny.weights
