@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>sort_ros</name>
+  <version>0.0.0</version>
+  <description>The sort_cpp package</description>
+
+  <maintainer email="mason@todo.todo">mason</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>darknet_ros_msgs</depend>
+  <depend>roscpp</depend>
+
+</package>
