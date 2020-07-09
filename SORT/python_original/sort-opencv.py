@@ -303,6 +303,7 @@ if __name__ == '__main__':
         frame += 1 #detection and frame numbers begin at 1
         dets = seq_dets[seq_dets[:, 0]==frame, 2:7]
         dets[:, 2:4] += dets[:, 0:2] #convert to [x1,y1,w,h] to [x1,y1,x2,y2]
+        print(dets)
         total_frames += 1
 
         if(display):
@@ -311,6 +312,8 @@ if __name__ == '__main__':
           img = cv2.imread(fn, cv2.IMREAD_COLOR)
 
         start_time = time.time()
+        print(dets)
+        pass
         trackers = mot_tracker.update(dets)
         cycle_time = time.time() - start_time
         msg2="current FPS : %.2f"%(1/cycle_time)

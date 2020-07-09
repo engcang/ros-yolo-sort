@@ -29,7 +29,8 @@ from filterpy.kalman import KalmanFilter
 
 import rospy
 from darknet_ros_msgs.msg import BoundingBoxes
-
+from darknet_ros_msgs.msg import BoundingBox
+from sensor_msgs.msg import Image
 
 import sys
 import signal
@@ -44,7 +45,6 @@ try:
 except:
   def jit(func):
     return func
-
 np.random.seed(0)
 
 
@@ -133,6 +133,7 @@ class KalmanBoxTracker(object):
     self.hit_streak = 0
     self.age = 0
 
+
   def update(self,bbox):
     """
     Updates the state vector with observed bbox.
@@ -142,6 +143,7 @@ class KalmanBoxTracker(object):
     self.hits += 1
     self.hit_streak += 1
     self.kf.update(convert_bbox_to_z(bbox))
+
 
   def predict(self):
     """
@@ -156,6 +158,7 @@ class KalmanBoxTracker(object):
     self.time_since_update += 1
     self.history.append(convert_x_to_bbox(self.kf.x))
     return self.history[-1]
+
 
   def get_state(self):
     """
@@ -213,11 +216,16 @@ def associate_detections_to_trackers(detections,trackers,iou_threshold = 0.3):
 
 
 class Sort(object):
-  def __init__(self, max_age=5, min_hits=1):
+  def __init__(self, max_age=5, min_hits=1,display):
     rospy.init_node('sort', anonymous=True)
     self.subb = rospy.Subscriber('darknet_ros/bounding_boxes/', BoundingBoxes, self.boxcallback)
-    self.pubb = rospy.Publisher('tracked_boxes', BoundingBoxes, queue_size=5)
+    self.pubb = rospy.Publisher('tracked_boxes', BoundingBoxes, queue_size=50)
     self.rate = rospy.Rate(30)
+    if display:
+        self.display = display
+        self.subimage = rospy.Subscriber('pi_cam', Image, self.imgcallback)
+        self.pubimage = rospy.Publisher('tracked_image', Image, queue_size=20)
+        
 
     """
     Sets key parameters for SORT
@@ -226,10 +234,42 @@ class Sort(object):
     self.min_hits = min_hits
     self.trackers = []
     self.frame_count = 0
+    self.colours = np.random.rand(32, 3) #used only for display
 
+
+  def self.imgcallback(self, msg):
+    self.img = msg
+    self.img_in = 1
+    return
   def boxcallback(self, msg):
-    self.msg = msg
-    self.check = 1
+    msg.
+    dets = []
+    for i in range(len(msg.bounding_boxes)):
+        bbox = msg.bounding_boxes[i]
+        dets.append(np.array([bbox.xmin, bbox.ymin, bbox.xmax, bbox.ymax, bbox.probability]))
+    dets = np.array(dets)
+    start_time = time.time()
+    trackers = self.update(dets)
+    cycle_time = time.time() - start_time
+    print(cycle_time)
+
+    r = BoundingBoxes()
+    rb = BoundingBox()
+    for d in range(len(trackers)):
+        rb.probability=1
+        rb.xmin = trackers[d,0]
+        rb.ymin = trackers[d,1]
+        rb.xmax = trackers[d,2]
+        rb.ymax = trackers[d,3]
+        rb.id = trackers[d,4]
+        rb.Class = 'tracked'
+        r.bounding_boxes.append(rb)
+    r.header.stamp = rospy.Time.now()
+    self.pubb.publish(r)
+    #            if(display):
+    #                d = d.astype(np.int32)
+    #                rgb=colours[d[4]%32,:]*255
+    #                cv2.rectangle(img, (d[0],d[1]), (d[2],d[3]), (rgb[0],rgb[1],rgb[2]), 2)
     return
 
   def update(self, dets=np.empty((0, 5))):
@@ -284,38 +324,16 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+
 if __name__ == '__main__':
-    # all train
-    total=0
     args = parse_args()
     display = args.display
-    colours = np.random.rand(32, 3) #used only for display
+    mot_tracker = Sort(max_age=5, min_hits=1, display) #create instance of the SORT tracker
 
-    mot_tracker = Sort() #create instance of the SORT tracker
-    #frame id x y w h C -1 -1 -1
-
-    mot_tracker.check = 0 
     while True:
-        dets = []
-        if mot_tracker.check==1:
-            for i in range(len(mot_tracker.msg.bounding_boxes)):
-                bbox=mot_tracker.msg.bounding_boxes[i]
-                dets.append(np.array([bbox.xmin, bbox.ymin, bbox.xmax, bbox.ymax, bbox.probability]))
-            dets = np.array(dets)
-            start_time = time.time()
-            trackers = mot_tracker.update(dets)
-            cycle_time = time.time() - start_time
-            total = total + cycle_time
-
-            r = BoundingBoxes()
-#            print(trackers)
-            for d in range(len(trackers)):
-                r.bounding_boxes.append([1, trackers[d,0], trackers[d,1], trackers[d,2], trackers[d,3], trackers[d,4], 'tracked'])
-            r.header.stamp = rospy.Time.now()
-#            print(r)
-#            print(total)
-            mot_tracker.pubb.publish(r)
-        #            if(display):
-        #                d = d.astype(np.int32)
-        #                rgb=colours[d[4]%32,:]*255
-        #                cv2.rectangle(img, (d[0],d[1]), (d[2],d[3]), (rgb[0],rgb[1],rgb[2]), 2)
+        try:
+            mot_tracker.rate.sleep()
+        except (rospy.ROSInterruptException, SystemExit, KeyboardInterrupt):
+            sys.exit(0)
+#        except:
+#            pass
