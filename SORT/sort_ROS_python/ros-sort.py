@@ -216,7 +216,7 @@ def associate_detections_to_trackers(detections,trackers,iou_threshold = 0.3):
 
 
 class Sort(object):
-  def __init__(self, max_age=5, min_hits=1,display):
+  def __init__(self, display, max_age=5, min_hits=1):
     rospy.init_node('sort', anonymous=True)
     self.subb = rospy.Subscriber('darknet_ros/bounding_boxes/', BoundingBoxes, self.boxcallback)
     self.pubb = rospy.Publisher('tracked_boxes', BoundingBoxes, queue_size=50)
@@ -235,14 +235,14 @@ class Sort(object):
     self.trackers = []
     self.frame_count = 0
     self.colours = np.random.rand(32, 3) #used only for display
+    self.img_in = 0
 
 
-  def self.imgcallback(self, msg):
+  def imgcallback(self, msg):
     self.img = msg
     self.img_in = 1
     return
   def boxcallback(self, msg):
-    msg.
     dets = []
     for i in range(len(msg.bounding_boxes)):
         bbox = msg.bounding_boxes[i]
@@ -264,12 +264,12 @@ class Sort(object):
         rb.id = trackers[d,4]
         rb.Class = 'tracked'
         r.bounding_boxes.append(rb)
+        if self.img_in==1 and display:
+            e = trackers[d].astype(np.int32)
+            rgb=self.colours[e[4]%32,:]*255
+            cv2.rectangle(self.img, (e[0],e[1]), (e[2],e[3]), (rgb[0],rgb[1],rgb[2]), 2)
     r.header.stamp = rospy.Time.now()
     self.pubb.publish(r)
-    #            if(display):
-    #                d = d.astype(np.int32)
-    #                rgb=colours[d[4]%32,:]*255
-    #                cv2.rectangle(img, (d[0],d[1]), (d[2],d[3]), (rgb[0],rgb[1],rgb[2]), 2)
     return
 
   def update(self, dets=np.empty((0, 5))):
@@ -328,7 +328,7 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     display = args.display
-    mot_tracker = Sort(max_age=5, min_hits=1, display) #create instance of the SORT tracker
+    mot_tracker = Sort(display, max_age=5, min_hits=1) #create instance of the SORT tracker
 
     while True:
         try:
