@@ -3,7 +3,8 @@
 + YOLO installation
 + YOLO-ROS version installation
 + SORT installation 
-+ SORT C++ version
-+ 'working on' SORT ROS verison
-+ 'working on' *YOLO + SORT with ROS*
-#### Check each folders~
++ SORT C++ version 'Implemented'
++ SORT ROS verison 'Implemented'
++ *YOLO + SORT with ROS* 'Implemented'
+
+### Check each folders~
