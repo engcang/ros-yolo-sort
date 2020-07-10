@@ -66,6 +66,11 @@
 <br>
   
 ## To run ROS version
++ Check the *topic Naems* and tune *max_age* and *min_hits* in sort_ROS_python folder's **ros-sort.py**
++ and simply run
+~~~shell
+  $ python ros-sort.py --display(optional to publish tracked image, boxes)
+~~~
 
 ## Result
 + on MOT benchmark dataset
