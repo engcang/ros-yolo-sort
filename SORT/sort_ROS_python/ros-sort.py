@@ -31,6 +31,7 @@ import rospy
 from darknet_ros_msgs.msg import BoundingBoxes
 from darknet_ros_msgs.msg import BoundingBox
 from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
 
 import sys
 import signal
@@ -224,6 +225,7 @@ class Sort(object):
     if display:
         self.display = display
         self.subimage = rospy.Subscriber('pi_cam', Image, self.imgcallback)
+        self.subimage = rospy.Subscriber('/usb_cam/image_raw', Image, self.imgcallback)
         self.pubimage = rospy.Publisher('tracked_image', Image, queue_size=20)
         
 
@@ -235,12 +237,19 @@ class Sort(object):
     self.trackers = []
     self.frame_count = 0
     self.colours = np.random.rand(32, 3) #used only for display
+
     self.img_in = 0
+    self.bridge = CvBridge()
 
 
   def imgcallback(self, msg):
-    self.img = msg
+    temp_image = msg
     self.img_in = 1
+    if self.img_in==1 and self.display:
+        try : 
+            self.img = self.bridge.imgmsg_to_cv2(temp_image, "bgr8")
+        except CvBridgeError as e:
+            pass
     return
   def boxcallback(self, msg):
     dets = []
@@ -264,10 +273,18 @@ class Sort(object):
         rb.id = trackers[d,4]
         rb.Class = 'tracked'
         r.bounding_boxes.append(rb)
-        if self.img_in==1 and display:
-            e = trackers[d].astype(np.int32)
-            rgb=self.colours[e[4]%32,:]*255
-            cv2.rectangle(self.img, (e[0],e[1]), (e[2],e[3]), (rgb[0],rgb[1],rgb[2]), 2)
+        if self.img_in==1 and self.display:
+            res = trackers[d].astype(np.int32)
+            rgb=self.colours[res[4]%32,:]*255
+            cv2.rectangle(self.img, (res[0],res[1]), (res[2],res[3]), (rgb[0],rgb[1],rgb[2]), 2)
+            cv2.putText(self.img, "ID : %d"%(res[4]), (res[0],res[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,85,200), 2)
+    if self.img_in==1 and self.display:
+        try : 
+            self.image = self.bridge.cv2_to_imgmsg(self.img, "bgr8")
+            self.image.header.stamp = rospy.Time.now()
+            self.pubimage.publish(self.image)
+        except CvBridgeError as e:
+            pass
     r.header.stamp = rospy.Time.now()
     self.pubb.publish(r)
     return
@@ -328,7 +345,7 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     display = args.display
-    mot_tracker = Sort(display, max_age=5, min_hits=1) #create instance of the SORT tracker
+    mot_tracker = Sort(display, max_age=20, min_hits=1) #create instance of the SORT tracker
 
     while True:
         try:
