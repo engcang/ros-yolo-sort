@@ -8,7 +8,17 @@
   + Original version + (OpenCV instead of matplotlib), **69.3/15.9FPS** (w, w/o display) on NVIDIA Jetson TX2
   + C++ Ubuntu version => ***200 times faster*** than Python(original) version, **2718/4790FPS** (w, w/o display) on NVIDIA Jetson TX2
     + Just few lines were edited from *Windows version*
-  + ROS version implemented
+  + ROS version implemented - only ***Python version yet***
+
+<br>
+
+  
+## To run ROS version
++ Check the *topic Names* and tune *max_age* and *min_hits* in sort_ROS_python folder's **ros-sort.py**
++ and simply run
+~~~shell
+  $ python ros-sort.py --display(optional to publish tracked image, boxes)
+~~~
 
 <br>
 
@@ -64,24 +74,18 @@
   ~~~
   
 <br>
-  
-## To run ROS version
-+ Check the *topic Naems* and tune *max_age* and *min_hits* in sort_ROS_python folder's **ros-sort.py**
-+ and simply run
-~~~shell
-  $ python ros-sort.py --display(optional to publish tracked image, boxes)
-~~~
+
 
 ## Result
 + on MOT benchmark dataset
   + Python version **TX2 Video [here](https://youtu.be/MYbjjg_Mics)**
   + **Xavier NX Video [here](https://youtu.be/iruvwU7yveA)**
   <p align="center">
-  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT/python.JPG" width="600"/>
+  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT_and_ROS_ver/python.JPG" width="600"/>
   </p>
   
   + Cpp version **TX2 Video [here](https://youtu.be/vkucBw3mQ7Y)**
   + **Xavier NX Video [here](https://youtu.be/xKaU3FE9PoI)**
   <p align="center">
-  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT/cpp.JPG" width="600"/>
+  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT_and_ROS_ver/cpp.JPG" width="600"/>
   </p>
