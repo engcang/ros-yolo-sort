@@ -17,7 +17,9 @@
 + Check the *topic Names* and tune *max_age* and *min_hits* in sort_ROS_python folder's **ros-sort.py**
 + and simply run
 ~~~shell
-  $ python ros-sort.py --display(optional to publish tracked image, boxes)
+  $ mv ros-sort.py ~/your_workspace/src/package_PATH/scripts/ && chmod +x ros-sort.py
+  $ rosrun package_name ros-sort.py _/display:=True 
+  ROS parameters : _/display (for image publish) _/max_age:=200 (max age for track) _/min_hits:=1 (min hits for track) _/img_topic:=/usb_cam/image_raw (topic name)
 ~~~
 
 <br>
