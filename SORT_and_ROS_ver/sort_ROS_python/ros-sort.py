@@ -223,8 +223,9 @@ class Sort(object):
     min_hits = rospy.get_param("/min_hits", min_hits)
 
     if display:
+        img_topic = rospy.get_param("/img_topic", '/usb_cam/image_raw')
         self.display = display
-        self.subimage = rospy.Subscriber('/usb_cam/image_raw', Image, self.imgcallback)
+        self.subimage = rospy.Subscriber(img_topic, Image, self.imgcallback)
         self.pubimage = rospy.Publisher('tracked_image', Image, queue_size=20)
         
 
