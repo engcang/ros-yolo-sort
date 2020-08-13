@@ -3,17 +3,14 @@
 """
     SORT: A Simple, Online and Realtime Tracker
     Copyright (C) 2016-2020 Alex Bewley alex@bewley.ai
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
@@ -171,7 +168,6 @@ class KalmanBoxTracker(object):
 def associate_detections_to_trackers(detections,trackers,iou_threshold = 0.3):
   """
   Assigns detections to tracked object (both represented as bounding boxes)
-
   Returns 3 lists of matches, unmatched_detections and unmatched_trackers
   """
   if(len(trackers)==0):
@@ -217,14 +213,17 @@ def associate_detections_to_trackers(detections,trackers,iou_threshold = 0.3):
 
 
 class Sort(object):
-  def __init__(self, display, max_age=5, min_hits=1):
+  def __init__(self, max_age=5, min_hits=1):
     rospy.init_node('sort', anonymous=True)
     self.subb = rospy.Subscriber('darknet_ros/bounding_boxes/', BoundingBoxes, self.boxcallback)
     self.pubb = rospy.Publisher('tracked_boxes', BoundingBoxes, queue_size=50)
     self.rate = rospy.Rate(30)
+    display = rospy.get_param("/display", True)
+    max_age = rospy.get_param("/max_age", max_age)
+    min_hits = rospy.get_param("/min_hits", min_hits)
+
     if display:
         self.display = display
-        self.subimage = rospy.Subscriber('pi_cam', Image, self.imgcallback)
         self.subimage = rospy.Subscriber('/usb_cam/image_raw', Image, self.imgcallback)
         self.pubimage = rospy.Publisher('tracked_image', Image, queue_size=20)
         
@@ -295,7 +294,6 @@ class Sort(object):
       dets - a numpy array of detections in the format [[x1,y1,x2,y2,score],[x1,y1,x2,y2,score],...]
     Requires: this method must be called once for each frame even with empty detections (use np.empty((0, 5)) for frames without detections).
     Returns the a similar array, where the last column is the object ID.
-
     NOTE: The number of objects returned may differ from the number of detections provided.
     """
     self.frame_count += 1
@@ -334,18 +332,13 @@ class Sort(object):
       return np.concatenate(ret)
     return np.empty((0,5))
 
-def parse_args():
-    """Parse input arguments."""
-    parser = argparse.ArgumentParser(description='SORT demo')
-    parser.add_argument('--display', dest='display', help='Display online tracker output (slow) [False]',action='store_true')
-    args = parser.parse_args()
-    return args
+
+
 
 
 if __name__ == '__main__':
-    args = parse_args()
-    display = args.display
-    mot_tracker = Sort(display, max_age=20, min_hits=1) #create instance of the SORT tracker
+
+    mot_tracker = Sort(max_age=200, min_hits=1) #create instance of the SORT tracker
 
     while True:
         try:
