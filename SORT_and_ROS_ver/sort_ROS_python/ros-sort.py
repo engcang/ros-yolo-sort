@@ -263,8 +263,9 @@ class Sort(object):
     print(cycle_time)
 
     r = BoundingBoxes()
-    rb = BoundingBox()
+    #rb = BoundingBox()
     for d in range(len(trackers)):
+        rb = BoundingBox()
         rb.probability=1
         rb.xmin = trackers[d,0]
         rb.ymin = trackers[d,1]
