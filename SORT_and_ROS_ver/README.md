@@ -23,7 +23,7 @@
   # _/min_hits:=1 (min hits for track) _/img_topic:=/usb_cam/image_raw (topic name)
   # _/iou_threshold:=0.2 (IoU threshold for ID matching)
 ~~~
-+ ROS params can be set using .launch file's <param>
++ ROS params can be set using .launch file
 
 <br>
 
