@@ -8,7 +8,7 @@
   + Original version + (OpenCV instead of matplotlib), **69.3/15.9FPS** (w, w/o display) on NVIDIA Jetson TX2
   + C++ Ubuntu version => ***200 times faster*** than Python(original) version, **2718/4790FPS** (w, w/o display) on NVIDIA Jetson TX2
     + Just few lines were edited from *Windows version*
-  + ROS version implemented - only ***Python version yet***
+  + **ROS** version implemented - only ***Python version yet***
 
 <br>
 
@@ -19,8 +19,11 @@
 ~~~shell
   $ mv ros-sort.py ~/your_workspace/src/package_PATH/scripts/ && chmod +x ros-sort.py
   $ rosrun package_name ros-sort.py _/display:=True 
-  ROS parameters : _/display (for image publish) _/max_age:=200 (max age for track) _/min_hits:=1 (min hits for track) _/img_topic:=/usb_cam/image_raw (topic name)
+  # ROS parameters : _/display (for image publish) _/max_age:=200 (max age for track)
+  # _/min_hits:=1 (min hits for track) _/img_topic:=/usb_cam/image_raw (topic name)
+  # _/iou_threshold:=0.2 (IoU threshold for ID matching)
 ~~~
++ ROS params can be set using .launch file's <param>
 
 <br>
 
