@@ -221,6 +221,7 @@ class Sort(object):
     display = rospy.get_param("/display", True)
     max_age = rospy.get_param("/max_age", max_age)
     min_hits = rospy.get_param("/min_hits", min_hits)
+    self.iou_threshold = rospy.get_param("/iou_threshold", 0.3)
 
     if display:
         img_topic = rospy.get_param("/img_topic", '/usb_cam/image_raw')
@@ -311,7 +312,7 @@ class Sort(object):
     trks = np.ma.compress_rows(np.ma.masked_invalid(trks))
     for t in reversed(to_del):
       self.trackers.pop(t)
-    matched, unmatched_dets, unmatched_trks = associate_detections_to_trackers(dets,trks)
+    matched, unmatched_dets, unmatched_trks = associate_detections_to_trackers(dets,trks,self.iou_threshold)
 
     # update matched trackers with assigned detections
     for m in matched:
