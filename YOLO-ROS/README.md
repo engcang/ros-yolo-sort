@@ -1,4 +1,4 @@
-### Original repo : upto [v4 : here](https://github.com/tom13133/darknet_ros) upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
+### Original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
 + Just explanation for installation
 
 <br>
@@ -50,15 +50,17 @@ $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
 ### Running
-+ To run, need cfg files from [darknet homepage](https://github.com/pjreddie/darknet/tree/master/cfg)
++ To run, need cfg files from [darknet homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
 + need weights file
 ~~~shell
 $ wget https://pjreddie.com/media/files/yolov3-tiny.weights
+# or download at the site : https://github.com/AlexeyAB/darknet/releases
 ~~~
 + and use the proper .yaml file and .launch files as attached in this repo
 
 ~~~shell
 $ roslaunch darknet_ros yolov3tiny.launch
+$ roslaunch darknet_ros yolov4tiny.launch
 ~~~
 
 <br>
@@ -66,5 +68,5 @@ $ roslaunch darknet_ros yolov3tiny.launch
 ### Results
 + with [USB-Camera ROS driver](http://wiki.ros.org/usb_cam), Logitech c930e Video clip [here](https://youtu.be/nfPVkNXSs-A)
   <p align="center">
-  <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/YOLO-ROS/YOLO%20V3_screenshot_20.06.2020.png" width="600"/>
+  <img src="https://github.com/engcang/ros-yolo-sort/blob/master/YOLO-ROS/YOLO%20V3_screenshot_20.06.2020.png" width="600"/>
   </p>
