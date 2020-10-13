@@ -38,14 +38,15 @@ $ cd .. && catkin build cv_bridge
 <br>
 <br>
 
-+ Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) (not recommended) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
++ Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
 ~~~shell
 $ cd catkin_workspace/src
-$ git clone https://github.com/tom13133/darknet_ros
+$ git clone https://github.com/leggedrobotics/darknet_ros # up to v3
+$ git clone https://github.com/tom13133/darknet_ros # up to v4
 $ cd darknet_ros/ && git submodule update --init --recursive
 $ cd ~/catkin_workspace
 # before build, check (-O3 -gencode arch=compute_<version>,code=sm_<version>) part in darknet_ros/darknet_ros/CMakeLists.txt if you use CUDA
-# ex) 72 for GTX1650
+# ex) 75 for GTX1650
 $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
