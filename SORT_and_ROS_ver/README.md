@@ -84,7 +84,7 @@
 ## Result
 + on MOT benchmark dataset
   + Python version **TX2 Video [here](https://youtu.be/MYbjjg_Mics)**
-  + **Xavier NX Video [here](https://youtu.be/iruvwU7yveA)**
+  + **Xavier NX Video [here](https://youtu.be/iruvwU7yveA)** [here-live version1](https://youtu.be/vdilds_buEI)
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT_and_ROS_ver/python.JPG" width="600"/>
   </p>
