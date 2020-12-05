@@ -346,11 +346,13 @@ if __name__ == '__main__':
                     mot_tracker.pubimage.publish(mot_tracker.image)
                 except CvBridgeError as e:
                     pass
-            r.header.stamp = rospy.Time.now()
-            mot_tracker.pubb.publish(r)
-
+                
             cycle_time = time.time() - start_time
-            print(cycle_time)
+            if len(r.bounding_boxes)>0:
+                r.header.stamp = rospy.Time.now()
+                mot_tracker.pubb.publish(r)
+                print(cycle_time)
+                
             mot_tracker.rate.sleep()
 
         except (rospy.ROSInterruptException, SystemExit, KeyboardInterrupt):
