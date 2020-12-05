@@ -327,11 +327,11 @@ if __name__ == '__main__':
             for d in range(len(trackers)):
                 rb = BoundingBox()
                 rb.probability=1
-                rb.xmin = trackers[d,0]
-                rb.ymin = trackers[d,1]
-                rb.xmax = trackers[d,2]
-                rb.ymax = trackers[d,3]
-                rb.id = trackers[d,4]
+                rb.xmin = int(trackers[d,0])
+                rb.ymin = int(trackers[d,1])
+                rb.xmax = int(trackers[d,2])
+                rb.ymax = int(trackers[d,3])
+                rb.id = int(trackers[d,4])
                 rb.Class = 'tracked'
                 r.bounding_boxes.append(rb)
                 if mot_tracker.img_in==1 and mot_tracker.display:
@@ -348,7 +348,7 @@ if __name__ == '__main__':
                     pass
                 
             cycle_time = time.time() - start_time
-            if len(r.bounding_boxes)>0:
+            if len(r.bounding_boxes)>0: #prevent empty box
                 r.header.stamp = rospy.Time.now()
                 mot_tracker.pubb.publish(r)
                 print(cycle_time)
