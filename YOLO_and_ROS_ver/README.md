@@ -1,6 +1,37 @@
-# YOLOv3-application
-+ Darknet [homepage](https://pjreddie.com/darknet/)
-+ Darknet [Github](https://github.com/pjreddie/darknet)
+# YOLO and ROS version installation, implementation, application, and comparison
++ Darknet version: [recent github](https://github.com/AlexeyAB/darknet), [homepage](https://pjreddie.com/darknet/), [old github](https://github.com/pjreddie/darknet)
++ OpenCV(DNN) version: [original code gist](https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49)
+  + [OpenCV-dnn benchmark and discuss](https://github.com/AlexeyAB/darknet/issues/6245), [OpenCV-dnn benchmark](https://github.com/AlexeyAB/darknet/issues/6067)
++ OpenVINO version - not OpenVINO built binary but OpenVINO enabled OpenCV(DNN) version
++ tensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
++ other versions: [other versions links in original github](https://github.com/AlexeyAB/darknet#yolo-v4-in-other-frameworks)
+
+| YOLO<br>v3 / v3-tiny<br>v4 /v4-tiny |                    <br>Remark                    | <br>CPU version | CPU<br>openMP<br>AVX | GPU<br><br>support |
+|:-----------------------------------:|:------------------------------------------------:|:---------------:|:--------------------:|:------------------:|
+|               Darknet               |                     .c codes                     |        O        |           O          |          O         |
+|              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
+|      OpenCV-dnn<br>+ CUDA/cuDNN     |             <br>OpenCV ver from 4.4.0            |   <br>utilzed   |         <br>-        |        <br>O       |
+|     <br>OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |      <br>O      |         <br>-        |        <br>-       |
+|           TensorRT(tkDNN)           |                     need GPU                     |     utlized     |           -          |          O         |
+
+<br>
+
+# Index
+1. Results
+2. Prerequisites
+3. Installation
+4. Installation for ROS version
+
+---
+
+<br>
+
+1. Results
+
+
+<br><br><br><br><br><br><br>
+
+
 #### ● GPU monitor from Jetsonhacks for *Jetson boards* [here](https://github.com/jetsonhacks/gpuGraphTX)
 
 <br><br>
