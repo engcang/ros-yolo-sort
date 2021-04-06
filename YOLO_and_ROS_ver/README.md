@@ -239,8 +239,6 @@ $ sudo make install
 
 <details><summary>[CLICK HERE To See]</summary>
 
-<br>
-
 ### ● If OpenCV was built manually, build cv_bridge manually also
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
