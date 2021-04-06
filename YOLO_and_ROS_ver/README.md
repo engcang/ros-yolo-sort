@@ -194,10 +194,9 @@ $ roslaunch darknet_ros yolov4tiny.launch
 <br>
 
 ### Results
-+ with [USB-Camera ROS driver](http://wiki.ros.org/usb_cam), Logitech c930e Video clip [here](https://youtu.be/nfPVkNXSs-A)
-  <p align="center">
-  <img src="yolo_v3_capture_20200620.png" width="600"/>
-  </p>
++ with Logitech c930e Video clip [here](https://youtu.be/nfPVkNXSs-A)
+<p align="center">
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="320" border="10" /></a></p>
 
 ---
 
