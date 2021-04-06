@@ -60,7 +60,7 @@
 # 2. Prerequisites
 ### ● CUDA / cuDNN
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -70,7 +70,7 @@
 
 ### ● OpenCV
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -80,7 +80,7 @@
 
 ### ● OpenCV with CUDA / cuDNN
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -90,7 +90,7 @@
 
 ### ● cv_bridge: OpenCV - ROS bridge
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -100,7 +100,7 @@
 
 ### ● tensorRT
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -110,7 +110,7 @@
 
 ### ● OpenVINO
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -121,7 +121,7 @@
 # 3. Installation
 ### ● Darknet ver.
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
   
 + Clone and make
 ~~~shell
@@ -216,7 +216,7 @@
 
 ### ● OpenCV(DNN) ver.
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -226,7 +226,7 @@
 
 ### ● OpenVINO ver.
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -236,7 +236,7 @@
 
 ### ● tensorRT(tkDNN) ver.
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -246,7 +246,7 @@
 
 # 4. Installation for ROS version
 ### ● Darknet ver.
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
   
 #### original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
 + Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
@@ -291,7 +291,7 @@ $ roslaunch darknet_ros yolov4tiny.launch
 ### ● OpenCV(DNN) ver.
 
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -301,7 +301,7 @@ $ roslaunch darknet_ros yolov4tiny.launch
 
 ### ● OpenVINO ver.
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
@@ -311,7 +311,7 @@ $ roslaunch darknet_ros yolov4tiny.launch
 
 ### ● tensorRT(tkDNN) ver.
 
-<details><summary>[CLICK To See]</summary>
+<details><summary>[CLICK HERE To See]</summary>
 
 ---
 
