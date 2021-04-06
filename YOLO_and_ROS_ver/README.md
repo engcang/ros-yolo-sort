@@ -17,17 +17,17 @@
 <br>
 
 # Index
-## 1. Results
+## 1. [Results](#1-results-1)
 
 ## 2. Prerequisites
-#### ● CUDA / cuDNN
-#### ● OpenCV
-#### ● OpenCV with CUDA / cuDNN
+#### ● [CUDA / cuDNN](#-cuda--cudnn-1)
+#### ● [OpenCV](#-opencv-1)
+#### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
 #### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
   + OpenVINO's prebuilt binary OpenCV is recommended instead. Refer installation below
-#### ● cv_bridge: OpenCV - ROS bridge, should be built when OpenCV is manually built
-#### ● tensorRT
-#### ● OpenVINO
+#### ● [cv_bridge](#-cv_bridge-opencv---ros-bridge): OpenCV - ROS bridge, should be built when OpenCV is manually built
+#### ● [tensorRT](#-tensorrt-1)
+#### ● [OpenVINO](#-openvino-1)
 
 ## 3. Installation
 #### ● Darknet ver.
@@ -57,12 +57,39 @@
 
 # 2. Prerequisites
 ### ● CUDA / cuDNN
+
+---
+
+<br>
+
 ### ● OpenCV
+
+---
+
+<br>
+
 ### ● OpenCV with CUDA / cuDNN
+
+---
+
+<br>
+
 ### ● cv_bridge: OpenCV - ROS bridge
+
+---
+
+<br>
+
 ### ● tensorRT
+
+---
+
+<br>
+
 ### ● OpenVINO
 [OpenVINO download](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
+
+---
 
 <br><br><br>
 
@@ -158,10 +185,27 @@
 
 </details>
 
+---
+
+<br>
+
 ### ● OpenCV(DNN) ver.
+
+---
+
+<br>
+
 ### ● OpenVINO ver.
+
+---
+
+<br>
+
 ### ● tensorRT(tkDNN) ver.
 
+---
+
+<br><br><br>
 
 # 4. Installation for ROS version
 ### ● Darknet ver.
@@ -205,8 +249,20 @@ $ roslaunch darknet_ros yolov4tiny.launch
 
 ---
 
-<br><br>
+<br>
 
 ### ● OpenCV(DNN) ver.
+
+
+---
+
+<br>
+
 ### ● OpenVINO ver.
+
+---
+
+<br>
+
 ### ● tensorRT(tkDNN) ver.
+
