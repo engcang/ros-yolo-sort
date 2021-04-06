@@ -6,11 +6,11 @@
 + tensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
 + other versions: [other versions links in original github](https://github.com/AlexeyAB/darknet#yolo-v4-in-other-frameworks)
 
-| YOLO<br>v3 / v3-tiny<br>v4 /v4-tiny |                    <br>Remark                    | <br>CPU version | CPU<br>openMP<br>AVX | GPU<br><br>support |
+| YOLO<br>v3 / v3-tiny<br>v4 / v4-tiny|                        Remark                    |     CPU version | CPU<br>openMP<br>AVX | GPU<br>    support |
 |:-----------------------------------:|:------------------------------------------------:|:---------------:|:--------------------:|:------------------:|
 |               Darknet               |                     .c codes                     |        O        |           O          |          O         |
 |              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
-|      OpenCV-dnn<br>+ CUDA/cuDNN     |             <br>OpenCV ver from 4.4.0            |   <br>utilzed   |         <br>-        |        <br>O       |
+|      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |       utilzed   |             -        |            O       |
 |     <br>OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |      <br>O      |         <br>-        |        <br>-       |
 |           TensorRT(tkDNN)           |                     need GPU                     |     utlized     |           -          |          O         |
 
