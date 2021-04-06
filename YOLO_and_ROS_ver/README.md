@@ -23,7 +23,6 @@
 
 ## 2. Prerequisites
 #### ● [CUDA / cuDNN](#-cuda--cudnn-1)
-#### ● [OpenCV](#-opencv-1)
 #### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
 #### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
   + OpenVINO's prebuilt binary OpenCV is recommended instead. Refer installation below
@@ -51,7 +50,7 @@
 #### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/)
 #### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson NX
 #### ● GPU monitor from Jetsonhacks for *Jetson boards* [here](https://github.com/jetsonhacks/gpuGraphTX)
-## ● Youtube videos: [Playlist of all results](https://www.youtube.com/playlist?list=PLvgPHeVm_WqIUHg7iu0g73-yaS08kv6-5)
+## ● Youtube videos: <a href="https://www.youtube.com/playlist?list=PLvgPHeVm_WqIUHg7iu0g73-yaS08kv6-5" target="_blank">Playlist of all results</a>
 + text
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=MYbjjg_Mics" target="_blank"><img src="http://img.youtube.com/vi/MYbjjg_Mics/0.jpg" alt="IMAGE ALT TEXT" width="320" border="10" /></a>
 
@@ -62,15 +61,70 @@
 
 <details><summary>[CLICK HERE To See]</summary>
 
----
++ Install **CUDA** and **Graphic Driver**: 
+  + for upper than **18.04**,
+~~~shell
+    $ sudo apt install gcc make
+    $ sudo ubuntu-drivers devices
+    (not recommended, use CUDA install script below) $ sudo ubuntu-drivers autoinstall
+    (not recommended, use CUDA install script below) $ sudo reboot
+    
+    # get the latest CUDA(with graphic driver) install script at https://developer.nvidia.com/cuda-downloads
+    $ sudo sh cuda_<version>_linux.run
+        # if want to install only graphic driver, get graphic driver install script at https://www.nvidia.com/Download/index.aspx?lang=en-us
+        # sudo ./NVIDIA_<graphic_driver_installer>.run --dkms
+        # --dkms option is recommended when you also install NVIDIA driver, to register it along with kernel
+        # otherwise, NVIDIA graphic driver will be gone after kernel upgrade via $ sudo apt upgrade
+    $ sudo reboot
+    
+    $ gedit ~/.bashrc
+    # type
+    export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
+    export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
+~~~
+  + check CUDA version using **nvcc --version**
+~~~shell
+# check installed cuda version
+$ nvcc --version
+# if nvcc --version does not print out CUDA,
+$ gedit ~/.profile
+# type below and save
+export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
+export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
+$ source ~/.profile
+~~~
 
 <br>
 
-</details>
+### ● Trouble shooting for NVIDIA driver or CUDA: please see /var/log/cuda-installer.log or /var/log/nvidia-install.log
++ Installation failed. See log at /var/log/cuda-installer.log for details => mostly because of `X server` is being used.
+    + turn off `X server` and install.
+~~~shell
+# if you are using lightdm
+$ sudo service lightdm stop
 
-### ● OpenCV
+# or if you are using gdm3
+$ sudo service gdm3
 
-<details><summary>[CLICK HERE To See]</summary>
+# then press Ctrl+Alt+F3 -> login with your ID/password
+$ sudo sh cuda_<version>_linux.run
+~~~
++ The kernel module failed to load. Secure boot is enabled on this system, so this is likely because it was not signed by a key that is trusted by the kernel.... 
+    + turn off `Secure Boot` as below [reference](https://wiki.ubuntu.com/UEFI/SecureBoot/DKMS)
+    + If you got this case, you should turn off `Secure Boot` and then turn off `X server` (as above) both.
+
+<br>
+
+
+### ● cuDNN: strong library for Neural Network used with CUDA
++ Download [here](https://developer.nvidia.com/cudnn)
++ install as below: [reference in Korean](https://cafepurple.tistory.com/39)
+~~~shell
+$ sudo tar zxf cudnn.tgz
+$ sudo cp extracted_cuda/include/* <CUDA_PATH>/include/   #ex /usr/local/cuda-11.2/include/
+$ sudo cp -P extracted_cuda/lib64/* <CUDA_PATH>/lib64/   #ex /usr/local/cuda-11.2/lib64/
+$ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.2/lib64/libcudnn*
+~~~
 
 ---
 
@@ -82,6 +136,101 @@
 
 <details><summary>[CLICK HERE To See]</summary>
 
++ Build OpenCV with CUDA / cuDNN - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
+~~~shell
+$ sudo apt-get purge libopencv* python-opencv
+$ sudo apt-get update
+$ sudo apt-get install -y build-essential pkg-config
+$ sudo apt-get install -y cmake libavcodec-dev libavformat-dev libavutil-dev \
+    libglew-dev libgtk2.0-dev libgtk-3-dev libjpeg-dev libpng-dev libpostproc-dev \
+    libswscale-dev libtbb-dev libtiff5-dev libv4l-dev libxvidcore-dev \
+    libx264-dev qt5-default zlib1g-dev libgl1 libglvnd-dev pkg-config \
+    libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev mesa-utils #libeigen3-dev # recommend to build from source : http://eigen.tuxfamily.org/index.php?title=Main_Page
+$ sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy
+$ mkdir <opencv_source_directory> && cd <opencv_source_directory>
+$ wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.1.zip # check version
+$ unzip opencv.zip
+$ cd <opencv_source_directory>/opencv && mkdir build && cd build
+# check your BIN version : http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
+# 8.6 for RTX3080 7.2 for Xavier, 5.2 for GTX TITAN X, 6.1 for GTX TITAN X(pascal)
+# -D BUILD_opencv_cudacodec=OFF #for cuda10-opencv3.4
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_C_COMPILER=gcc-6 \
+      -D CMAKE_CXX_COMPILER=g++-6 \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D WITH_CUDA=ON \
+      -D OPENCV_DNN_CUDA=ON \
+      -D WITH_CUDNN=ON \
+      -D CUDA_ARCH_BIN=7.2 \
+      -D CUDA_ARCH_PTX="" \
+      -D ENABLE_FAST_MATH=ON \
+      -D CUDA_FAST_MATH=ON \
+      -D WITH_CUBLAS=ON \
+      -D WITH_LIBV4L=ON \
+      -D WITH_GSTREAMER=ON \
+      -D WITH_GSTREAMER_0_10=OFF \
+      -D WITH_QT=ON \
+      -D WITH_OPENGL=ON \
+      -D BUILD_opencv_cudacodec=OFF \
+      -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
+      -D WITH_TBB=ON \
+      ../
+$ time make -j8 # 8 : numbers of core
+
+# when make error, use only one core as
+$ time make -j1 # important, use only one core to prevent compile error
+
+$ sudo make install
+$ sudo rm -r <opencv_source_directory> #optional
+~~~
+
+<br>
+
+### ● Trouble shooting for OpenCV build error:
++ Please include the appropriate gl headers before including cuda_gl_interop.h => reference [1](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh#L101), [2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/patches/OpenGLHeader.patch), [3](https://devtalk.nvidia.com/default/topic/1007290/jetson-tx2/building-opencv-with-opengl-support-/post/5141945/#5141945)
++ modules/cudacodec/src/precomp.hpp:60:37: fatal error: dynlink_nvcuvid.h: No such file or directory
+compilation terminated. --> **for CUDA version 10**
+    + => reference [here](https://devtalk.nvidia.com/default/topic/1044773/cuda-setup-and-installation/error-in-installing-opencv-3-4-0-on-cuda-10/)
+    + cmake ... -D BUILD_opencv_cudacodec=OFF ...
++ CUDA_nppicom_LIBRARY not found => reference [here](https://stackoverflow.com/questions/46584000/cmake-error-variables-are-set-to-notfound)
+    + $ sudo apt-get install nvidia-cuda-toolkit
+    + or Edit *FindCUDA.cmake* and *OpenCVDetectCUDA.cmake*
+
+
+### ● (Optional) if also **contrib** for OpenCV should be built,
++ add **-D OPENCV_EXTRA_MODULES_PATH** option as below:
+
+~~~shell
+$ cd <opencv_source_directory>
+$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.4.1.zip #check version
+$ unzip opencv_contrib.zip
+$ cd <opencv_source_directory>/build
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_C_COMPILER=gcc-6 \
+      -D CMAKE_CXX_COMPILER=g++-6 \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D WITH_CUDA=ON \
+      -D OPENCV_DNN_CUDA=ON \
+      -D WITH_CUDNN=ON \
+      -D CUDA_ARCH_BIN=7.2 \
+      -D CUDA_ARCH_PTX="" \
+      -D ENABLE_FAST_MATH=ON \
+      -D CUDA_FAST_MATH=ON \
+      -D WITH_CUBLAS=ON \
+      -D WITH_LIBV4L=ON \
+      -D WITH_GSTREAMER=ON \
+      -D WITH_GSTREAMER_0_10=OFF \
+      -D WITH_QT=ON \
+      -D WITH_OPENGL=ON \
+      -D BUILD_opencv_cudacodec=OFF \
+      -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
+      -D WITH_TBB=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-3.4.1/modules \
+      ../
+$ time make -j1 # important, use only one core to prevent compile error
+$ sudo make install
+~~~
+
 ---
 
 <br>
@@ -91,6 +240,32 @@
 ### ● cv_bridge: OpenCV - ROS bridge
 
 <details><summary>[CLICK HERE To See]</summary>
+
++ If OpenCV was built manually, build cv_bridge manually also
+~~~shell
+$ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
+
+# since ROS Noetic is added, we have to checkout to melodic tree
+$ cd vision_opencv && git checkout origin/melodic
+$ gedit vision_opencv/cv_bridge/CMakeLists.txt
+~~~
++ Edit OpenCV PATHS in CMakeLists and include cmake file
+~~~txt
+#when error, try both lines
+find_package(OpenCV 3 REQUIRED PATHS /usr/local/share/OpenCV NO_DEFAULT_PATH
+#find_package(OpenCV 3 HINTS /usr/local/share/OpenCV NO_DEFAULT_PATH
+  COMPONENTS
+    opencv_core
+    opencv_imgproc
+    opencv_imgcodecs
+  CONFIG
+)
+include(/usr/local/share/OpenCV/OpenCVConfig.cmake) #under catkin_python_setup()
+~~~
+
+~~~shell
+$ cd .. && catkin build cv_bridge
+~~~
 
 ---
 
