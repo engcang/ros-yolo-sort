@@ -67,6 +67,9 @@
 
 # 3. Installation
 ### ● Darknet ver.
+
+<details><summary>[CLICK To See]</summary>
+  
 + Clone and make
 ~~~shell
   $ cd 
@@ -151,6 +154,9 @@
   <p align="center">
   <img src="dog.png" width="600"/>
   </p>
+
+</details>
+
 ### ● OpenCV(DNN) ver.
 ### ● OpenVINO ver.
 ### ● tensorRT(tkDNN) ver.
