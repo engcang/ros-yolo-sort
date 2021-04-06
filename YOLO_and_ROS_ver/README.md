@@ -49,7 +49,8 @@
 #### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/)
 #### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson NX
 #### ● GPU monitor from Jetsonhacks for *Jetson boards* [here](https://github.com/jetsonhacks/gpuGraphTX)
-## ● Youtube videos: [here]()
+## ● Youtube videos: [Playlist of all results](https://www.youtube.com/playlist?list=PLvgPHeVm_WqIUHg7iu0g73-yaS08kv6-5)
++ text
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=MYbjjg_Mics" target="_blank"><img src="http://img.youtube.com/vi/MYbjjg_Mics/0.jpg" alt="IMAGE ALT TEXT" width="320" border="10" /></a>
 
 <br><br><br>
@@ -164,6 +165,8 @@
 
 # 4. Installation for ROS version
 ### ● Darknet ver.
+<details><summary>[CLICK To See]</summary>
+  
 #### original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
 + Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
 ~~~shell
@@ -198,9 +201,11 @@ $ roslaunch darknet_ros yolov4tiny.launch
 <p align="center">
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="320" border="10" /></a></p>
 
+</details>
+
 ---
 
-<br><br><br>
+<br><br>
 
 ### ● OpenCV(DNN) ver.
 ### ● OpenVINO ver.
