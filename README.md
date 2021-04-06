@@ -1,11 +1,9 @@
-# YOLO and SORT, and ROS version of them
+# YOLO and SORT, and ROS versions of them
 ### this repo covers
-+ YOLO installation
-+ YOLO-ROS version installation
-  + up to **v4**
++ YOLO installation: Darknet, OpenCV(DNN), OpenVINO, TensorRT(tkDNN)
++ YOLO-ROS version implementation / installation
 + SORT installation 
 + SORT C++ version 'Implemented'
 + SORT ROS verison 'Implemented'
 + *YOLO + SORT with ROS* 'Implemented'
 
-### Check each folders~
