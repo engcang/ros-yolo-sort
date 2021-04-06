@@ -11,52 +11,62 @@
 |               Darknet               |                     .c codes                     |        O        |           O          |          O         |
 |              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
 |      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |       utilzed   |           -          |          O         |
-|     <br>OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |          O      |           -          |          -         |
+|         OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |          O      |           -          |          -         |
 |           TensorRT(tkDNN)           |                     need GPU                     |     utlized     |           -          |          O         |
 
 <br>
 
 # Index
-1. Results
-2. Prerequisites
-3. Installation
-4. Installation for ROS version
+## 1. Results
+
+## 2. Prerequisites
+#### ● CUDA / cuDNN
+#### ● OpenCV
+#### ● OpenCV with CUDA / cuDNN
+#### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
+  + OpenVINO's prebuilt binary OpenCV is recommended instead. Refer installation below
+#### ● cv_bridge: OpenCV - ROS bridge, should be built when OpenCV is manually built
+#### ● tensorRT
+#### ● OpenVINO
+
+## 3. Installation
+#### ● Darknet ver.
+#### ● OpenCV(DNN) ver.
+#### ● OpenVINO ver.
+#### ● tensorRT(tkDNN) ver.
+
+## 4. Installation for ROS version
+#### ● Darknet ver.
+#### ● OpenCV(DNN) ver.
+#### ● OpenVINO ver.
+#### ● tensorRT(tkDNN) ver.
 
 ---
 
-<br>
+<br><br><br><br>
 
-1. Results
-
-
-<br><br><br><br><br><br><br>
-
-
+# 1. Results
+#### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/)
+#### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson NX
 #### ● GPU monitor from Jetsonhacks for *Jetson boards* [here](https://github.com/jetsonhacks/gpuGraphTX)
+## ● Youtube videos: [here]()
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
-<br><br>
+<br><br><br>
 
-#### ● OpenCV version >= 3.4 is needed to run YOLO v3
-### ● OpenCV build
-+ For **Jetson Xavier NX** board -> just build same as Desktop PC as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version-1)
-+ Jetsonhacks build OpenCV on TX2 [here](https://github.com/jetsonhacks/buildOpenCVTX2)
-  + before run the .sh script file, please refer [this file change](https://github.com/jetsonhacks/buildOpenCVTX2/pull/34/files) ***For JetPack >= 4.3***
+# 2. Prerequisites
+### ● CUDA / cuDNN
+### ● OpenCV
+### ● OpenCV with CUDA / cuDNN
+### ● cv_bridge: OpenCV - ROS bridge
+### ● tensorRT
+### ● OpenVINO
+[OpenVINO download](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
 
-+ To use **onboard camera of TX2 Development Kit, use this OpenCV build [here](https://github.com/Alro10/OpenCVTX2)**
-  + Just using here instead of Jetsonhacks is totally fine
-pkg-config --modversion opencv
-pkg-config --libs --cflags opencv
-  
-+ After built OpenCV, we may remove OpenCV source folder to save disk
-  + But if you want to delete the built OpenCV, you should go to OpenCV source folder and ***$ sudo make uninstall***
-~~~shell
-  $ cd buildOpenCVTX2 && ./removeOpenCVSource.sh #if used Jetsonhacks' script
-  $ rm -r ~/opencv  #or just manually removing the folder is fine.
-~~~
+<br><br><br>
 
-<br><br>
-
-### ● Installation
+# 3. Installation
+### ● Darknet ver.
 + Clone and make
 ~~~shell
   $ cd 
@@ -141,53 +151,14 @@ pkg-config --libs --cflags opencv
   <p align="center">
   <img src="dog.png" width="600"/>
   </p>
+### ● OpenCV(DNN) ver.
+### ● OpenVINO ver.
+### ● tensorRT(tkDNN) ver.
 
 
-
----
-
-
-
-### Original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
-+ Just explanation for installation
-
-<br>
-
-### Installation
-+ build OpenCV with CUDA as [here](https://github.com/engcang/vins-application#-opencv-with-cuda--necessary-for-gpu-version-1)
-  + **User OpenCV version 3.4.0** because darknet has to use C API with OpenCV [refer](https://github.com/pjreddie/darknet/issues/551)
-  + **(Recommended)** or **Patch as [here](https://github.com/opencv/opencv/issues/10963)** to use other version 
-    + should **comment** the /usr/local/include/opencv2/highgui/highgui_c.h line 139 [as here](https://stackoverflow.com/questions/48611228/yolo-compilation-with-opencv-1-fails)
-
-<br>
-
-+ build cv_bridge as I did for VINS-Fusion [here](https://github.com/engcang/vins-application#-installation-1)
-~~~shell
-$ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
-# since ROS Noetic is added, we have to checkout to melodic tree
-$ cd vision_opencv && git checkout origin/melodic
-$ gedit vision_opencv/cv_bridge/CMakeLists.txt
-~~~
-+ Edit OpenCV PATHS in CMakeLists and include cmake file
-~~~txt
-#when error, try both lines
-#find_package(OpenCV 3 REQUIRED PATHS /usr/local/share/OpenCV NO_DEFAULT_PATH
-find_package(OpenCV 3 HINTS /usr/local/share/OpenCV NO_DEFAULT_PATH
-  COMPONENTS
-    opencv_core
-    opencv_imgproc
-    opencv_imgcodecs
-  CONFIG
-)
-include(/usr/local/share/OpenCV/OpenCVConfig.cmake) #under catkin_python_setup()
-~~~
-~~~shell
-$ cd .. && catkin build cv_bridge
-~~~
-
-<br>
-<br>
-
+# 4. Installation for ROS version
+### ● Darknet ver.
+#### original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
 + Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
 ~~~shell
 $ cd catkin_workspace/src
@@ -221,3 +192,11 @@ $ roslaunch darknet_ros yolov4tiny.launch
   <p align="center">
   <img src="yolo_v3_capture_20200620.png" width="600"/>
   </p>
+
+---
+
+<br><br><br>
+
+### ● OpenCV(DNN) ver.
+### ● OpenVINO ver.
+### ● tensorRT(tkDNN) ver.
