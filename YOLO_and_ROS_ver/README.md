@@ -61,8 +61,8 @@
 
 <details><summary>[CLICK HERE To See]</summary>
 
-+ Install **CUDA** and **Graphic Driver**: 
-  + for upper than **18.04**,
+### ● Install **CUDA** and **Graphic Driver**: 
++ for upper than **18.04**,
 ~~~shell
     $ sudo apt install gcc make
     $ sudo ubuntu-drivers devices
@@ -82,7 +82,7 @@
     export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
     export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
 ~~~
-  + check CUDA version using **nvcc --version**
++ check CUDA version using **nvcc --version**
 ~~~shell
 # check installed cuda version
 $ nvcc --version
@@ -93,8 +93,6 @@ export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
 export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
 $ source ~/.profile
 ~~~
-
-<br>
 
 ### ● Trouble shooting for NVIDIA driver or CUDA: please see /var/log/cuda-installer.log or /var/log/nvidia-install.log
 + Installation failed. See log at /var/log/cuda-installer.log for details => mostly because of `X server` is being used.
@@ -136,7 +134,7 @@ $ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.2/lib64/li
 
 <details><summary>[CLICK HERE To See]</summary>
 
-+ Build OpenCV with CUDA / cuDNN - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
+### ● Build OpenCV with CUDA / cuDNN - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
 ~~~shell
 $ sudo apt-get purge libopencv* python-opencv
 $ sudo apt-get update
@@ -241,7 +239,9 @@ $ sudo make install
 
 <details><summary>[CLICK HERE To See]</summary>
 
-+ If OpenCV was built manually, build cv_bridge manually also
+<br>
+
+### ● If OpenCV was built manually, build cv_bridge manually also
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
 
@@ -286,6 +286,8 @@ $ cd .. && catkin build cv_bridge
 ### ● OpenVINO
 
 <details><summary>[CLICK HERE To See]</summary>
+
+[OpenVINO Download](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
 
 ---
 
