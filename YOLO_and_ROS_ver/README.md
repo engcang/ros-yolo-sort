@@ -2,7 +2,7 @@
 + Darknet version: [recent github](https://github.com/AlexeyAB/darknet), [old homepage](https://pjreddie.com/darknet/), [old github](https://github.com/pjreddie/darknet)
 + OpenCV(DNN) version: [original code gist](https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49)
   + [OpenCV-dnn benchmark and discuss](https://github.com/AlexeyAB/darknet/issues/6245), [OpenCV-dnn benchmark](https://github.com/AlexeyAB/darknet/issues/6067)
-+ OpenVINO version - **NOT** OpenVINO built binary, **BUT** OpenVINO enabled OpenCV(DNN) version
++ OpenVINO version: [v4 and v4tiny](https://github.com/TNTWEN/OpenVINO-YOLOV4), [v3 and v3tiny](https://github.com/PINTO0309/OpenVINO-YoloV3)
 + tensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
 + other versions: [other versions links in original github](https://github.com/AlexeyAB/darknet#yolo-v4-in-other-frameworks)
 
@@ -13,8 +13,8 @@
 |               Darknet               |                     .c codes                     |        O        |           O          |          O         |
 |              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
 |      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |     utilzed     |           -          |          O         |
-|         OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |        O        |           -          | Only for GPU stick |
-|           TensorRT(tkDNN)           |                     need GPU                     |     utlized     |           -          |          O         |
+|               OpenVINO              |                     Intel only                   |        O        |           -          | Only for GPU stick |
+|           TensorRT(tkDNN)           |                      need GPU                    |     utlized     |           -          |          O         |
 
 <br>
 
