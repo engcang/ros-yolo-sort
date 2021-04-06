@@ -30,16 +30,16 @@
 #### ● [OpenVINO](#-openvino-1)
 
 ## 3. Installation
-#### ● Darknet ver.
-#### ● OpenCV(DNN) ver.
-#### ● OpenVINO ver.
-#### ● tensorRT(tkDNN) ver.
+#### ● [Darknet ver.](#-darknet-ver-2)
+#### ● [OpenCV(DNN) ver.](#-opencvdnn-ver-2)
+#### ● [OpenVINO ver.](#-openvino-ver-2)
+#### ● [tensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
 
 ## 4. Installation for ROS version
-#### ● Darknet ver.
-#### ● OpenCV(DNN) ver.
-#### ● OpenVINO ver.
-#### ● tensorRT(tkDNN) ver.
+#### ● [Darknet ver.](#-darknet-ver-3)
+#### ● [OpenCV(DNN) ver.](#-opencvdnn-ver-3)
+#### ● [OpenVINO ver.](#-openvino-ver-3)
+#### ● [tensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
 
 ---
 
@@ -183,11 +183,11 @@
   <img src="dog.png" width="600"/>
   </p>
 
-</details>
-
 ---
 
 <br>
+
+</details>
 
 ### ● OpenCV(DNN) ver.
 
@@ -245,11 +245,11 @@ $ roslaunch darknet_ros yolov4tiny.launch
 <p align="center">
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="320" border="10" /></a></p>
 
-</details>
-
 ---
 
 <br>
+
+</details>
 
 ### ● OpenCV(DNN) ver.
 
