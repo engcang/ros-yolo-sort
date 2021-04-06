@@ -2,16 +2,18 @@
 + Darknet version: [recent github](https://github.com/AlexeyAB/darknet), [homepage](https://pjreddie.com/darknet/), [old github](https://github.com/pjreddie/darknet)
 + OpenCV(DNN) version: [original code gist](https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49)
   + [OpenCV-dnn benchmark and discuss](https://github.com/AlexeyAB/darknet/issues/6245), [OpenCV-dnn benchmark](https://github.com/AlexeyAB/darknet/issues/6067)
-+ OpenVINO version - not OpenVINO built binary but OpenVINO enabled OpenCV(DNN) version
++ OpenVINO version - **NOT** OpenVINO built binary, **BUT** OpenVINO enabled OpenCV(DNN) version
 + tensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
 + other versions: [other versions links in original github](https://github.com/AlexeyAB/darknet#yolo-v4-in-other-frameworks)
 
-| YOLO<br>v3 / v3-tiny<br>v4 / v4-tiny|                        Remark                    |     CPU version | CPU<br>openMP<br>AVX | GPU<br>    support |
+<br>
+
+| YOLO<br>v3 / v3-tiny<br>v4 / v4-tiny|                        Remark                    |     CPU version | CPU<br>openMP<br>AVX |     GPU support    |
 |:-----------------------------------:|:------------------------------------------------:|:---------------:|:--------------------:|:------------------:|
 |               Darknet               |                     .c codes                     |        O        |           O          |          O         |
 |              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
-|      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |       utilzed   |           -          |          O         |
-|         OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |          O      |           -          |          -         |
+|      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |     utilzed     |           -          |          O         |
+|         OpenCV-dnn<br>+ OpenVINO    | Intel only, <br>prebuilt OpenCV<br>from OpenVINO |        O        |           -          | Only for GPU stick |
 |           TensorRT(tkDNN)           |                     need GPU                     |     utlized     |           -          |          O         |
 
 <br>
@@ -58,38 +60,61 @@
 # 2. Prerequisites
 ### ● CUDA / cuDNN
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
+
+</details>
 
 ### ● OpenCV
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
+
+</details>
 
 ### ● OpenCV with CUDA / cuDNN
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
+
+</details>
 
 ### ● cv_bridge: OpenCV - ROS bridge
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
+
+</details>
 
 ### ● tensorRT
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
 
+</details>
+
 ### ● OpenVINO
-[OpenVINO download](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
+
+<details><summary>[CLICK To See]</summary>
 
 ---
+
+</details>
 
 <br><br><br>
 
@@ -191,19 +216,31 @@
 
 ### ● OpenCV(DNN) ver.
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
+
+</details>
 
 ### ● OpenVINO ver.
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
 
+</details>
+
 ### ● tensorRT(tkDNN) ver.
 
+<details><summary>[CLICK To See]</summary>
+
 ---
+
+</details>
 
 <br><br><br>
 
@@ -254,15 +291,30 @@ $ roslaunch darknet_ros yolov4tiny.launch
 ### ● OpenCV(DNN) ver.
 
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
+
+</details>
 
 ### ● OpenVINO ver.
 
+<details><summary>[CLICK To See]</summary>
+
 ---
 
 <br>
 
+</details>
+
 ### ● tensorRT(tkDNN) ver.
 
+<details><summary>[CLICK To See]</summary>
+
+---
+
+<br>
+
+</details>
