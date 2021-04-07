@@ -318,7 +318,7 @@ $ sudo ./install_GUI.sh
 
 $ cd /opt/intel/openvino_2021/install_dependencies
 $ sudo -E ./install_openvino_dependencies.sh
-$ echo "source /opt/intel/openvino/bin/setupvars.sh" >> ~/.bashrc
+$ echo "source /opt/intel/openvino_2021/bin/setupvars.sh" >> ~/.bashrc
 # remember to delete this line in ~/.bashrc, if you want to use original OpenCV
 
 $ cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
