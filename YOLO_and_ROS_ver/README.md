@@ -3,7 +3,7 @@
 + OpenCV(DNN) version: [original code gist](https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49)
   + [OpenCV-dnn benchmark and discuss](https://github.com/AlexeyAB/darknet/issues/6245), [OpenCV-dnn benchmark](https://github.com/AlexeyAB/darknet/issues/6067)
 + OpenVINO version: [v4 and v4tiny](https://github.com/TNTWEN/OpenVINO-YOLOV4), [v3 and v3tiny](https://github.com/PINTO0309/OpenVINO-YoloV3)
-+ tensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
++ TensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
 + other versions: [other versions links in original github](https://github.com/AlexeyAB/darknet#yolo-v4-in-other-frameworks)
 
 <br>
@@ -22,25 +22,26 @@
 ## 1. [Results](#1-results-1)
 
 ## 2. Prerequisites
+#### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN)
 #### ● [CUDA / cuDNN](#-cuda--cudnn-1)
 #### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
 #### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
   + OpenVINO's prebuilt binary OpenCV is recommended instead. Refer installation below
 #### ● [cv_bridge](#-cv_bridge-opencv---ros-bridge): OpenCV - ROS bridge, should be built when OpenCV is manually built
-#### ● [tensorRT](#-tensorrt-1)
+#### ● [TensorRT](#-tensorrt-1)
 #### ● [OpenVINO](#-openvino-1)
 
 ## 3. Installation
 #### ● [Darknet ver.](#-darknet-ver-2)
 #### ● [OpenCV(DNN) ver.](#-opencvdnn-ver-2)
 #### ● [OpenVINO ver.](#-openvino-ver-2)
-#### ● [tensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
+#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
 
 ## 4. Installation for ROS version
 #### ● [Darknet ver.](#-darknet-ver-3)
 #### ● [OpenCV(DNN) ver.](#-opencvdnn-ver-3)
 #### ● [OpenVINO ver.](#-openvino-ver-3)
-#### ● [tensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
+#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
 
 ---
 
@@ -57,6 +58,28 @@
 <br><br><br>
 
 # 2. Prerequisites
+
+### ● CMake version upgrade
+
+<details><summary>[CLICK HERE To See]</summary>
+
+~~~shell
+$ wget https://github.com/Kitware/CMake/releases/download/v3.19.8/cmake-3.19.8.tar.gz
+$ tar zxf cmake-3.19.8.tar.gz && cd cmake-3.19.8
+$ ./bootstrap
+$ make
+$ sudo make install
+
+# check, reboot can be needed.
+$ cmake --version 
+~~~
+
+---
+
+<br>
+
+</details>
+
 ### ● CUDA / cuDNN
 
 <details><summary>[CLICK HERE To See]</summary>
@@ -271,7 +294,7 @@ $ cd .. && catkin build cv_bridge
 
 </details>
 
-### ● tensorRT
+### ● TensorRT
 
 <details><summary>[CLICK HERE To See]</summary>
 
@@ -409,7 +432,7 @@ $ cd .. && catkin build cv_bridge
 
 </details>
 
-### ● tensorRT(tkDNN) ver.
+### ● TensorRT(tkDNN) ver.
 
 <details><summary>[CLICK HERE To See]</summary>
 
@@ -484,7 +507,7 @@ $ roslaunch darknet_ros yolov4tiny.launch
 
 </details>
 
-### ● tensorRT(tkDNN) ver.
+### ● TensorRT(tkDNN) ver.
 
 <details><summary>[CLICK HERE To See]</summary>
 
