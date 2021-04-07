@@ -308,8 +308,9 @@ $ cd .. && catkin build cv_bridge
 
 <details><summary>[CLICK HERE To See]</summary>
 
-### ● Download OpenVINO and setup
-+ [OpenVINO Download](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
+<br>
+
++ OpenVINO [Download link](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
 ~~~shell
 $ tar zxf l_openvino_toolkit_p_2021.3.394.tgz
 $ cd l_openvino_toolkit_p_2021.3.394
@@ -320,7 +321,7 @@ $ sudo -E ./install_openvino_dependencies.sh
 $ echo "source /opt/intel/openvino/bin/setupvars.sh" >> ~/.bashrc
 # remember to delete this line in ~/.bashrc, if you want to use original OpenCV
 
-# cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
+$ cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
 $ sudo ./install_prerequisites.sh
 ~~~
 
