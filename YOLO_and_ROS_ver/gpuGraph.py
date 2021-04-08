@@ -85,6 +85,7 @@ def updateGraph(frame):
     ann=plt.annotate(usage_text,(20,90))
     ann_list.append(ann)
 
+    return gpuLine, fill_lines
 
 # Keep a reference to the FuncAnimation, so it does not get garbage collected
 animation = FuncAnimation(fig, updateGraph, frames=200,
