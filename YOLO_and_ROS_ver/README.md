@@ -163,6 +163,8 @@ $ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.2/lib64/li
 <details><summary>[CLICK HERE To See]</summary>
 
 ### ● Build OpenCV with CUDA / cuDNN - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
++ **-D OPENCV_GENERATE_PKGCONFIG=YES** option is also needed for OpenCV 4.X
+  + and copy the generated `opencv4.pc` file to `/usr/local/lib/pkgconfig` or `/usr/lib/aarch64-linux-gnu/pkgconfig` for jetson boards
 ~~~shell
 $ sudo apt-get purge libopencv* python-opencv
 $ sudo apt-get update
