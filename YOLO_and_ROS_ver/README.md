@@ -48,13 +48,29 @@
 <br><br><br><br>
 
 # 1. Results
-#### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/)
+#### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/), with 640x480 resolution
 #### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson NX
 #### ● GPU monitor: [nvtop](https://github.com/Syllo/nvtop) or [this python code](gpuGraph.py), edited from Jetsonhacks' [code for Jetson boards](https://github.com/jetsonhacks/gpuGraphTX)
 ## ● Youtube videos: <a href="https://www.youtube.com/playlist?list=PLvgPHeVm_WqIUHg7iu0g73-yaS08kv6-5" target="_blank">Playlist of all results</a>
 + text
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=MYbjjg_Mics" target="_blank"><img src="http://img.youtube.com/vi/MYbjjg_Mics/0.jpg" alt="IMAGE ALT TEXT" width="320" border="10" /></a>
 
+<br>
+
+#### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
+<details><summary>[CLICK HERE To see the results on TX2]</summary>
+
+| Jetson TX2 |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |   TensorRT<br>(tkDNN)<br>INT8   |
+|:----------:|:------------------------------:|:------------------------------------:|:--------------------------------:|:--------------------------------:|:-------------------------------:|
+|     v4     |           impossible           |    3.79Hz<br>@ CPU 74%<br>GPU 57%    |  6.49Hz<br>@ CPU 59%<br>GPU 75%  |  8.68Hz<br>@ CPU 71%<br>GPU 70%  |  6.42Hz<br>@ CPU 57%<br>GPU 68% |
+|   v4-tiny  | 0.19Hz<br>@ CPU 430%<br>GPU 3% |   13.65Hz<br>@ CPU 154%<br>GPU 27%   | 51.84Hz<br>@ CPU 165%<br>GPU 32% | 71.62Hz<br>@ CPU 177%<br>GPU 27% | 50.0Hz<br>@ CPU 148%<br>GPU 29% |
+
+--- 
+
+<br>
+
+</details>
+  
 <br><br><br>
 
 # 2. Prerequisites
