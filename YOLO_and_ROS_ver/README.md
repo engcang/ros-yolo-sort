@@ -402,7 +402,7 @@ type one of belows: (TKDNN_MODE=FP32 is default before change)
 $ export TKDNN_MODE=FP16
 $ export TKDNN_MODE=INT8
 
-and re-generate .rt file as above
+and re-generate .rt file as above before execute.
 ~~~
 
 ---
