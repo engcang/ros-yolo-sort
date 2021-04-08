@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # MIT License
 # Copyright (c) 2018 Jetsonhacks
+### edited by Mason EungChang Lee
 import sys
 import os
 import numpy as np
@@ -32,10 +33,10 @@ gpux_list = deque(np.linspace(60,0,num=240))
 fill_lines=0
 
 global avg_usage
-global alpha
+global count
 avg_usage=0
-alpha=0.85
 ann_list = []
+count=0
 
 def initGraph():
     global gpuAx
@@ -62,7 +63,7 @@ def updateGraph(frame):
     global gpuLine
     global gpuAx
     global avg_usage
-    global alpha
+    global count
  
     # Now draw the GPU usage
     gpuy_list.popleft()
@@ -71,7 +72,8 @@ def updateGraph(frame):
 
     # The GPU load is stored as a percentage * 10, e.g 256 = 25.6%
     usage = int(fileData)/10
-    avg_usage = avg_usage*(alpha) + usage*(1-alpha)
+    avg_usage = avg_usage + usage
+    count=count+1
 
     gpuy_list.append(usage)
     gpuLine.set_data(gpux_list,gpuy_list)
@@ -81,7 +83,7 @@ def updateGraph(frame):
     for i, a in enumerate(ann_list):
         a.remove()
     ann_list[:] = []
-    usage_text = "avg usage: %.2f %%"%avg_usage
+    usage_text = "avg usage: %.2f %%"%(avg_usage/float(count))
     ann=plt.annotate(usage_text,(20,90))
     ann_list.append(ann)
 
@@ -89,6 +91,6 @@ def updateGraph(frame):
 
 # Keep a reference to the FuncAnimation, so it does not get garbage collected
 animation = FuncAnimation(fig, updateGraph, frames=200,
-                    init_func=initGraph,  interval=250)
+                    init_func=initGraph,  interval=100)
 
 plt.show()
