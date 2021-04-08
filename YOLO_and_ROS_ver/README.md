@@ -22,7 +22,7 @@
 ## 1. [Results](#1-results-1)
 
 ## 2. Prerequisites
-#### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN)
+#### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN), upper than 3.12.8 for train custom data
 #### ● [CUDA / cuDNN](#-cuda--cudnn-1)
 #### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
 #### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
@@ -41,6 +41,7 @@
 #### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-3)
 #### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
 
+## 5. [How to train for custom data]
 ---
 
 <br><br><br><br>
@@ -469,3 +470,7 @@ $ roslaunch darknet_ros yolov4tiny.launch
 <br>
 
 </details>
+
+<br><br><br>
+
+# 5. How to train for custom data
