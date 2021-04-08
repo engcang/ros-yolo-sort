@@ -328,7 +328,7 @@ $ sudo ./install_prerequisites.sh
 
 <details><summary>[CLICK HERE To See]</summary>
 
-#### ● Install darknet
+### ● Install darknet
 + Clone and make
 ~~~shell
   $ git clone https://github.com/AlexeyAB/darknet
@@ -347,7 +347,7 @@ $ sudo ./install_prerequisites.sh
   $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
 ~~~
 
-#### ● Execution
+### ● Execution
 + Using on Test data (Image)
 ~~~shell
   $ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg #or any other image files
@@ -392,6 +392,18 @@ $ sudo ./install_prerequisites.sh
 ### ● TensorRT(tkDNN) ver.
 
 <details><summary>[CLICK HERE To See]</summary>
+
+### ● A lot referred from [here1](https://keyog.tistory.com/33), [here2](https://github.com/Keunyoung-Jung/Yolov4-tkdnn)
+### ● install tkDNN
+### ● prepare `.rt file` (much work to do)
++ if you want to change inference data type, **re-generate `.rt file` after export tkdnn mode**
+~~~shell
+type one of belows: (TKDNN_MODE=FP32 is default before change)
+$ export TKDNN_MODE=FP16
+$ export TKDNN_MODE=INT8
+
+and re-generate .rt file as above
+~~~
 
 ---
 
