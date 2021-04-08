@@ -58,6 +58,17 @@
 
 # 2. Prerequisites
 
+### ● `.weights` and `.cfg` files
++ Download from homepage
+~~~shell
+  $ cd ~/darknet
+  $ wget https://pjreddie.com/media/files/yolov3.weights
+  $ wget https://pjreddie.com/media/files/yolov3-tiny.weights #for tiny (much faster, less accurate)
+  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
+~~~
++ Download cfg from [homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
+
 ### ● CMake version upgrade
 
 <details><summary>[CLICK HERE To See]</summary>
@@ -338,14 +349,6 @@ $ sudo ./install_prerequisites.sh
   # uncomment proper line "ARCH= -gencode arch=compute....." for your GPU
   $ make
 ~~~
-+ Download weights from homepage
-~~~shell
-  $ cd ~/darknet
-  $ wget https://pjreddie.com/media/files/yolov3.weights
-  $ wget https://pjreddie.com/media/files/yolov3-tiny.weights #for tiny (much faster, less accurate)
-  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
-  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
-~~~
 
 ### ● Execution
 + Using on Test data (Image)
@@ -428,7 +431,7 @@ $ cd ~/catkin_workspace
 $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
-### Running
+### Execution and result
 + To run, need cfg files from [darknet homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
 + need weights file
 ~~~shell
@@ -442,12 +445,9 @@ $ roslaunch darknet_ros yolov3tiny.launch
 $ roslaunch darknet_ros yolov4tiny.launch
 ~~~
 
-<br>
-
 ### Results
 + with Logitech c930e Video clip [here](https://youtu.be/nfPVkNXSs-A)
-<p align="center">
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="320" border="10" /></a></p>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="240" border="10" /></a>
 
 ---
 
