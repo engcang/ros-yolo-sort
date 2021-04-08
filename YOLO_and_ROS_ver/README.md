@@ -84,25 +84,18 @@ $ cmake --version
 <details><summary>[CLICK HERE To See]</summary>
 
 ### ● Install **CUDA** and **Graphic Driver**: 
-+ for upper than **18.04**,
++ Ubuntu
 ~~~shell
     $ sudo apt install gcc make
-    $ sudo ubuntu-drivers devices
-    (not recommended, use CUDA install script below) $ sudo ubuntu-drivers autoinstall
-    (not recommended, use CUDA install script below) $ sudo reboot
-    
-    # get the latest CUDA(with graphic driver) install script at https://developer.nvidia.com/cuda-downloads
+    get the latest CUDA(with graphic driver) install script at https://developer.nvidia.com/cuda-downloads
     $ sudo sh cuda_<version>_linux.run
-        # if want to install only graphic driver, get graphic driver install script at https://www.nvidia.com/Download/index.aspx?lang=en-us
-        # sudo ./NVIDIA_<graphic_driver_installer>.run --dkms
-        # --dkms option is recommended when you also install NVIDIA driver, to register it along with kernel
-        # otherwise, NVIDIA graphic driver will be gone after kernel upgrade via $ sudo apt upgrade
     $ sudo reboot
     
     $ gedit ~/.bashrc
-    # type
+    # type and save
     export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
     export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
+    $ . ~/.bashrc
 ~~~
 + check CUDA version using **nvcc --version**
 ~~~shell
