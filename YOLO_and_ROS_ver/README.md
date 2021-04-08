@@ -10,7 +10,7 @@
 
 | YOLO<br>v3 / v3-tiny<br>v4 / v4-tiny|                        Remark                    |     CPU version | CPU<br>openMP<br>AVX |     GPU support    |
 |:-----------------------------------:|:------------------------------------------------:|:---------------:|:--------------------:|:------------------:|
-|               Darknet               |                     .c codes                     |        O        |           O          |          O         |
+|               Darknet               |                     .c codes                     |        O        |           O          | O, from CUDA 10.1  |
 |              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
 |      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |     utilzed     |           -          |          O         |
 |               OpenVINO              |                     Intel only                   |        O        |           -          | Only for GPU stick |
