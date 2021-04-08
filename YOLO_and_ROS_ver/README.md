@@ -33,12 +33,12 @@
 
 ## 3. Installation
 #### ● [Darknet ver.](#-darknet-ver-2)
-#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver-2)
+#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-2)
 #### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
 
 ## 4. Installation for ROS version
 #### ● [Darknet ver.](#-darknet-ver-3)
-#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver-3)
+#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-3)
 #### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
 
 ---
@@ -333,12 +333,15 @@ $ sudo ./install_prerequisites.sh
 ### ● Darknet ver.
 
 <details><summary>[CLICK HERE To See]</summary>
-  
+
+#### ● Install darknet
 + Clone and make
 ~~~shell
-  $ cd 
-  $ git clone https://github.com/pjreddie/darknet
-  $ gedit Makefile # => Edit first 3 lines if you want to use them (OPENCV=1 is needed to watch GUI result)
+  $ git clone https://github.com/AlexeyAB/darknet
+  $ cd darknet
+  $ gedit Makefile # => Edit if you want to use option 
+     # OPENCV=1 is needed to watch GUI result
+  # uncomment proper line "ARCH= -gencode arch=compute....." for your GPU
   $ make
 ~~~
 + Download weights from homepage
@@ -346,78 +349,35 @@ $ sudo ./install_prerequisites.sh
   $ cd ~/darknet
   $ wget https://pjreddie.com/media/files/yolov3.weights
   $ wget https://pjreddie.com/media/files/yolov3-tiny.weights #for tiny (much faster, less accurate)
+  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
 ~~~
 
-<br><br>
-
-### ● Execution
-
+#### ● Execution
 + Using on Test data (Image)
 ~~~shell
   $ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg #or any other image files
-   # -> yolov3 will assume memory a lot.
   $ ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg  #V3 tiny
 ~~~
 + Using on Test data (Video, Live)
 ~~~shell
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights data/dog.jpg #or any other image files
-   # -> yolov3 will assume memory a lot.
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg  #V3 tiny
+# Video
+  $ ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights any_video.mp4
+
+# Live camera
+  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights -c 1 # 1 is camera number, as onboard camera is 0, usb camera is 1
+  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights /dev/video1 #same here
 ~~~
 + Using onboard camera of TX2 development kit (Live), *tiny*
 ~~~shell
   $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights "nvcamerasrc ! video/x-raw(memory:NVMM), width=(int)1280, height=(int)720,format=(string)I420, framerate=(fraction)30/1 ! nvvidconv flip-method=0 ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
 ~~~
-+ Using USB camera on TX2 (Live), *tiny*
-~~~shell
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights -c 1 # 1 is camera number, as onboard camera is 0, usb camera is 1
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights /dev/video1 #same here
-  # if not using development kit, instead carrier board, usb camera will be camera0
-~~~
-
-<br><br>
-
 
 ### ● Trouble shooting
-+ *not such file of directory tegra/libGL.so* when building **OpenCV**
-  + Change the script file before run it, [here](https://github.com/jetsonhacks/buildOpenCVTX2/pull/34/files)
-+ *make[2]: *** No rule to make target '/usr/lib/aarch64-linux-gnu/libGL.so', needed by 'lib/libopencv_cudev.so.3.4.1'. Stop.*
-  + **OpenCV** was not built well.
-  + or for TX2, did not build **OpenCV** manually yet -> If you want to use pre-installed OpenCV from Jetpack, 
-+ *nvcc not found* -> After OpenCV, when building **YOLOv3**
-  ~~~shell
-    $ echo "export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}" >> ~/.bashrc
-    $ echo "export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
-    # or type those exports into ~/.bashrc manually
-    $ source ~/.bashrc
-  ~~~
 + *No such file lib....* when **execute**
 ~~~shell
   $ sudo ldconfig
 ~~~
-  
-<br><br>
-
-### ● Result
-
-<br>
-
-+ **Result [Video on Xavier NX](https://youtu.be/Rqkp7XEiQqU)
-+ **Result [video on TX2 using USB cam](https://youtu.be/w3Em89Z58og)** with ***default cfg, default weights, default trained model***
-  + on the monitor playing youtube [video for detection](https://www.youtube.com/watch?v=wqctLW0Hb_0&feature=youtu.be)
-  <p align="center">
-  <img src="yolo.png" width="600"/>
-  </p>
-
-<br>
-
-+ on Test image with ***default cfg, default weights, default trained model***
-  <p align="center">
-  <img src="tiny.png" width="600"/>
-  </p>
-  <p align="center">
-  <img src="dog.png" width="600"/>
-  </p>
 
 ---
 
