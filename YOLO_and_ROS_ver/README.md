@@ -22,6 +22,7 @@
 ## 1. [Results](#1-results-1)
 
 ## 2. Prerequisites
+#### ● [`.weights` and `.cfg` files](#-weights-and-cfg-files-1)
 #### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN), upper than 3.12.8 for train custom data
 #### ● [CUDA / cuDNN](#-cuda--cudnn-1)
 #### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
@@ -59,7 +60,7 @@
 # 2. Prerequisites
 
 ### ● `.weights` and `.cfg` files
-+ Download from homepage
++ Download `.weights` from homepage
 ~~~shell
   $ cd ~/darknet
   $ wget https://pjreddie.com/media/files/yolov3.weights
@@ -67,7 +68,8 @@
   $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
   $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
 ~~~
-+ Download cfg from [homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
++ Download `.cfg` from [homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
++ Further versions can be checked [here](https://github.com/AlexeyAB/darknet#pre-trained-models)
 
 ### ● CMake version upgrade
 
@@ -418,7 +420,7 @@ and re-generate .rt file as above before execute.
 ### ● Darknet ver.
 <details><summary>[CLICK HERE To See]</summary>
   
-#### original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
+#### ● original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
 + Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
 ~~~shell
 $ cd catkin_workspace/src
@@ -427,26 +429,18 @@ $ git clone https://github.com/tom13133/darknet_ros # up to v4
 $ cd darknet_ros/ && git submodule update --init --recursive
 $ cd ~/catkin_workspace
 # before build, check (-O3 -gencode arch=compute_<version>,code=sm_<version>) part in darknet_ros/darknet_ros/CMakeLists.txt if you use CUDA
-# ex) 75 for GTX1650
+# ex) 75 for GTX1650, 86 for RTX3080
 $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
-### Execution and result
-+ To run, need cfg files from [darknet homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
-+ need weights file
+### ● Execution and result
++ Use the proper `.yaml` files and `.launch` files as attached in this repo
 ~~~shell
-$ wget https://pjreddie.com/media/files/yolov3-tiny.weights
-# or download at the site : https://github.com/AlexeyAB/darknet/releases
+$ roslaunch darknet_ros darknet_ros_yolov3tiny.launch network_param_file:=darknet_ros_yolov3tiny.yaml
+or
+$ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darknet_ros_yolov4tiny.yaml
 ~~~
-+ and use the proper .yaml file and .launch files as attached in this repo
-
-~~~shell
-$ roslaunch darknet_ros yolov3tiny.launch
-$ roslaunch darknet_ros yolov4tiny.launch
-~~~
-
-### Results
-+ with Logitech c930e Video clip [here](https://youtu.be/nfPVkNXSs-A)
++ with Logitech c930e Video clip
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="240" border="10" /></a>
 
 ---
