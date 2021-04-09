@@ -491,3 +491,36 @@ $ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darkne
 <br><br><br>
 
 # 5. How to train for custom data
+
+<details><summary>[CLICK HERE To See]</summary>
+
+#### ● Get the image data and label them
++ install `yolo_mark` and label images
+  + need `cmake` upperthan 3.12.8
+  + need `OpenCV`
+~~~shell
+$ git clone https://github.com/AlexeyAB/Yolo_mark.git
+$ cd Yolo_mark 
+$ cmake . && make
+
+$ cd Yolo_mark/x64/Release/data
+$ gedit obj.data 
+# edit the number of classes - e.g., classses=10
+
+$ gedit obj.names
+# edit the names of classes - e.g., person, drone, ...
+
+$ cd img
+# place all images you want to use to train
+
+$ ./linux_mark.sh
+# draw bounding boxes, then you get label files (.txt files)
+~~~
+
+#### ● Train images with labels
+
+---
+
+<br>
+
+</details>
