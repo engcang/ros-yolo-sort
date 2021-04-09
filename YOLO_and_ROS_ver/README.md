@@ -287,7 +287,51 @@ $ sudo make install
 
 <details><summary>[CLICK HERE To See]</summary>
 
-### ● If OpenCV was built manually, build cv_bridge manually also
+### ● CV_bridge with OpenCV 4.X version
++ Referred [here](https://github.com/ros-perception/vision_opencv/issues/272#issuecomment-471311300)
+~~~shell
+$ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
+# since ROS Noetic is added, we have to checkout to melodic tree
+$ cd vision_opencv && git checkout origin/melodic
+$ gedit vision_opencv/cv_bridge/CMakeLists.txt
+~~~
++ Add options and edit OpenCV PATHS in CMakeLists
+~~~txt
+# add right after project()
+set(CMAKE_CXX_STANDARD 11) 
+
+# edit find_package(OpenCV)
+find_package(OpenCV 4 REQUIRED PATHS /usr/local/share/opencv4 NO_DEFAULT_PATH
+  COMPONENTS
+    opencv_core
+    opencv_imgproc
+    opencv_imgcodecs
+  CONFIG
+)
+include(/usr/local/lib/cmake/opencv4/OpenCVConfig.cmake)
+~~~
++ Edit `cv_bridge/src/CMakeLists.txt`
+~~~txt
+# line number 35, Edit 3 -> 4
+if (OpenCV_VERSION_MAJOR VERSION_EQUAL 4)
+~~~
++ Edit `cv_bridge/src/module_opencv3.cpp`
+~~~cpp
+// line number 110
+//    UMatData* allocate(int dims0, const int* sizes, int type, void* data, size_t* step, int flags, UMatUsageFlags usageFlags) const
+    UMatData* allocate(int dims0, const int* sizes, int type, void* data, size_t* step, AccessFlag flags, UMatUsageFlags usageFlags) const
+
+// line number 140
+//    bool allocate(UMatData* u, int accessFlags, UMatUsageFlags usageFlags) const
+    bool allocate(UMatData* u, AccessFlag accessFlags, UMatUsageFlags usageFlags) const
+~~~
+~~~shell
+$ cd .. && catkin build cv_bridge
+~~~
+
+<br>
+
+### ● CV_bridge with OpenCV 3.X version
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
 
