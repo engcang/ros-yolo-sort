@@ -192,7 +192,7 @@ $ sudo apt-get install -y cmake libavcodec-dev libavformat-dev libavutil-dev \
     libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev mesa-utils #libeigen3-dev # recommend to build from source : http://eigen.tuxfamily.org/index.php?title=Main_Page
 $ sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy
 $ mkdir <opencv_source_directory> && cd <opencv_source_directory>
-$ wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.1.zip # check version
+$ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.2.zip # check version
 $ unzip opencv.zip
 $ cd <opencv_source_directory>/opencv && mkdir build && cd build
 # check your BIN version : http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
@@ -202,6 +202,7 @@ $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_C_COMPILER=gcc-6 \
       -D CMAKE_CXX_COMPILER=g++-6 \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D OPENCV_GENERATE_PKGCONFIG=YES \
       -D WITH_CUDA=ON \
       -D OPENCV_DNN_CUDA=ON \
       -D WITH_CUDNN=ON \
@@ -246,13 +247,14 @@ compilation terminated. --> **for CUDA version 10**
 
 ~~~shell
 $ cd <opencv_source_directory>
-$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.4.1.zip #check version
+$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.5.2.zip #check version
 $ unzip opencv_contrib.zip
 $ cd <opencv_source_directory>/build
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_C_COMPILER=gcc-6 \
       -D CMAKE_CXX_COMPILER=g++-6 \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D OPENCV_GENERATE_PKGCONFIG=YES \
       -D WITH_CUDA=ON \
       -D OPENCV_DNN_CUDA=ON \
       -D WITH_CUDNN=ON \
@@ -269,7 +271,7 @@ $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D BUILD_opencv_cudacodec=OFF \
       -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
       -D WITH_TBB=ON \
-      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-3.4.1/modules \
+      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.5.2/modules \
       ../
 $ time make -j1 # important, use only one core to prevent compile error
 $ sudo make install
