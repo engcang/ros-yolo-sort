@@ -285,7 +285,7 @@ $ sudo make install
 
 ### ● cv_bridge: OpenCV - ROS bridge
 
-<details><summary>[CLICK HERE To See]</summary>
+<details><summary>[CLICK HERE for OpenCV version 4.X]</summary>
 
 ### ● CV_bridge with OpenCV 4.X version
 + Referred [here](https://github.com/ros-perception/vision_opencv/issues/272#issuecomment-471311300)
@@ -329,8 +329,14 @@ if (OpenCV_VERSION_MAJOR VERSION_EQUAL 4)
 $ cd .. && catkin build cv_bridge
 ~~~
 
+---
+
 <br>
 
+</details>
+
+<details><summary>[CLICK HERE for OpenCV version 3.X]</summary>
+  
 ### ● CV_bridge with OpenCV 3.X version
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
