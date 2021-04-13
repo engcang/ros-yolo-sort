@@ -499,7 +499,21 @@ $ sudo ./install_prerequisites.sh
 <details><summary>[CLICK HERE To See]</summary>
 
 ### ● A lot referred from [here](https://github.com/Keunyoung-Jung/Yolov4-tkdnn)
+
 ### ● install tkDNN
+
+~~~shell
+$ git clone https://github.com/Keunyoung-Jung/Yolov4-tkdnn.git
+$ cd Yolo-tkdnn/tkdnn
+$ mkdir build && cd build
+$ camke ..
+$ make
+~~~
+#### Fucking ★Trobule★ shooting
++ **error: ‘CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST’ was not declared in this scope**
+  + cuDNN version is too recent. Apply [this patch](https://github.com/ceccocats/tkDNN/issues/74#issuecomment-659093110)
+  + `$ cd tkdnn && patch -p1 < ./tkDNN_cudnn8support.patch`
+
 ### ● prepare `.rt file` (much work to do)
 + if you want to change inference data type, **re-generate `.rt file` after export tkdnn mode**
 ~~~shell
