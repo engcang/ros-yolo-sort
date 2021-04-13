@@ -113,18 +113,27 @@ $ cmake --version
 <details><summary>[CLICK HERE To See]</summary>
 
 ### ● Install **CUDA** and **Graphic Driver**: 
+##### ● (If you will use TensorRT) The latest TensorRT(7.2.3) supports CUDA 10.2, 11.0 update 1, 11.1 update 1, and 11.2 update 1. [doc](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-723/release-notes/tensorrt-7.html#rel_7-2-3)
 + Ubuntu
 ~~~shell
     $ sudo apt install gcc make
-    get the latest CUDA(with graphic driver) install script at https://developer.nvidia.com/cuda-downloads
-    $ sudo sh cuda_<version>_linux.run
+    get the right version of CUDA(with graphic driver) .deb file at https://developer.nvidia.com/cuda-downloads
+    follow the installation instructions there!
+        # .run file can be used as nvidia graphic driver. But, .deb file is recommended to install tensorRT further.
+        # if want to install only graphic driver, get graphic driver install script at https://www.nvidia.com/Download/index.aspx?lang=en-us
+        # sudo ./NVIDIA_<graphic_driver_installer>.run --dkms
+        # --dkms option is recommended when you also install NVIDIA driver, to register it along with kernel
+        # otherwise, NVIDIA graphic driver will be gone after kernel upgrade via $ sudo apt upgrade
     $ sudo reboot
     
     $ gedit ~/.bashrc
     # type and save
-    export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
-    export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
+    export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-11.2
+    export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-11.2
     $ . ~/.bashrc
+    
+    # check if installed well
+    $ dpkg-query -W | grep cuda
 ~~~
 + check CUDA version using **nvcc --version**
 ~~~shell
@@ -133,8 +142,8 @@ $ nvcc --version
 # if nvcc --version does not print out CUDA,
 $ gedit ~/.profile
 # type below and save
-export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-10.1
-export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-10.1
+export PATH=<CUDA_PATH>/bin:$PATH #ex: /usr/local/cuda-11.2
+export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-11.2
 $ source ~/.profile
 ~~~
 
@@ -295,7 +304,7 @@ $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_openc
 $ cd vision_opencv && git checkout origin/melodic
 $ gedit vision_opencv/cv_bridge/CMakeLists.txt
 ~~~
-+ Add options and edit OpenCV PATHS in CMakeLists
++ Add options and edit OpenCV PATHS in `CMakeLists.txt`
 ~~~txt
 # add right after project()
 set(CMAKE_CXX_STANDARD 11) 
@@ -349,7 +358,6 @@ $ gedit vision_opencv/cv_bridge/CMakeLists.txt
 ~~~txt
 #when error, try both lines
 find_package(OpenCV 3 REQUIRED PATHS /usr/local/share/OpenCV NO_DEFAULT_PATH
-#find_package(OpenCV 3 HINTS /usr/local/share/OpenCV NO_DEFAULT_PATH
   COMPONENTS
     opencv_core
     opencv_imgproc
@@ -372,6 +380,28 @@ $ cd .. && catkin build cv_bridge
 ### ● TensorRT
 
 <details><summary>[CLICK HERE To See]</summary>
+
+#### ● The latest TensorRT(7.2.3) supports CUDA 10.2, 11.0 update 1, 11.1 update 1, and 11.2 update 1. [doc](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-723/release-notes/tensorrt-7.html#rel_7-2-3)
++ Download right version of `TensorRT` at [nvidia download link](https://developer.nvidia.com/nvidia-tensorrt-download)
++ Install it
+~~~shell
+$ cd ~/Downloads
+$ sudo dpkg -i nv-tensorrt-repo-ubuntu1804-cuda11.1-trt7.2.3.4-ga-20210226_1-1_amd64.deb
+
+# copy-paste the result of .deb installation
+$ sudo apt-key add /var/nv-tensorrt-repo-ubuntu1804-cuda11.1-trt7.2.3.4-ga-20210226/7fa2af80.pub
+
+$ sudo apt update
+$ sudo apt-get install tensorrt
+
+$ sudo apt-get install python-libnvinfer-dev
+$ sudo apt-get install python3-libnvinfer-dev
+
+$ (optional for ONNX) sudo apt-get install onnx-graphsurgeon
+
+Verify the installation!
+$ dpkg -l | grep TensorRT
+~~~
 
 ---
 
@@ -468,7 +498,7 @@ $ sudo ./install_prerequisites.sh
 
 <details><summary>[CLICK HERE To See]</summary>
 
-### ● A lot referred from [here1](https://keyog.tistory.com/33), [here2](https://github.com/Keunyoung-Jung/Yolov4-tkdnn)
+### ● A lot referred from [here](https://github.com/Keunyoung-Jung/Yolov4-tkdnn)
 ### ● install tkDNN
 ### ● prepare `.rt file` (much work to do)
 + if you want to change inference data type, **re-generate `.rt file` after export tkdnn mode**
