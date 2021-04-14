@@ -505,8 +505,8 @@ $ sudo ./install_prerequisites.sh
 ### ● install tkDNN
 
 ~~~shell
-$ git clone https://github.com/Keunyoung-Jung/Yolov4-tkdnn.git
-$ cd Yolo-tkdnn/tkdnn
+$ git clone https://github.com/ceccocats/tkDNN
+$ cd tkDNN
 $ mkdir build && cd build
 $ camke ..
 $ make
@@ -533,12 +533,12 @@ $ ./darknet export <path-to-cfg-file> <path-to-weights> layers
 
 + Build `.rt` file, which can generate `executable file`
 ~~~shell
-$ cd tkdnn/tests/darknet
+$ cd tkDNN/tests/darknet
 $ cp yolo4.cpp <name_you_want>.cpp
 $ gedit <name_you_want>.cpp
 ~~~
 ~~~cpp
-std::string bin_path = "path from tkdnn/build folder"; //edit
+std::string bin_path = "path from tkDNN/build folder"; //edit
 
 // Edit here with output layer, check exported 'layers' folder
 // e.g., for yolo v4 tiny, exported .bin file with name 'g' are 'g30.bin' and 'g37.bin'
