@@ -498,6 +498,8 @@ $ sudo ./install_prerequisites.sh
 
 <details><summary>[CLICK HERE To See]</summary>
 
+<br>
+
 ### ● A lot referred from [here](https://github.com/Keunyoung-Jung/Yolov4-tkdnn)
 
 ### ● install tkDNN
@@ -559,14 +561,15 @@ $ cmake .. && make
 ### it reads the .cfg and .bin files written in <name_you_want>.cpp file, so directories should be accurate
 $ ./test_<name_you_want> 
 ~~~
-+ Execution, refer [here](https://github.com/ceccocats/tkDNN#run-the-demo) for more detail
+
+### ● Execution, refer [here](https://github.com/ceccocats/tkDNN#run-the-demo) for more detail
 ~~~shell
 $ cd tkdnn/build
 $ ./demo <name_you_want>_fp32.rt ~/test_video.mp4 y 80 1 1
 (./demo <network-rt-file> <path-to-video> <kind-of-network> <number-of-classes> <n-batches> <show-flag>)
 ~~~
 
-+ if you want to change inference data type, **re-generate `.rt file` after export tkdnn mode**
+### ● Changing inference data type: **re-generate `.rt file` after export tkdnn mode**
 ~~~shell
 type one of belows: (TKDNN_MODE=FP32 is default before change)
 $ export TKDNN_MODE=FP16
