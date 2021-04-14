@@ -523,6 +523,10 @@ $ make
 + **error: ‘CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST’ was not declared in this scope**
   + cuDNN version is too recent. Apply [this patch](https://github.com/ceccocats/tkDNN/issues/74#issuecomment-659093110)
   + `$ cd tkdnn && patch -p1 < ./tkDNN_cudnn8support.patch`
++ **Please set them or make sure they are set and tested correctly in the CMake files: CUDA_cublas_device_LIBRARY (ADVANCED)**
+  + (Almost cases) `Cmake version` is not met. Go to [here](#-cmake-version-upgrade-upper-than-313-for-openvino-upper-than-315-for-tensorrttkdnn-upper-than-3128-for-train-custom-data). Please check `Prerequisites` first!!!!!
+  + (Less cases) CUDA libraries are not installed (libcublas, etc...)
+  
 
 ### ● prepare `.rt file` ★much work to do★
 + Export `weight` and `cfg` file into `.bin` files as [original repo](https://github.com/ceccocats/tkDNN#how-to-export-weights)
