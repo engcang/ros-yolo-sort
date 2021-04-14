@@ -57,8 +57,7 @@
 
 <br>
 
-### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
-#### Result clips (edited): [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0)
+### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny) <br> ● Result clips (edited): [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0)
 
 <br>
 
@@ -508,10 +507,9 @@ $ sudo ./install_prerequisites.sh
 <details><summary>[CLICK HERE To See]</summary>
 
 ### ● Available from OpenCV version 4.4.0
-#### original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
-#### edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
+#### ● original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br> ● edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
 
-+ Get the code
++ Get the code (edited one)
 ~~~shell
 $ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py
 
