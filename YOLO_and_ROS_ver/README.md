@@ -58,7 +58,9 @@
 <br>
 
 ### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
+#### Result clips (edited): [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0)
 
+<br>
 
 | Jetson TX2 |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |   TensorRT<br>(tkDNN)<br>INT8   |
 |:----------:|:------------------------------:|:------------------------------------:|:--------------------------------:|:--------------------------------:|:-------------------------------:|
