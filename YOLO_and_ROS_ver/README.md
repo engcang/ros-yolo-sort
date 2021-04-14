@@ -505,6 +505,25 @@ $ sudo ./install_prerequisites.sh
 
 <details><summary>[CLICK HERE To See]</summary>
 
+### ● Available from OpenCV version 4.4.0
+#### original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
+#### edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
+
++ Get the code
+~~~shell
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py
+
+# check weight, cfg, class files' directory
+$ python3 OpenCV_dnn.py
+~~~
+
++ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
+
+|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
+|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
+| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
+|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
+
 ---
 
 <br>
