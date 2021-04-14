@@ -57,9 +57,8 @@
 
 <br>
 
-#### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
+### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
 
-<details><summary>[CLICK to see the results on Jetson TX2]</summary>
 
 | Jetson TX2 |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |   TensorRT<br>(tkDNN)<br>INT8   |
 |:----------:|:------------------------------:|:------------------------------------:|:--------------------------------:|:--------------------------------:|:-------------------------------:|
@@ -78,8 +77,6 @@
 --- 
 
 <br>
-
-</details>
 
   
 <br><br><br>
