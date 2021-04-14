@@ -69,6 +69,15 @@
 
 <br>
 
+| Jetson<br>Xavier<br>NX |         darknet<br>CPU         |  darknet<br>GPU<br>(cuDNN_HALF) |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP16 |   TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |
+|:----------------------:|:------------------------------:|:-------------------------------:|:------------------------------:|:------------------------------------:|:------------------------------------:|:-------------------------------:|:--------------------------------:|
+|           v4           | 0.05Hz<br>@ CPU 390%<br>GPU 4% |  3.8Hz<br>@ CPU 118%<br>GPU 98% | 0.37Hz<br>@ CPU 376%<br>GPU 4% |    5.76Hz<br>@ CPU 76%<br>GPU 98%    |    11.85Hz<br>@ CPU 72%<br>GPU 82%   |  8.14Hz<br>@ CPU 19%<br>GPU 98% |  18.98Hz<br>@ CPU 39%<br>GPU 80% |
+|         v4-tiny        |  1.3Hz<br>@ CPU 366%<br>GPU 3% | 37.9Hz<br>@ CPU 197%<br>GPU 71% |  3.6Hz<br>@ CPU 340%<br>GPU 5% |    39.7Hz<br>@ CPU 84%<br>GPU 68%    |    62.7Hz<br>@ CPU 86%<br>GPU 43%    | 69.05Hz<br>@ CPU 62%<br>GPU 54% | 172.36Hz<br>@ CPU 84%<br>GPU 32% |
+
+---
+
+<br>
+
 | i9-10900k + <br>GTX Titan X(Pascal) |    Darknet<br>CPU   |          Darknet<br>GPU          |      OpenCV(dnn)<br>Only CPU     |    OpenCV(dnn) +<br>CUDA/cuDNN   |     OpenVINO +<br>OpenCV(dnn)    |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |
 |:-----------------------------------:|:-------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|
 |                  v4                 | 0.1Hz<br>@ CPU 199% |  26.7Hz<br>@ CPU 222%<br>GPU 97% [video](https://youtu.be/-Gn7iob4dI8) |  7.5Hz<br>@ CPU 1590%<br>GPU 12% [video](https://youtu.be/DUjkmB-PTB0) |  57.1Hz<br>@ CPU 101%<br>GPU 68% [video](https://youtu.be/78A3HelDEu4) |  10.9Hz<br>@ CPU 1600%<br>GPU 9% [video](https://youtu.be/XkP_bYbVWYQ) |  76.1Hz<br>@ CPU 104%<br>GPU 67% [video](https://youtu.be/mK9PXYgXLx4) |  75.9Hz<br>@ CPU 104%<br>GPU 68% [video](https://youtu.be/LQ8kVqx0FUs) |
