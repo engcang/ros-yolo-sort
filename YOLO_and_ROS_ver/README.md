@@ -58,7 +58,8 @@
 <br>
 
 #### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
-<details><summary>[CLICK HERE To see the results on TX2]</summary>
+
+<details><summary>[CLICK to see the results on Jetson TX2]</summary>
 
 | Jetson TX2 |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |   TensorRT<br>(tkDNN)<br>INT8   |
 |:----------:|:------------------------------:|:------------------------------------:|:--------------------------------:|:--------------------------------:|:-------------------------------:|
@@ -70,6 +71,20 @@
 <br>
 
 </details>
+
+<details><summary>[CLICK to see the results on i9-10900k+GTX Titan X(pascal)]</summary>
+
+| i9-10900k + <br>GTX Titan X(Pascal) |    Darknet<br>CPU   |          Darknet<br>GPU          |      OpenCV(dnn)<br>Only CPU     |    OpenCV(dnn) +<br>CUDA/cuDNN   |     OpenVINO +<br>OpenCV(dnn)    |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |
+|:-----------------------------------:|:-------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|
+|                  v4                 | 0.1Hz<br>@ CPU 199% |  26.7Hz<br>@ CPU 222%<br>GPU 97% |  7.5Hz<br>@ CPU 1590%<br>GPU 12% |  57.1Hz<br>@ CPU 101%<br>GPU 68% |  10.9Hz<br>@ CPU 1600%<br>GPU 9% |  76.1Hz<br>@ CPU 104%<br>GPU 67% |  75.9Hz<br>@ CPU 104%<br>GPU 68% |
+|               v4-tiny               | 1.9Hz<br>@ CPU 198% | 293.5Hz<br>@ CPU 378%<br>GPU 92% | 57.5Hz<br>@ CPU 1300%<br>GPU 26% | 225.7Hz<br>@ CPU 107%<br>GPU 51% | 64.7Hz<br>@ CPU 1080%<br>GPU 26% | 427.8Hz<br>@ CPU 115%<br>GPU 39% | 434.2Hz<br>@ CPU 116%<br>GPU 39% |
+
+--- 
+
+<br>
+
+</details>
+
   
 <br><br><br>
 
