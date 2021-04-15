@@ -79,10 +79,10 @@
 
 <br>
 
-| Intel NUC i710FNH<br>(i7-10710U)<br>CPU only | darknet<br>CPU<br>(openMP, AVX) | OpenCV(dnn)           | OpenVINO +<br>OpenCV(dnn) |
-|----------------------------------------------|---------------------------------|-----------------------|---------------------------|
-| v4                                           | 0.2Hz<br>@ CPU 1120%            | 3.78Hz<br>@ CPU 1080% | 4.67Hz<br>@ CPU 1035%     |
-| v4-tiny                                      | 3.5Hz<br>@ CPU 1160%            | 31.5Hz<br>@ CPU 980%  | 43.61Hz<br>@ CPU 880%     |
+| Intel NUC i710FNH<br>(i7-10710U)<br>CPU only | darknet<br>CPU<br>(openMP, AVX) |      OpenCV(dnn)      | OpenVINO +<br>OpenCV(dnn) |
+|:--------------------------------------------:|:-------------------------------:|:---------------------:|:-------------------------:|
+|                      v4                      |       0.2Hz<br>@ CPU 1120%      | 3.78Hz<br>@ CPU 1080% |   4.67Hz<br>@ CPU 1035%   |
+|                    v4-tiny                   |       3.5Hz<br>@ CPU 1160%      |  31.5Hz<br>@ CPU 980% |   43.61Hz<br>@ CPU 880%   |
 
 ---
 
