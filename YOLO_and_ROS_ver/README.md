@@ -513,7 +513,7 @@ $ sudo ./install_prerequisites.sh
 ~~~shell
 $ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py
 
-# check weight, cfg, class files' directory
+# Before run, check weight, cfg, class files' directory
 $ python3 OpenCV_dnn.py
 ~~~
 
@@ -547,7 +547,7 @@ $ mkdir build && cd build
 $ camke ..
 $ make
 ~~~
-#### Fucking ★Trobule★ shooting
+#### Fucking ★Trouble★ shooting
 + **error: ‘CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST’ was not declared in this scope**
   + cuDNN version is too recent. Apply [this patch](https://github.com/ceccocats/tkDNN/issues/74#issuecomment-659093110)
   + `$ cd tkdnn && patch -p1 < ./tkDNN_cudnn8support.patch`
