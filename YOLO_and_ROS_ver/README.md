@@ -57,7 +57,7 @@
 
 <br>
 
-### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny) <br> ● Result clips (edited): [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0)
+### ● with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny) <br> ● Result clips (edited): [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0) <br> [Jetson TX2](https://youtu.be/fH9YxO4PKaM) <br> [Intel NUC i710FNH](https://youtu.be/MuzW4W4kC2o)
 
 <br>
 
