@@ -554,7 +554,7 @@ $ python3 OpenCV_dnn.py
 $ git clone https://github.com/ceccocats/tkDNN
 $ cd tkDNN
 $ mkdir build && cd build
-$ camke ..
+$ cmake ..
 $ make
 ~~~
 #### Fucking ★Trouble★ shooting
