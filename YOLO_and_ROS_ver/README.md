@@ -79,6 +79,15 @@
 
 <br>
 
+| Intel NUC i710FNH<br>(i7-10710U)<br>CPU only | darknet<br>CPU<br>(openMP, AVX) | OpenCV(dnn)           | OpenVINO +<br>OpenCV(dnn) |
+|----------------------------------------------|---------------------------------|-----------------------|---------------------------|
+| v4                                           | 0.2Hz<br>@ CPU 1120%            | 3.78Hz<br>@ CPU 1080% | 4.67Hz<br>@ CPU 1035%     |
+| v4-tiny                                      | 3.5Hz<br>@ CPU 1160%            | 31.5Hz<br>@ CPU 980%  | 43.61Hz<br>@ CPU 880%     |
+
+---
+
+<br>
+
 | i9-10900k + <br>GTX Titan X(Pascal) |    Darknet<br>CPU   |          Darknet<br>GPU          |      OpenCV(dnn)<br>Only CPU     |    OpenCV(dnn) +<br>CUDA/cuDNN   |     OpenVINO +<br>OpenCV(dnn)    |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |
 |:-----------------------------------:|:-------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|:--------------------------------:|
 |                  v4                 | 0.1Hz<br>@ CPU 199% |  26.7Hz<br>@ CPU 222%<br>GPU 97% [video](https://youtu.be/-Gn7iob4dI8) |  7.5Hz<br>@ CPU 1590%<br>GPU 12% [video](https://youtu.be/DUjkmB-PTB0) |  57.1Hz<br>@ CPU 101%<br>GPU 68% [video](https://youtu.be/78A3HelDEu4) |  10.9Hz<br>@ CPU 1600%<br>GPU 9% [video](https://youtu.be/XkP_bYbVWYQ) |  76.1Hz<br>@ CPU 104%<br>GPU 67% [video](https://youtu.be/mK9PXYgXLx4) |  75.9Hz<br>@ CPU 104%<br>GPU 68% [video](https://youtu.be/LQ8kVqx0FUs) |
