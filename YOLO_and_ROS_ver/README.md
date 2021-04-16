@@ -731,11 +731,13 @@ $ cd Yolo_mark && ./linux_mark.sh
 + [details](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects)
 ~~~shell
 # v4
-$ ./darknet detector train data/obj.data yolo-obj.cfg yolov4.conv.137
+$ ./darknet detector train data/obj.data yolov4-obj.cfg yolov4.conv.137
 
-# v4-tiny
-$ ./darknet partial cfg/yolov4-tiny-custom.cfg yolov4-tiny.weights yolov4-tiny.conv.29 29
+# v4-tiny & v4-tiny-3l
+$ ./darknet detector train data/obj.data yolov4-tiny-obj.cfg yolov4-tiny.conv.29
 ~~~
++ Trouble shooting
+  + **cannot load image error in load_data_detection() - OpenCV**: check if the path to images are correct in `train.txt`
 
 ---
 
