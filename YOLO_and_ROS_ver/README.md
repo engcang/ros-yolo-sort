@@ -23,7 +23,7 @@
 
 ## 2. Prerequisites
 #### ● [`.weights` and `.cfg` files](#-weights-and-cfg-files-1)
-#### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN), upper than 3.12.8 for train custom data
+#### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN), upper than 3.12.8 to train custom data
 #### ● [CUDA / cuDNN](#-cuda--cudnn-1)
 #### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
 #### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
