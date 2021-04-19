@@ -29,7 +29,8 @@ net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
 #net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU) #must be enabled for CPU
 
 model = cv2.dnn_DetectionModel(net)
-model.setInputParams(size=(416, 416), scale=1/255, swapRB=True)
+#model.setInputParams(size=(416, 416), scale=1/255, swapRB=True)
+model.setInputParams(size=(416, 416), scale=1/float(255.0), swapRB=True) #float is important for Python version 2!!!
 
 avg_FPS=0; count=0; total_fps=0;
 while cv2.waitKey(1) < 1:
