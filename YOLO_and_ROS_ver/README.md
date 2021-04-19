@@ -684,6 +684,33 @@ $ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darkne
 
 <details><summary>[CLICK HERE To See]</summary>
 
+### ● Available from OpenCV version 4.4.0
+#### ● edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
+
++ Get the code (edited one)
+~~~shell
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/ros_opencv_dnn.py
+
+# Before run, check weight, cfg, class files' directory
+# also check topic name, inference rates, etc.
+$ python3 ros_opencv_dnn.py
+or for Python2,
+$ python ros_opencv_dnn.py
+
+or to easily change parameters using .launch file,
+$ chmod +x ros_opencv_dnn.py
+$ mv ros_opencv_dnn.py ~/directory_of_ros_package_you_want/scripts/
+$ gedit ~/directory_of_ros_package_you_want/launch/launch_file_you_want.launch
+edit launch file with <param name="" value=""/>
+~~~
+
++ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
+
+|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
+|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
+| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
+|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
+
 ---
 
 <br>
