@@ -535,6 +535,8 @@ $ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_R
 
 # Before run, check weight, cfg, class files' directory
 $ python3 OpenCV_dnn.py
+or for Python2,
+$ python OpenCV_dnn.py
 ~~~
 
 + Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
