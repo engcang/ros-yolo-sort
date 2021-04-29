@@ -57,6 +57,7 @@
 
 <br>
 
+## ● Result clip on [Thermal camera](https://youtu.be/no8tMU9GWWA)
 ## ● Result clips: [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0), [Jetson TX2](https://youtu.be/fH9YxO4PKaM), [Intel NUC i710FNH](https://youtu.be/MuzW4W4kC2o), [RTX3080 + i9-10900k](https://youtu.be/6FZ06NAJXbA)
 + with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
 
