@@ -5,7 +5,7 @@
 <br>
 
 ### Implemented version
-  + Original version + (OpenCV instead of matplotlib), **69.3/15.9FPS** (w, w/o display) on NVIDIA Jetson TX2
+  + Original version + (OpenCV instead of matplotlib), **15.9/69.3FPS** (w, w/o display) on NVIDIA Jetson TX2
   + C++ Ubuntu version => ***200 times faster*** than Python(original) version, **2718/4790FPS** (w, w/o display) on NVIDIA Jetson TX2
     + Just few lines were edited from *Windows version*
   + **ROS** version implemented - only ***Python version yet***
@@ -22,6 +22,9 @@
   # ROS parameters : _/display (for image publish) _/max_age:=200 (max age for track)
   # _/min_hits:=1 (min hits for track) _/img_topic:=/usb_cam/image_raw (topic name)
   # _/iou_threshold:=0.2 (IoU threshold for ID matching)
+  
+  or simply,
+  $ python ros-sort.py
 ~~~
 + ROS params can be set using .launch file
 
@@ -84,7 +87,7 @@
 ## Result
 + on MOT benchmark dataset
   + Python version **TX2 Video [here](https://youtu.be/MYbjjg_Mics)**
-  + **Xavier NX Video [here](https://youtu.be/iruvwU7yveA)** [here-live version1](https://youtu.be/vdilds_buEI)
+  + **Xavier NX Video [here1](https://youtu.be/iruvwU7yveA)**, [here2(live version)](https://youtu.be/vdilds_buEI)
   <p align="center">
   <img src="https://github.com/engcang/ros-yolov3-sort/blob/master/SORT_and_ROS_ver/python.JPG" width="600"/>
   </p>
