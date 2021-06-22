@@ -12,9 +12,9 @@
 |:-----------------------------------:|:------------------------------------------------:|:---------------:|:--------------------:|:------------------:|
 |               Darknet               |                     .c codes                     |        O        |           O          | O, from CUDA 10.1  |
 |              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
-|      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |     utilzed     |           -          |          O         |
+|      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |     utilized    |           -          |          O         |
 |               OpenVINO              |                     Intel only                   |        O        |           -          | Only for GPU stick |
-|           TensorRT(tkDNN)           |                      need GPU                    |     utlized     |           -          |          O         |
+|           TensorRT(tkDNN)           |                      need GPU                    |     utilized    |           -          |          O         |
 
 <br>
 
