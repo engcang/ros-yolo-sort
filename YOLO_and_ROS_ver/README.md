@@ -724,7 +724,8 @@ edit launch file with <param name="" value=""/>
 
 ## How to install
 
-+ clone my other repo - [link](https://github.com/engcang/tkdnn-ros) and build
++ Clone my other repo - [link](https://github.com/engcang/tkdnn-ros).
++ And build `tkDNN` first.
 
 ~~~shell
 $ cd ~/<your_workspace>/src
