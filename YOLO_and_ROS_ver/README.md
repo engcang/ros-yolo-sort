@@ -625,11 +625,12 @@ $ cmake .. && make
 $ ./test_<name_you_want> 
 ~~~
 
-### ● Execution, refer [here](https://github.com/ceccocats/tkDNN#run-the-demo) for more detail
+### ● Execution, refer [here](https://github.com/ceccocats/tkDNN/blob/master/docs/demo.md) for more detail
 ~~~shell
 $ cd tkdnn/build
-$ ./demo <name_you_want>_fp32.rt ~/test_video.mp4 y 80 1 1
-(./demo <network-rt-file> <path-to-video> <kind-of-network> <number-of-classes> <n-batches> <show-flag>)
+
+Edit the paths in the demoConfig.yaml file before!
+$ ./demo ../demo/demoConfig.yaml
 ~~~
 
 ### ● Changing inference data type: **re-generate `.rt file` after export tkdnn mode**
