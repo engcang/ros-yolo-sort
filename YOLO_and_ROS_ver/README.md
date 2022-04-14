@@ -141,6 +141,8 @@
 + Download `.cfg` from [homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
 + Further versions can be checked [here](https://github.com/AlexeyAB/darknet#pre-trained-models)
 
+---
+
 ### ● CMake version upgrade
 
 <details><summary>[CLICK HERE To See]</summary>
@@ -161,6 +163,8 @@ $ cmake --version
 <br>
 
 </details>
+
+---
 
 ### ● CUDA / cuDNN
 
@@ -235,6 +239,8 @@ $ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.1/lib64/li
 <br>
 
 </details>
+
+---
 
 ### ● OpenCV with CUDA / cuDNN
 
@@ -419,9 +425,12 @@ $ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this
 </details>
 
 
-### ● cv_bridge: OpenCV - ROS bridge
+---
 
-<details><summary>[CLICK HERE for OpenCV version 4.X]</summary>
+### ● cv_bridge: OpenCV - ROS bridge
+#### ■ ROS1-cv_bridge
+
+<details><summary>[Click: CV_bridge with OpenCV 4.X version]</summary>
 
 ### ● CV_bridge with OpenCV 4.X version
 + Referred [here](https://github.com/ros-perception/vision_opencv/issues/272#issuecomment-471311300)
@@ -472,7 +481,7 @@ $ cd .. && catkin build cv_bridge
 
 </details>
 
-<details><summary>[CLICK HERE for OpenCV version 3.X]</summary>
+<details><summary>[Click: CV_bridge with OpenCV 3.X version]</summary>
   
 ### ● CV_bridge with OpenCV 3.X version
 ~~~shell
@@ -505,6 +514,25 @@ $ cd .. && catkin build cv_bridge
 
 </details>
 
+#### ■ ROS2-cv_bridge
+
+<details><summary>[Click: CV_bridge with OpenCV 4.X version]</summary>
+
++ If OpenCV with CUDA were built manually, build cv_bridge manually also
+~~~bash
+$ cd ~/colcon_ws/src && git clone https://github.com/ros-perception/vision_opencv
+$ cd vision_opencv
+$ git checkout origin/ros2
+
+$ cd ~/colcon_ws
+$ colcon build --symlink-install --packages-select cv_bridge image_geometry --allow-overriding cv_bridge image_geometry
+$ source install/setup.bash
+~~~
+
+</details>
+
+---
+
 ### ● TensorRT
 
 <details><summary>[CLICK HERE To See]</summary>
@@ -536,6 +564,8 @@ $ dpkg -l | grep TensorRT
 <br>
 
 </details>
+
+---
 
 ### ● OpenVINO
 
