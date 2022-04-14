@@ -238,10 +238,14 @@ $ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.1/lib64/li
 
 ### ● OpenCV with CUDA / cuDNN
 
-<details><summary>[CLICK HERE To See]</summary>
-
-### ● Build OpenCV with CUDA / cuDNN - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
-+ **-D OPENCV_GENERATE_PKGCONFIG=YES** option is also needed for OpenCV 4.X
+<details><summary>[click to see OpenCV for Ubuntu 18.04 - ROS1]</summary>
+    
++ Build OpenCV with CUDA - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
+    + for Xavier do as below or sh file from jetsonhacks [here](https://github.com/jetsonhacks/buildOpenCVXavier)
+    + If want to use **C API (e.g. Darknet YOLO)** with `OpenCV3`, then: 
+        + **Patch as [here](https://github.com/opencv/opencv/issues/10963)** to use other version **(3.4.1 is the best)**
+            + should **comment** the /usr/local/include/opencv2/highgui/highgui_c.h line 139 [as here](https://stackoverflow.com/questions/48611228/yolo-compilation-with-opencv-1-fails) after install
++ **-D OPENCV_GENERATE_PKGCONFIG=YES** option is also needed for `OpenCV 4.X`
   + and copy the generated `opencv4.pc` file to `/usr/local/lib/pkgconfig` or `/usr/lib/aarch64-linux-gnu/pkgconfig` for jetson boards
 ~~~shell
 $ sudo apt-get purge libopencv* python-opencv
@@ -254,12 +258,22 @@ $ sudo apt-get install -y cmake libavcodec-dev libavformat-dev libavutil-dev \
     libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev mesa-utils #libeigen3-dev # recommend to build from source : http://eigen.tuxfamily.org/index.php?title=Main_Page
 $ sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy
 $ mkdir <opencv_source_directory> && cd <opencv_source_directory>
-$ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.2.zip # check version
+
+
+# check version
+$ wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.1.zip # check version
 $ unzip opencv.zip
-$ cd <opencv_source_directory>/opencv && mkdir build && cd build
+$ cd <opencv_source_directory>/opencv 
+
+$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.4.1.zip # check version
+$ unzip opencv_contrib.zip
+
+$ mkdir build && cd build
+    
 # check your BIN version : http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-# 8.6 for RTX3080 7.2 for Xavier, 5.2 for GTX TITAN X, 6.1 for GTX TITAN X(pascal)
+# 8.6 for RTX3080 7.2 for Xavier, 5.2 for GTX TITAN X, 6.1 for GTX TITAN X(pascal), 6.2 for TX2
 # -D BUILD_opencv_cudacodec=OFF #for cuda10-opencv3.4
+    
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_C_COMPILER=gcc-6 \
       -D CMAKE_CXX_COMPILER=g++-6 \
@@ -268,27 +282,32 @@ $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_CUDA=ON \
       -D OPENCV_DNN_CUDA=ON \
       -D WITH_CUDNN=ON \
-      -D CUDA_ARCH_BIN=7.2 \
-      -D CUDA_ARCH_PTX="" \
+      -D CUDA_ARCH_BIN=8.6 \
+      -D CUDA_ARCH_PTX=8.6 \
       -D ENABLE_FAST_MATH=ON \
       -D CUDA_FAST_MATH=ON \
       -D WITH_CUBLAS=ON \
       -D WITH_LIBV4L=ON \
       -D WITH_GSTREAMER=ON \
       -D WITH_GSTREAMER_0_10=OFF \
+      -D WITH_CUFFT=ON \
+      -D WITH_NVCUVID=ON \
       -D WITH_QT=ON \
       -D WITH_OPENGL=ON \
+      -D WITH_IPP=OFF \
+      -D WITH_V4L=ON \
+      -D WITH_1394=OFF \
+      -D WITH_GTK=ON \
+      -D WITH_EIGEN=ON \
+      -D WITH_FFMPEG=ON \
+      -D WITH_TBB=ON \
       -D BUILD_opencv_cudacodec=OFF \
       -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
-      -D WITH_TBB=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-3.4.1/modules \
       ../
 $ time make -j8 # 8 : numbers of core
-
-# when make error, use only one core as
-$ time make -j1 # important, use only one core to prevent compile error
-
 $ sudo make install
-$ sudo rm -r <opencv_source_directory> #optional
+$ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this folder to uninstall later, if you need.
 ~~~
 
 <br>
@@ -301,49 +320,104 @@ compilation terminated. --> **for CUDA version 10**
     + cmake ... -D BUILD_opencv_cudacodec=OFF ...
 + CUDA_nppicom_LIBRARY not found => reference [here](https://stackoverflow.com/questions/46584000/cmake-error-variables-are-set-to-notfound)
     + $ sudo apt-get install nvidia-cuda-toolkit
-    + or Edit *FindCUDA.cmake* and *OpenCVDetectCUDA.cmake*
+    + or Edit *FindCUDA.cmake* and *OpenCVDetectCUDA.cmake* as [here](https://stackoverflow.com/questions/46584000/cmake-error-variables-are-set-to-notfound)
+    
+---
+
+</details>
 
 
-### ● (Optional) if also **contrib** for OpenCV should be built,
-+ add **-D OPENCV_EXTRA_MODULES_PATH** option as below:
+<details><summary>[Click to see OpenCV for Ubuntu 20.04 - ROS2]</summary>
+    
++ Build OpenCV with CUDA - references: [link 1](https://webnautes.tistory.com/1479?category=704653)
++ **-D PYTHON3_PACKAGES_PATH=/usr/local/lib/python3.8/dist-packages** 
+    + This is needed to prevent `No module name cv2` when `import cv2` in `Python3`
+    
+~~~bash
+## optional, I just leave default OpenCV from ROS2, since I can set proper PATHS for desired OpenCV versions
+## If you cannot, just do below:
+$ sudo apt-get purge libopencv*
+## (But you will have to sudo apt install ros-foxy-desktop again, when you need other packages related to this)
 
-~~~shell
-$ cd <opencv_source_directory>
-$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.5.2.zip #check version
+$ sudo apt-get purge python-opencv python3-opencv
+$ pip uninstall opencv-python
+$ sudo apt-get update
+$ sudo apt-get install -y build-essential pkg-config
+$ sudo apt-get install -y cmake libavcodec-dev libavformat-dev libavutil-dev \
+    libglew-dev libgtk2.0-dev libgtk-3-dev libjpeg-dev libpng-dev libpostproc-dev \
+    libswscale-dev libtbb-dev libtiff5-dev libv4l-dev libxvidcore-dev \
+    libx264-dev qt5-default zlib1g-dev libgl1 libglvnd-dev pkg-config \
+    libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev mesa-utils #libeigen3-dev # recommend to build from source : http://eigen.tuxfamily.org/index.php?title=Main_Page
+$ sudo apt-get install python3-dev python3-numpy
+$ mkdir <opencv_source_directory> && cd <opencv_source_directory>
+
+
+# check version
+$ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.5.zip # check version
+$ unzip opencv.zip
+$ cd <opencv_source_directory>/opencv 
+
+$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.5.5.zip # check version
 $ unzip opencv_contrib.zip
-$ cd <opencv_source_directory>/build
+
+$ mkdir build && cd build
+    
+# check your CUDA_ARCH_BIN and CUDA_ARCH_PTX version : http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
+# 8.6 for RTX3080 7.2 for Xavier, 5.2 for GTX TITAN X, 6.1 for GTX TITAN X(pascal), 6.2 for TX2
+# -D BUILD_opencv_cudacodec=OFF #for cuda10-opencv3.4
+    
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
-      -D CMAKE_C_COMPILER=gcc-6 \
-      -D CMAKE_CXX_COMPILER=g++-6 \
+      -D CMAKE_C_COMPILER=gcc-9 \
+      -D CMAKE_CXX_COMPILER=g++-9 \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D OPENCV_GENERATE_PKGCONFIG=YES \
+      -D PYTHON_EXECUTABLE=/usr/bin/python3.8 \
+      -D PYTHON2_EXECUTABLE="" \
+      -D BUILD_opencv_python3=ON \
+      -D BUILD_opencv_python2=OFF \
+      -D PYTHON3_PACKAGES_PATH=/usr/local/lib/python3.8/dist-packages \
+      -D BUILD_NEW_PYTHON_SUPPORT=ON \
+      -D OPENCV_SKIP_PYTHON_LOADER=ON \
       -D WITH_CUDA=ON \
       -D OPENCV_DNN_CUDA=ON \
       -D WITH_CUDNN=ON \
-      -D CUDA_ARCH_BIN=7.2 \
-      -D CUDA_ARCH_PTX="" \
+      -D CUDA_ARCH_BIN=8.6 \
+      -D CUDA_ARCH_PTX=8.6 \
       -D ENABLE_FAST_MATH=ON \
       -D CUDA_FAST_MATH=ON \
       -D WITH_CUBLAS=ON \
       -D WITH_LIBV4L=ON \
       -D WITH_GSTREAMER=ON \
       -D WITH_GSTREAMER_0_10=OFF \
+      -D WITH_CUFFT=ON \
+      -D WITH_NVCUVID=ON \
       -D WITH_QT=ON \
       -D WITH_OPENGL=ON \
+      -D WITH_IPP=OFF \
+      -D WITH_V4L=ON \
+      -D WITH_1394=OFF \
+      -D WITH_GTK=ON \
+      -D WITH_EIGEN=ON \
+      -D WITH_FFMPEG=ON \
+      -D WITH_TBB=ON \
       -D BUILD_opencv_cudacodec=OFF \
       -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
-      -D WITH_TBB=ON \
-      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.5.2/modules \
+      -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.5.5/modules \
       ../
-$ time make -j1 # important, use only one core to prevent compile error
+$ time make -j20 # 20 : numbers of core
 $ sudo make install
+$ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this folder to uninstall later, if you need.
 ~~~
-
----
 
 <br>
 
+### ● Trouble shooting for OpenCV build error:
++ No troubles found yet
+
+---
+
 </details>
+
 
 ### ● cv_bridge: OpenCV - ROS bridge
 
