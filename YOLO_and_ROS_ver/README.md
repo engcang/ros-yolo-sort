@@ -49,7 +49,7 @@
 
 # 1. Results
 #### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/), with 640x480 resolution
-#### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson NX
+#### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson Xavier NX / Jetson Xavier AGX
 #### ● GPU monitor: [nvtop](https://github.com/Syllo/nvtop) or [this python code](gpuGraph.py), edited from Jetsonhacks' [code for Jetson boards](https://github.com/jetsonhacks/gpuGraphTX)
 [comment]: <> (## ● Youtube videos: <a href="https://www.youtube.com/playlist?list=PLvgPHeVm_WqIUHg7iu0g73-yaS08kv6-5" target="_blank">Playlist of all results</a>)
 [comment]: <> (+ text
@@ -57,18 +57,24 @@
 
 <br>
 
-## ● Result clip on [Thermal camera](https://youtu.be/no8tMU9GWWA)
-## ● Result clips: [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0), [Jetson TX2](https://youtu.be/fH9YxO4PKaM), [Intel NUC i710FNH](https://youtu.be/MuzW4W4kC2o), [RTX3080 + i9-10900k](https://youtu.be/6FZ06NAJXbA)
-+ with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
+## ● Result clips: with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
++ [Jetson Xavier AGX](https://youtu.be/4waUDFSaVeg)-from [Dongkyu Lee](https://github.com/dklee98)
++ [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0)
++ [Jetson TX2](https://youtu.be/fH9YxO4PKaM)
++ [Intel NUC i710FNH](https://youtu.be/MuzW4W4kC2o)
++ [RTX3080 + i9-10900k](https://youtu.be/6FZ06NAJXbA)
++ [Thermal camera](https://youtu.be/no8tMU9GWWA)
+
 
 <br>
 
-| Jetson TX2 |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |   TensorRT<br>(tkDNN)<br>INT8   |
-|:----------:|:------------------------------:|:------------------------------------:|:--------------------------------:|:--------------------------------:|:-------------------------------:|
-|     v4     |           impossible           |    3.79Hz<br>@ CPU 74%<br>GPU 57% [video](https://youtu.be/MHykXbcts10)   |  6.49Hz<br>@ CPU 59%<br>GPU 75% [video](https://youtu.be/zBdcRr9Y-wY) |  8.68Hz<br>@ CPU 71%<br>GPU 70% [video](https://youtu.be/WYxTtGCvxwA) |  6.42Hz<br>@ CPU 57%<br>GPU 68% [video](https://youtu.be/P0ga_LJBUlQ) |
-|   v4-tiny  | 0.19Hz<br>@ CPU 430%<br>GPU 3% [video](https://youtu.be/72IczySK59c) |   13.65Hz<br>@ CPU 154%<br>GPU 27% [video](https://youtu.be/dMl2TL4KUxE) | 51.84Hz<br>@ CPU 165%<br>GPU 32% [video](https://youtu.be/thZXqmLahOc) | 71.62Hz<br>@ CPU 177%<br>GPU 27% [video](https://youtu.be/wpGuNjwJPiU) | 50.0Hz<br>@ CPU 148%<br>GPU 29% [video](https://youtu.be/M2cid-WkPI4) |
 
---- 
+| Jetson<br>Xavier<br>AGX<br>from<br>[Dongkyu Lee](https://github.com/dklee98) |          OpenCV(dnn)<br>Only CPU         |     OpenCV(dnn) +<br>CUDA/cuDNN<br>FP32     |   OpenCV(dnn) +<br>CUDA/cuDNN<br>FP16   |        TensorRT<br>(tkDNN)<br>FP32        |        TensorRT<br>(tkDNN)<br>FP16       |
+|:----------------------------------------------:|:----------------------------------------:|:-------------------------------------------:|:---------------------------------------:|:-----------------------------------------:|:----------------------------------------:|
+|                       v4                       |  0.84Hz<br>CPU 522%<br>GPU 4.3%<br>[video](https://youtu.be/4waUDFSaVeg?t=5) |  13.7Hz<br>CPU 35.9%<br>GPU 68.94%<br>[video](https://youtu.be/4waUDFSaVeg?t=95) |  22.93Hz<br>CPU 67%<br>GPU 71%<br>[video](https://youtu.be/4waUDFSaVeg?t=180) |   9.64Hz<br>CPU 13%<br>GPU 94%<br>[video](https://youtu.be/4waUDFSaVeg?t=268)   | 26.82Hz<br>CPU 37%<br>GPU 75.2%<br>[video](https://youtu.be/4waUDFSaVeg?t=352) |
+|                     v4-tiny                    | 7.67Hz<br>CPU 436%<br>GPU 6.67%<br>[video](https://youtu.be/4waUDFSaVeg?t=436) | 76.41Hz<br>CPU 73.9%<br>GPU 46.75%<br>[video](https://youtu.be/4waUDFSaVeg?t=526) | 89.8Hz<br>CPU 90.1%<br>GPU 45%<br>[video](https://youtu.be/4waUDFSaVeg?t=605) | 112.63Hz<br>CPU 61%<br>GPU 49.8%<br>[video](https://youtu.be/4waUDFSaVeg?t=670) |  133Hz<br>CPU 70%<br>GPU 47.8%<br>[video](https://youtu.be/4waUDFSaVeg?t=735)  |
+
+---
 
 <br>
 
@@ -78,6 +84,16 @@
 |         v4-tiny        |  1.3Hz<br>@ CPU 366%<br>GPU 3% [video](https://youtu.be/TEGfNpYXLgQ) | 37.9Hz<br>@ CPU 197%<br>GPU 71% [video](https://youtu.be/qlBLyWljqO4) |  3.6Hz<br>@ CPU 340%<br>GPU 5% [video](https://youtu.be/EUKP4l3WsZM) |    39.7Hz<br>@ CPU 84%<br>GPU 68% [video](https://youtu.be/atXI778GuM4)   |    62.7Hz<br>@ CPU 86%<br>GPU 43% [video](https://youtu.be/MwRgBRG3D7k)   | 69.05Hz<br>@ CPU 62%<br>GPU 54% [video](https://youtu.be/a42ybz8ZGR8) | 172.36Hz<br>@ CPU 84%<br>GPU 32% [video](https://youtu.be/s2JzhiwXhm4) |
 
 ---
+
+<br>
+
+
+| Jetson TX2 |     OpenCV(dnn)<br>Only CPU    | OpenCV(dnn) + <br>CUDA/cuDNN<br>FP32 |    TensorRT<br>(tkDNN)<br>FP32   |    TensorRT<br>(tkDNN)<br>FP16   |   TensorRT<br>(tkDNN)<br>INT8   |
+|:----------:|:------------------------------:|:------------------------------------:|:--------------------------------:|:--------------------------------:|:-------------------------------:|
+|     v4     |           impossible           |    3.79Hz<br>@ CPU 74%<br>GPU 57% [video](https://youtu.be/MHykXbcts10)   |  6.49Hz<br>@ CPU 59%<br>GPU 75% [video](https://youtu.be/zBdcRr9Y-wY) |  8.68Hz<br>@ CPU 71%<br>GPU 70% [video](https://youtu.be/WYxTtGCvxwA) |  6.42Hz<br>@ CPU 57%<br>GPU 68% [video](https://youtu.be/P0ga_LJBUlQ) |
+|   v4-tiny  | 0.19Hz<br>@ CPU 430%<br>GPU 3% [video](https://youtu.be/72IczySK59c) |   13.65Hz<br>@ CPU 154%<br>GPU 27% [video](https://youtu.be/dMl2TL4KUxE) | 51.84Hz<br>@ CPU 165%<br>GPU 32% [video](https://youtu.be/thZXqmLahOc) | 71.62Hz<br>@ CPU 177%<br>GPU 27% [video](https://youtu.be/wpGuNjwJPiU) | 50.0Hz<br>@ CPU 148%<br>GPU 29% [video](https://youtu.be/M2cid-WkPI4) |
+
+--- 
 
 <br>
 
