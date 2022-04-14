@@ -151,8 +151,7 @@ $ cmake --version
 <details><summary>[CLICK HERE To See]</summary>
 
 ### ● Install **CUDA** and **Graphic Driver**: 
-##### ● (If you will use TensorRT) The latest TensorRT(7.2.3) supports CUDA 10.2, 11.0 update 1, 11.1 update 1, ~~and 11.2 update 1.~~ [doc](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-723/release-notes/tensorrt-7.html#rel_7-2-3)
-+ Ubuntu
++ Install CUDA and Graphic Driver
 ~~~shell
     $ sudo apt install gcc make
     get the right version of CUDA(with graphic driver) .deb file at https://developer.nvidia.com/cuda-downloads
@@ -420,8 +419,8 @@ $ cd .. && catkin build cv_bridge
 
 <details><summary>[CLICK HERE To See]</summary>
 
-#### ● The latest TensorRT(7.2.3) supports CUDA 10.2, 11.0 update 1, 11.1 update 1, and ~~11.2 update 1.~~ [doc](https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-723/release-notes/tensorrt-7.html#rel_7-2-3) <br> and also needs latest `cudNN 8.1.1`
-+ Download right version of `TensorRT` at [nvidia download link](https://developer.nvidia.com/nvidia-tensorrt-download)
++ Download **right version** of `TensorRT` at [nvidia download link](https://developer.nvidia.com/nvidia-tensorrt-download)
+  + Please check your `CUDA`, `cuDNN` version
 + Install it
 ~~~shell
 $ cd ~/Downloads
