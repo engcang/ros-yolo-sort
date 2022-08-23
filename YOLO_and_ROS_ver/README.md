@@ -8,13 +8,14 @@
 
 <br>
 
-| YOLO<br>v3 / v3-tiny<br>v4 / v4-tiny|                        Remark                    |     CPU version | CPU<br>openMP<br>AVX |     GPU support    |
-|:-----------------------------------:|:------------------------------------------------:|:---------------:|:--------------------:|:------------------:|
-|               Darknet               |                     .c codes                     |        O        |           O          | O, from CUDA 10.1  |
-|              OpenCV-dnn             |               OpenCV ver from 4.4.0              |        O        |           -          |          -         |
-|      OpenCV-dnn<br>+ CUDA/cuDNN     |                 OpenCV ver from 4.4.0            |     utilized    |           -          |          O         |
-|               OpenVINO              |                     Intel only                   |        O        |           -          | Only for GPU stick |
-|           TensorRT(tkDNN)           |                      need GPU                    |     utilized    |           -          |          O         |
+|   YOLO<br>Implementation   |         Remark        | CPU version | CPU<br>openMP<br>AVX |     GPU support    |    Support version    |
+|:--------------------------:|:---------------------:|:-----------:|:--------------------:|:------------------:|:---------------------:|
+|           Darknet          |        .c codes       |      O      |           O          |  O, from CUDA 10.1 |       v3, v4, v7      |
+|         OpenCV-dnn         | OpenCV ver from 4.4.0 |      O      |           -          |          -         |   v3, v4, v5, v6, v7  |
+| OpenCV-dnn<br>+ CUDA/cuDNN | OpenCV ver from 4.4.0 |   utilized  |           -          |          O         |   v3, v4, v5, v6, v7  |
+|          OpenVINO          |       Intel only      |      O      |           -          | Only for GPU stick |   v3, v4, v5, v6, v7  |
+|       TensorRT(tkDNN)      |        need GPU       |   utilized  |           -          |          O         | v3, v4, v7(only tiny) |
+
 
 <br>
 
