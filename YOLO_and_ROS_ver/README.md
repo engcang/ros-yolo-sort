@@ -129,7 +129,8 @@
 ---
 
   <br>
-  
+  Unfold to see
+
 </details>
 
 #### ● `.onnx` files for YOLOv5, v6, v7
@@ -232,7 +233,7 @@ $ cmake --version
 
 <details><summary>Unfold to see</summary>
 
-+ Install `CUDA` and `Graphic Driver`
+#### ● Install `CUDA` and `Graphic Driver`
 ~~~shell
     $ sudo apt install gcc make
     get the right version of CUDA(with graphic driver) .deb file at https://developer.nvidia.com/cuda-downloads
@@ -265,7 +266,7 @@ export LD_LIBRARY_PATH=<CUDA_PATH>/lib64:$LD_LIBRARY_PATH #ex : /usr/local/cuda-
 $ source ~/.profile
 ~~~
 
-### ● Trouble shooting for NVIDIA driver or CUDA: please see /var/log/cuda-installer.log or /var/log/nvidia-install.log
+#### ● Trouble shooting for NVIDIA driver or CUDA: please see /var/log/cuda-installer.log or /var/log/nvidia-install.log
 + Installation failed. See log at /var/log/cuda-installer.log for details => mostly because of `X server` is being used.
     + turn off `X server` and install.
 ~~~shell
@@ -282,8 +283,8 @@ $ sudo sh cuda_<version>_linux.run
     + turn off `Secure Boot` as below [reference](https://wiki.ubuntu.com/UEFI/SecureBoot/DKMS)
     + If you got this case, you should turn off `Secure Boot` and then turn off `X server` (as above) both.
 
-<br>
 
+---
 
 ### ● cuDNN: strong library for Neural Network used with CUDA
 + Download [here](https://developer.nvidia.com/cudnn)
@@ -377,7 +378,7 @@ $ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this
 
 <br>
 
-### ● Trouble shooting for OpenCV build error:
+#### ● Trouble shooting for OpenCV build error:
 + Please include the appropriate gl headers before including cuda_gl_interop.h => reference [1](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh#L101), [2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/patches/OpenGLHeader.patch), [3](https://devtalk.nvidia.com/default/topic/1007290/jetson-tx2/building-opencv-with-opengl-support-/post/5141945/#5141945)
 + modules/cudacodec/src/precomp.hpp:60:37: fatal error: dynlink_nvcuvid.h: No such file or directory
 compilation terminated. --> **for CUDA version 10**
@@ -402,6 +403,8 @@ compilation terminated. --> **for CUDA version 10**
     
 ---
 
+  <br>
+  
 </details>
 
 <details> <summary> Unfold to see OpenCV for Ubuntu 20.04 - ROS2 </summary>
@@ -486,13 +489,14 @@ $ sudo make install
 $ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this folder to uninstall later, if you need.
 ~~~
 
-<br>
 
-### ● Trouble shooting for OpenCV build error:
+#### ● Trouble shooting for OpenCV build error:
 + No troubles found yet
 
 ---
 
+  <br>
+  
 </details>
 
 
@@ -506,7 +510,7 @@ $ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this
 
 <details><summary>Unfold to see cv_bridge with OpenCV 4.X version</summary>
 
-### ● CV_bridge with OpenCV 4.X version
+#### ● CV_bridge with OpenCV 4.X version
 + Referred [here](https://github.com/ros-perception/vision_opencv/issues/272#issuecomment-471311300)
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
@@ -557,7 +561,7 @@ $ cd .. && catkin build cv_bridge
 
 <details><summary>Unfold to see cv_bridge with OpenCV 3.X version</summary>
   
-### ● CV_bridge with OpenCV 3.X version
+#### ● CV_bridge with OpenCV 3.X version
 ~~~shell
 $ cd ~/catkin_ws/src && git clone https://github.com/ros-perception/vision_opencv
 
@@ -592,7 +596,7 @@ $ cd .. && catkin build cv_bridge
 
 <details><summary>Unfold to see cv_bridge with OpenCV 4.X version</summary>
 
-### ● CV_bridge with OpenCV 4.X version - ROS2
+#### ● CV_bridge with OpenCV 4.X version - ROS2
 
 ~~~bash
 $ cd ~/colcon_ws/src && git clone https://github.com/ros-perception/vision_opencv
@@ -718,7 +722,7 @@ $ sudo ./install_prerequisites.sh
 
 <details><summary>Unfold to see .weight .cfg - v3, v4, v7</summary>
 
-#### ● original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br>
+#### ● Original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br>
   ● Edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py) in this repo
 
 + Get the code (edited one)
@@ -975,6 +979,5 @@ $ cd Yolo_mark && ./linux_mark.sh
 + v3, v4, v7 - [official repo](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects)
   
   
----
 
-<br><br><br><br>
+<br><br>
