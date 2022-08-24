@@ -187,7 +187,7 @@ $ ./test_<name_you_want>
   
   ---
   
-  </details>
+</details>
 
 #### ● `CMake` version upgrade: upper than 3.13 for `OpenVINO`, upper than 3.15 for `TensorRT(tkDNN)`, upper than 3.12.8 to train custom data
 <details><summary>Unfold to see</summary>
@@ -285,7 +285,7 @@ $ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.1/lib64/li
 
 #### ● `OpenCV` with `CUDA` / `cuDNN`
 
-<details><summary>Unfold to see OpenCV for Ubuntu 18.04 - ROS</summary>
+<details><summary>Unfold to see OpenCV for Ubuntu 18.04 - ROS1</summary>
 
 + Build OpenCV with CUDA - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
     + for Xavier do as below or sh file from jetsonhacks [here](https://github.com/jetsonhacks/buildOpenCVXavier)
@@ -648,6 +648,43 @@ $ sudo ./install_prerequisites.sh
 ## 3. Installation
 #### ● `Darknet` ver.
 #### ● `OpenCV(DNN)` ver. (including `OpenVINO` ver.)
+
+<details><summary>Unfold to see .weight .cfg - v3, v4, v7</summary>
+
+  ### ● Available from OpenCV version 4.4.0
+#### ● original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br> ● edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
+
++ Get the code (edited one)
+~~~shell
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py
+
+# Before run, check weight, cfg, class files' directory
+$ python3 OpenCV_dnn.py
+or for Python2,
+$ python OpenCV_dnn.py
+~~~
+
++ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
+
+|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
+|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
+| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
+|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
+
+---
+
+<br>
+
+</details>
+  
+<details><summary>Unfold to see .onnx - v5, v6, v7</summary>
+  
+  
+  
+  ---
+  
+</details>
+
 #### ● `TensorRT(tkDNN)` ver.
 
 ## 4. Installation for ROS version
@@ -686,7 +723,7 @@ $ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darkne
   
 #### ● `OpenCV(DNN)` ver. (including `OpenVINO` ver.)
 
-<details><summary>Unfold to see</summary>
+<details><summary>Unfold to see .weights + .cfg - v3, v4, v7</summary>
 
 ### ● Available from OpenCV version 4.4.0
 #### ● edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
@@ -719,6 +756,14 @@ edit launch file with <param name="" value=""/>
 
 <br>
 
+</details>
+  
+<details><summary>Unfold to see .onnx - v5, v6, v7</summary>
+  
+  
+  
+  ---
+  
 </details>
   
 #### ● `TensorRT(tkDNN)` ver.
@@ -900,35 +945,6 @@ $ cd Yolo_mark && ./linux_mark.sh
 
 </details>
 
-### ● OpenCV(DNN) ver. / OpenVINO ver.
-
-<details><summary>[CLICK HERE To See]</summary>
-
-### ● Available from OpenCV version 4.4.0
-#### ● original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br> ● edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
-
-+ Get the code (edited one)
-~~~shell
-$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py
-
-# Before run, check weight, cfg, class files' directory
-$ python3 OpenCV_dnn.py
-or for Python2,
-$ python OpenCV_dnn.py
-~~~
-
-+ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
-
-|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
-|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
-| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
-|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
-
----
-
-<br>
-
-</details>
 
 ### ● TensorRT(tkDNN) ver.
 
