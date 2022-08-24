@@ -17,6 +17,12 @@
 |       TensorRT(tkDNN)      |        need GPU       |   utilized  |           -          |          O         | v3, v4, v7(only tiny) |
 
 
+| YOLO<br>Version |       Default<br>Implementation      |   Supported<br>Implementation<br>within this repository  |                       Necessary files                       |                                   Remarks                                  |
+|:---------------:|:------------------------------------:|:--------------------------------------------------------:|:-----------------------------------------------------------:|:--------------------------------------------------------------------------:|
+|      v3, v4     | Darknet<br>(.c code, .weights, .cfg) | OpenCV-dnn<br>(w/ w/o CUDA, OpenVINO)<br>TensorRT(tkDNN) |     OpenCV-dnn: (.weights+.cfg)<br>TensorRT(tkDNN): .rt     |                                      -                                     |
+|      v5, v6     |         Pytorch<br>(.py, .pt)        |           OpenCV-dnn<br>(w/ w/o CUDA, OpenVINO)          |          OpenCV-dnn: .onnx<br>TensorRT(tkDNN): .rt          |                                      -                                     |
+|        v7       |         Pytorch<br>(.py, .pt)        | OpenCV-dnn<br>(w/ w/o CUDA, OpenVINO)<br>TensorRT(tkDNN) | OpenCV-dnn: .onnx / (.weights+.cfg)<br>TensorRT(tkDNN): .rt | (.weights+.cfg) shows poorer performance<br>**TensorRT: only v7-tiny yet** |
+
 <br>
 
 # Index
