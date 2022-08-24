@@ -25,36 +25,11 @@
 
 <br>
 
-# Index
-## 1. [Results](#1-results-1)
 
-## 2. Prerequisites
-#### ● [`.weights` and `.cfg` files](#-weights-and-cfg-files-1)
-#### ● [CMake version upgrade](#-cmake-version-upgrade): upper than 3.13 for OpenVINO, upper than 3.15 for TensorRT(tkDNN), upper than 3.12.8 to train custom data
-#### ● [CUDA / cuDNN](#-cuda--cudnn-1)
-#### ● [OpenCV with CUDA / cuDNN](#-opencv-with-cuda--cudnn-1)
-#### ● OpenCV with OpenVINO manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
-  + OpenVINO's prebuilt binary OpenCV is recommended instead. Refer installation below
-#### ● [cv_bridge](#-cv_bridge-opencv---ros-bridge): OpenCV - ROS bridge, should be built when OpenCV is manually built
-#### ● [TensorRT](#-tensorrt-1)
-#### ● [OpenVINO](#-openvino-1)
+## 1. Results: with MS-COCO pre-trained models
 
-## 3. Installation
-#### ● [Darknet ver.](#-darknet-ver-2)
-#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-2)
-#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
+<details> <summary> Unfold to see  </summary>
 
-## 4. Installation for ROS version
-#### ● [Darknet ver.](#-darknet-ver-3)
-#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-3)
-#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
-
-## 5. [How to train for custom data](#5-how-to-train-for-custom-data---refer-here-original-repo)
----
-
-<br><br><br><br>
-
-# 1. Results
 #### ● Tested on [2015 MOT dataset](https://motchallenge.net/data/MOT15/), with 640x480 resolution
 #### ● on i9-10900k+GTX Titan X(pascal) / i9-10900k+RTX 3080 / Intel NUC10i7FNH (i7-10710U) / Jetson TX2 / Jetson Xavier NX / Jetson Xavier AGX
 #### ● GPU monitor: [nvtop](https://github.com/Syllo/nvtop) or [this python code](gpuGraph.py), edited from Jetsonhacks' [code for Jetson boards](https://github.com/jetsonhacks/gpuGraphTX)
@@ -62,9 +37,7 @@
 [comment]: <> (+ text
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=MYbjjg_Mics" target="_blank"><img src="http://img.youtube.com/vi/MYbjjg_Mics/0.jpg" alt="IMAGE ALT TEXT" width="320" border="10" /></a>)
 
-<br>
-
-## ● Result clips: with MS-COCO pre-trained models (YOLO v4, YOLO v4-tiny)
+#### ● Result clips:  (YOLO v4, YOLO v4-tiny)
 + [Jetson Xavier AGX](https://youtu.be/4waUDFSaVeg)-from [Dongkyu Lee](https://github.com/dklee98)
 + [Jetson Xavier NX](https://youtu.be/7DnZBvuw7H0)
 + [Jetson TX2](https://youtu.be/fH9YxO4PKaM)
@@ -131,28 +104,39 @@
 
 <br>
 
-  
-<br><br><br>
 
-# 2. Prerequisites
+</details>
 
-### ● `.weights` and `.cfg` files
-+ Download `.weights` from homepage
+
+## 2. Prerequisites
+
+#### ● `.weights` and `.cfg` files: for YOLOv3, v4, v7
+
+<details><summary>Unfold to see</summary>
+
++ Download `.weights` and `.cfg` from homepage
++ v3 `.weights`
+
 ~~~shell
   $ cd ~/darknet
   $ wget https://pjreddie.com/media/files/yolov3.weights
-  $ wget https://pjreddie.com/media/files/yolov3-tiny.weights #for tiny (much faster, less accurate)
-  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
-  $ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
+  $ wget https://pjreddie.com/media/files/yolov3-tiny.weights
 ~~~
-+ Download `.cfg` from [homepage](https://github.com/AlexeyAB/darknet/tree/master/cfg)
-+ Further versions can be checked [here](https://github.com/AlexeyAB/darknet#pre-trained-models)
+
++ v4, v7 `.weights`: https://github.com/AlexeyAB/darknet/releases
++ v3, v4, v7 `.cfg`: https://github.com/AlexeyAB/darknet/tree/master/cfg
 
 ---
 
-### ● CMake version upgrade
+</details>
 
-<details><summary>[CLICK HERE To See]</summary>
+#### ● `.onnx` files for YOLOv5, v6, v7
+
+<details><summary>Unfold to see</summary>
+</details>
+
+#### ● `CMake` version upgrade: upper than 3.13 for `OpenVINO`, upper than 3.15 for `TensorRT(tkDNN)`, upper than 3.12.8 to train custom data
+<details><summary>Unfold to see</summary>
 
 ~~~shell
 $ wget https://github.com/Kitware/CMake/releases/download/v3.19.8/cmake-3.19.8.tar.gz
@@ -171,11 +155,9 @@ $ cmake --version
 
 </details>
 
----
+#### ● `CUDA` / `cuDNN`
 
-### ● CUDA / cuDNN
-
-<details><summary>[CLICK HERE To See]</summary>
+<details><summary>Unfold to see</summary>
 
 ### ● Install **CUDA** and **Graphic Driver**: 
 + Install CUDA and Graphic Driver
@@ -247,12 +229,10 @@ $ sudo chmod a+r <CUDA_PATH>/lib64/libcudnn*   #ex /usr/local/cuda-11.1/lib64/li
 
 </details>
 
----
+#### ● `OpenCV` with `CUDA` / `cuDNN`
 
-### ● OpenCV with CUDA / cuDNN
+<details><summary>Unfold to see OpenCV for Ubuntu 18.04 - ROS</summary>
 
-<details><summary>[click to see OpenCV for Ubuntu 18.04 - ROS1]</summary>
-    
 + Build OpenCV with CUDA - references: [link 1](https://webnautes.tistory.com/1030), [link 2](https://github.com/jetsonhacks/buildOpenCVXavier/blob/master/buildOpenCV.sh)
     + for Xavier do as below or sh file from jetsonhacks [here](https://github.com/jetsonhacks/buildOpenCVXavier)
     + If want to use **C API (e.g. Darknet YOLO)** with `OpenCV3`, then: 
@@ -352,9 +332,8 @@ compilation terminated. --> **for CUDA version 10**
 
 </details>
 
+<details> <summary> Unfold to see OpenCV for Ubuntu 20.04 - ROS2 </summary>
 
-<details><summary>[Click to see OpenCV for Ubuntu 20.04 - ROS2]</summary>
-    
 + Build OpenCV with CUDA - references: [link 1](https://webnautes.tistory.com/1479?category=704653)
 + **-D PYTHON3_PACKAGES_PATH=/usr/local/lib/python3.8/dist-packages** 
     + This is needed to prevent `No module name cv2` when `import cv2` in `Python3`
@@ -443,6 +422,48 @@ $ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this
 ---
 
 </details>
+
+
+
+#### ● `OpenCV` with `OpenVINO` manual build: not recommended, [direct link](https://github.com/opencv/opencv/wiki/Intel's-Deep-Learning-Inference-Engine-backend)
+  + OpenVINO's prebuilt binary OpenCV is recommended instead. 
+  
+#### ● `cv_bridge`: `OpenCV` - `ROS` bridge, should be built when `OpenCV` is manually built
+
+<details><summary>Unfold to see</summary>
+</details>
+
+#### ● `TensorRT`
+
+<details><summary>Unfold to see</summary>
+</details>
+
+#### ● `OpenVINO`
+
+<details><summary>Unfold to see</summary>
+</details>
+
+
+## 3. Installation
+#### ● [Darknet ver.](#-darknet-ver-2)
+#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-2)
+#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
+
+## 4. Installation for ROS version
+#### ● [Darknet ver.](#-darknet-ver-3)
+#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-3)
+#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
+
+## 5. [How to train for custom data](#5-how-to-train-for-custom-data---refer-here-original-repo)
+---
+
+<br><br><br><br>
+
+
+
+
+# 2. Prerequisites
+
 
 
 ---
