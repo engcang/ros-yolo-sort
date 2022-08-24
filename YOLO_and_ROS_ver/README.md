@@ -722,17 +722,17 @@ $ sudo ./install_prerequisites.sh
 
 <details><summary>Unfold to see .weight .cfg - v3, v4, v7</summary>
 
-#### ● Original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br>
-  ● Edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py) in this repo
+#### ● Original [python and c++ code](https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49) <br>
+  ● Edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/OpenCV_dnn_weights_v3v4v7.py) in this repo
 
 + Get the code (edited one)
 ~~~shell
-$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/OpenCV_dnn_weights_v3v4v7.py
 
 # Before run, check weight, cfg, class files' directory
-$ python3 OpenCV_dnn.py
+$ python3 OpenCV_dnn_weights_v3v4v7.py
 or for Python2,
-$ python OpenCV_dnn.py
+$ python OpenCV_dnn_weights_v3v4v7.py
 ~~~
 
 + Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
@@ -749,11 +749,30 @@ $ python OpenCV_dnn.py
 </details>
   
 <details><summary>Unfold to see .onnx - v5, v6, v7</summary>
-  
-  
-  
-  ---
-  
+
+#### ● [Python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/OpenCV_dnn_onnx_v5v6v7.py) in this repo
+
++ Get the code (edited one)
+~~~shell
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/OpenCV_dnn_onnx_v5v6v7.py
+
+# Before run, check onnx, class files' directory
+$ python3 OpenCV_dnn_onnx_v5v6v7.py
+or for Python2,
+$ python OpenCV_dnn_onnx_v5v6v7.py
+~~~
+
++ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
+
+|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
+|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
+| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
+|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
+
+---
+
+<br>
+
 </details>
 
 #### ● `TensorRT(tkDNN)` ver.
@@ -838,21 +857,21 @@ $ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darkne
 
 <details><summary>Unfold to see .weights + .cfg - v3, v4, v7</summary>
 
-#### ● Edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
+#### ● [Python ROS code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/ROS_OpenCV_dnn_weights_v3v4v7.py)
 
 + Get the code (edited one)
 ~~~shell
-$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/ros_opencv_dnn.py
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/ROS_OpenCV_dnn_weights_v3v4v7.py
 
 # Before run, check weight, cfg, class files' directory
 # also check topic name, inference rates, etc.
-$ python3 ros_opencv_dnn.py
+$ python3 ROS_OpenCV_dnn_weights_v3v4v7.py
 or for Python2,
-$ python ros_opencv_dnn.py
+$ python ROS_OpenCV_dnn_weights_v3v4v7.py
 
 or to easily change parameters using .launch file,
-$ chmod +x ros_opencv_dnn.py
-$ mv ros_opencv_dnn.py ~/directory_of_ros_package_you_want/scripts/
+$ chmod +x ROS_OpenCV_dnn_weights_v3v4v7.py
+$ mv ROS_OpenCV_dnn_weights_v3v4v7.py ~/directory_of_ros_package_you_want/scripts/
 $ gedit ~/directory_of_ros_package_you_want/launch/launch_file_you_want.launch
 edit launch file with <param name="" value=""/>
 ~~~
@@ -872,11 +891,35 @@ edit launch file with <param name="" value=""/>
   
 <details><summary>Unfold to see .onnx - v5, v6, v7</summary>
   
-  
-  
-  ---
-  
-  <br>
+#### ● [Python ROS code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/ROS_OpenCV_dnn_onnx_v5v6v7.py)
+
++ Get the code (edited one)
+~~~shell
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn_and_OpenVINO/ROS_OpenCV_dnn_onnx_v5v6v7.py
+
+# Before run, check onnx, class files' directory
+# also check topic name, inference rates, etc.
+$ python3 ROS_OpenCV_dnn_onnx_v5v6v7.py
+or for Python2,
+$ python ROS_OpenCV_dnn_onnx_v5v6v7.py
+
+or to easily change parameters using .launch file,
+$ chmod +x ROS_OpenCV_dnn_onnx_v5v6v7.py
+$ mv ROS_OpenCV_dnn_onnx_v5v6v7.py ~/directory_of_ros_package_you_want/scripts/
+$ gedit ~/directory_of_ros_package_you_want/launch/launch_file_you_want.launch
+edit launch file with <param name="" value=""/>
+~~~
+
++ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
+
+|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
+|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
+| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
+|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
+
+---
+
+<br>
   
 </details>
   

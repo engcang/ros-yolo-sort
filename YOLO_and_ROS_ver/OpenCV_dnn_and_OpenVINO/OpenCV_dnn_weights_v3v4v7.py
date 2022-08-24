@@ -1,14 +1,15 @@
 import cv2
 import time
+import numpy as np
 
 CONFIDENCE_THRESHOLD = 0.3
 NMS_THRESHOLD = 0.4
-COLORS = [(0, 255, 255), (255, 255, 0), (0, 255, 0), (255, 0, 0)]
 
 class_names = []
 #with open("classes.txt", "r") as f:
 with open("coco.names", "r") as f:
     class_names = [cname.strip() for cname in f.readlines()]
+COLORS = np.random.uniform(0, 255, size=(len(class_names), 3))
 
 vc = cv2.VideoCapture("MOT_19201080_30hz.mp4")
 
@@ -55,6 +56,5 @@ while cv2.waitKey(1) < 1:
     
     fps_label = "avg FPS: %.2f FPS: %.2f (excluding drawing %.2fms)" % (avg_FPS, 1 / (end - start), (end_drawing - start_drawing) * 1000)
     cv2.putText(frame, fps_label, (0, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 127), 2)
-    #print(fps_label)
     cv2.imshow("detections", frame)
 print(avg_FPS)

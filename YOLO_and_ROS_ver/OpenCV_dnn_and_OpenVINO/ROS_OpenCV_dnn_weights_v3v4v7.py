@@ -11,6 +11,7 @@ import time
 import rospy
 import signal
 import sys
+import numpy as np
 
 from sensor_msgs.msg import Image
 from sensor_msgs.msg import CompressedImage
@@ -27,16 +28,17 @@ class cv_yolo_ros():
         rospy.init_node('cv_yolo_ros_node', anonymous=True)
         self.flag = False
         self.inference_rate = rospy.get_param("/inference_rate", 30)
-        self.img_in_topic = rospy.get_param("/img_in_topic", "/d435i/stereo_ir/left/image_raw")
+        self.inference_img_size = rospy.get_param("/inference_img_size", 640)
+        self.img_in_topic = rospy.get_param("/img_in_topic", "/kitti/camera_color_left/image_raw")
         self.img_out = rospy.get_param("/img_out", True)
         self.img_out_topic = rospy.get_param("/img_out_topic", "/detected")
 
         self.confidence_threshold = rospy.get_param("/confidence_threshold", 0.3)
         self.nms_threshold = rospy.get_param("/nms_threshold", 0.4)
 
-        self.class_file = rospy.get_param("/class_file", "class.txt")
-        self.weight_file = rospy.get_param("/weight_file", "yolov4-tiny-3l-obj_final.weights")
-        self.cfg_file = rospy.get_param("/cfg_file", "yolov4-tiny-3l-obj.cfg")
+        self.class_file = rospy.get_param("/class_file", "classes.txt")
+        self.weight_file = rospy.get_param("/weight_file", "yolov4-tiny.weights")
+        self.cfg_file = rospy.get_param("/cfg_file", "yolov4-tiny.cfg")
         self.backend = rospy.get_param("/backend", cv2.dnn.DNN_BACKEND_CUDA)
     ### cv2.dnn.DNN_BACKEND_CUDA for GPU, 
     ### cv2.dnn.DNN_BACKEND_OPENCV for CPU
@@ -59,7 +61,7 @@ class cv_yolo_ros():
             self.class_names = [cname.strip() for cname in f.readlines()]
 
         self.model = cv2.dnn_DetectionModel(self.net)
-        self.model.setInputParams(size=(416, 416), scale=1/float(255.0), swapRB=True)
+        self.model.setInputParams(size=(self.inference_img_size, self.inference_img_size), scale=1/float(255.0), swapRB=True)
 
     def img_callback(self, msg):
         self.img_cb_in = self.bridge.imgmsg_to_cv2(msg, "bgr8")
@@ -68,9 +70,9 @@ class cv_yolo_ros():
 
 
 if __name__=='__main__':
-    COLORS = [(0, 255, 255), (255, 255, 0), (0, 255, 0), (255, 0, 0)]
     avg_FPS=0; count=0; total_fps=0;
     cyr=cv_yolo_ros()
+    COLORS = np.random.uniform(0, 255, size=(len(cyr.class_names), 3))
     while 1:
         try:
             if cyr.flag:
@@ -92,7 +94,6 @@ if __name__=='__main__':
 
                 fps_label = "avg FPS: %.2f FPS: %.2f (excluding drawing %.2fms)" % (avg_FPS, 1 / (end - start), (end_drawing - start_drawing) * 1000)
                 cv2.putText(frame, fps_label, (0, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 127), 2)
-                #print(fps_label)
                 img=cyr.bridge.cv2_to_imgmsg(frame, "bgr8")
                 img.header.stamp = rospy.Time.now()
                 cyr.img_publisher.publish(img)
