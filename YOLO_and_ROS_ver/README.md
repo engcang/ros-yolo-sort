@@ -430,48 +430,9 @@ $ sudo rm -r <opencv_source_directory> #optional for saving disk, but leave this
   
 #### ● `cv_bridge`: `OpenCV` - `ROS` bridge, should be built when `OpenCV` is manually built
 
-<details><summary>Unfold to see</summary>
-</details>
-
-#### ● `TensorRT`
-
-<details><summary>Unfold to see</summary>
-</details>
-
-#### ● `OpenVINO`
-
-<details><summary>Unfold to see</summary>
-</details>
-
-
-## 3. Installation
-#### ● [Darknet ver.](#-darknet-ver-2)
-#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-2)
-#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-2)
-
-## 4. Installation for ROS version
-#### ● [Darknet ver.](#-darknet-ver-3)
-#### ● [OpenCV(DNN) ver. / OpenVINO ver.](#-opencvdnn-ver--openvino-ver-3)
-#### ● [TensorRT(tkDNN) ver.](#-tensorrttkdnn-ver-3)
-
-## 5. [How to train for custom data](#5-how-to-train-for-custom-data---refer-here-original-repo)
----
-
-<br><br><br><br>
-
-
-
-
-# 2. Prerequisites
-
-
-
----
-
-### ● cv_bridge: OpenCV - ROS bridge
 #### ■ ROS1-cv_bridge
 
-<details><summary>[Click: CV_bridge with OpenCV 4.X version]</summary>
+<details><summary>Unfold to see cv_bridge with OpenCV 4.X version</summary>
 
 ### ● CV_bridge with OpenCV 4.X version
 + Referred [here](https://github.com/ros-perception/vision_opencv/issues/272#issuecomment-471311300)
@@ -522,7 +483,7 @@ $ cd .. && catkin build cv_bridge
 
 </details>
 
-<details><summary>[Click: CV_bridge with OpenCV 3.X version]</summary>
+<details><summary>Unfold to see cv_bridge with OpenCV 3.X version</summary>
   
 ### ● CV_bridge with OpenCV 3.X version
 ~~~shell
@@ -557,7 +518,7 @@ $ cd .. && catkin build cv_bridge
 
 #### ■ ROS2-cv_bridge
 
-<details><summary>[Click: CV_bridge with OpenCV 4.X version]</summary>
+<details><summary>Unfold to see cv_bridge with OpenCV 4.X version</summary>
 
 + If OpenCV with CUDA were built manually, build cv_bridge manually also
 ~~~bash
@@ -570,16 +531,16 @@ $ colcon build --symlink-install --packages-select cv_bridge image_geometry --al
 $ source install/setup.bash
 ~~~
 
+  ---
+  
 </details>
 
----
+#### ● `TensorRT`
 
-### ● TensorRT
-
-<details><summary>[CLICK HERE To See]</summary>
+<details><summary>Unfold to see</summary>
 
 + Download **right version** of `TensorRT` at [nvidia download link](https://developer.nvidia.com/nvidia-tensorrt-download)
-  + Please check your `CUDA`, `cuDNN` version
++ Please check your `CUDA`, `cuDNN` version
 + Install it
 ~~~shell
 $ cd ~/Downloads
@@ -600,21 +561,17 @@ Verify the installation!
 $ dpkg -l | grep TensorRT
 ~~~
 
----
-
-<br>
-
+  ---
+  
 </details>
 
----
+#### ● `OpenVINO`
 
-### ● OpenVINO
-
-<details><summary>[CLICK HERE To See]</summary>
-
-<br>
-
+<details><summary>Unfold to see</summary>
+  
 + OpenVINO [Download link](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html)
++ With `source /opt/intel/openvino/bin/setupvar.sh`, `OpenVINO` can be used within `OpenCV`
+  
 ~~~shell
 $ tar zxf l_openvino_toolkit_p_2021.3.394.tgz
 $ cd l_openvino_toolkit_p_2021.3.394
@@ -630,10 +587,58 @@ $ sudo ./install_prerequisites.sh
 ~~~
 
 ---
-
+  
 </details>
 
-<br><br><br>
+
+## 3. Installation
+#### ● `Darknet` ver.
+#### ● `OpenCV(DNN)` ver. (including `OpenVINO` ver.)
+#### ● `TensorRT(tkDNN)` ver.
+
+## 4. Installation for ROS version
+#### ● `Darknet` ver.
+#### ● `OpenCV(DNN)` ver. (including `OpenVINO` ver.)
+#### ● `TensorRT(tkDNN)` ver.
+
+## 5. How to train for custom data
+#### ● Get data and `labeling`
+
+<details><summary>Unfold to see</summary>
+
++ install [`yolo_mark`](https://github.com/AlexeyAB/Yolo_mark) and label images
++ need `cmake` upperthan 3.12.8, and `OpenCV`
++ check out the repo to see shortcuts and details
+~~~shell
+$ git clone https://github.com/AlexeyAB/Yolo_mark.git
+$ cd Yolo_mark 
+$ cmake . && make
+
+$ cd Yolo_mark/x64/Release/data
+$ gedit obj.data 
+# edit the number of classes - e.g., classses=10
+
+$ gedit obj.names
+# edit the names of classes - e.g., person, drone, ...
+
+$ cd img
+# place all images you want to use to train
+
+$ cd Yolo_mark && ./linux_mark.sh
+# draw bounding boxes, then you get label files (.txt files)
+~~~
+  
+</details>
+  
+#### ● Train network
++ v3, v4, v7 - [official repo](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects)
+  
+  
+---
+
+<br><br><br><br>
+
+
 
 # 3. Installation
 ### ● Darknet ver.
@@ -946,49 +951,4 @@ $ roslaunch tkdnn-ros main.launch
 
 </details>
 
-<br><br><br>
-
-# 5. How to train for custom data - refer [here, original repo](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects)
-
-<details><summary>[CLICK HERE To See]</summary>
-
-#### ● Get the image data and label them
-+ install [`yolo_mark`](https://github.com/AlexeyAB/Yolo_mark) and label images
-  + need `cmake` upperthan 3.12.8, and `OpenCV`
-  + check out the repo to see shortcuts and details
-~~~shell
-$ git clone https://github.com/AlexeyAB/Yolo_mark.git
-$ cd Yolo_mark 
-$ cmake . && make
-
-$ cd Yolo_mark/x64/Release/data
-$ gedit obj.data 
-# edit the number of classes - e.g., classses=10
-
-$ gedit obj.names
-# edit the names of classes - e.g., person, drone, ...
-
-$ cd img
-# place all images you want to use to train
-
-$ cd Yolo_mark && ./linux_mark.sh
-# draw bounding boxes, then you get label files (.txt files)
-~~~
-
-#### ● Train images with labels
-+ [details](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects)
-~~~shell
-# v4
-$ ./darknet detector train data/obj.data yolov4-obj.cfg yolov4.conv.137
-
-# v4-tiny & v4-tiny-3l
-$ ./darknet detector train data/obj.data yolov4-tiny-obj.cfg yolov4-tiny.conv.29
-~~~
-+ Trouble shooting
-  + **cannot load image error in load_data_detection() - OpenCV**: check if the path to images are correct in `train.txt`
-
----
-
-<br>
-
-</details>
+  
