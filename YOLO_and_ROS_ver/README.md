@@ -135,6 +135,60 @@
 <details><summary>Unfold to see</summary>
 </details>
 
+#### `.rt` file from `.weights` and `.cfg`: for `TensorRT(tkDNN)` version
+
+<details><summary>Unfold to see</summary>
+  
+### ● prepare `.rt file` ★much work to do★
++ Export `weight` and `cfg` file into `.bin` files as [original repo](https://github.com/ceccocats/tkDNN#how-to-export-weights)
+~~~shell
+Get the darknet (only for export, not used for detection)
+$ git clone https://git.hipert.unimore.it/fgatti/darknet.git
+If this darknet repo does not work, try with this one: 
+              https://github.com/AlexeyAB/darknet/issues/6116#issuecomment-655483646
+              https://github.com/AlexeyAB/darknet/files/4890564/darknet-master.zip
+$ cd darknet
+$ make
+$ mkdir layers debug
+$ ./darknet export <path-to-cfg-file> <path-to-weights> layers
+-> .bin files are generated in debug and layers folders
+~~~
+
++ Build `.rt` file, which can generate `executable file`
+~~~shell
+$ cd tkDNN/tests/darknet
+$ cp yolo4.cpp <name_you_want>.cpp
+$ gedit <name_you_want>.cpp
+~~~
+~~~cpp
+std::string bin_path = "path from tkDNN/build folder"; //edit
+
+// Edit here with output layer, check exported 'layers' folder
+// e.g., for yolo v4 tiny, exported .bin file with name 'g' are 'g30.bin' and 'g37.bin'
+// files starting with 'g' are output layer
+std::vector<std::string> output_bins = {
+    bin_path + "/debug/layer30_out.bin",
+    bin_path + "/debug/layer37_out.bin"
+};
+
+// also check .cfg and .names (.txt) files directory
+std::string cfg_path  = std::string(TKDNN_PATH) + "/tests/darknet/cfg/yolo4tiny.cfg";
+std::string name_path = std::string(TKDNN_PATH) + "/tests/darknet/names/coco.names";
+~~~
+~~~shell
+$ cd tkdnn/build
+$ cmake .. && make
+
+# executable file name with <name_you_want> is generated.
+# Excute it to generate .rt file
+### it reads the .cfg and .bin files written in <name_you_want>.cpp file, so directories should be accurate
+$ ./test_<name_you_want> 
+~~~
+  
+  ---
+  
+  </details>
+
 #### ● `CMake` version upgrade: upper than 3.13 for `OpenVINO`, upper than 3.15 for `TensorRT(tkDNN)`, upper than 3.12.8 to train custom data
 <details><summary>Unfold to see</summary>
 
@@ -598,9 +652,143 @@ $ sudo ./install_prerequisites.sh
 
 ## 4. Installation for ROS version
 #### ● `Darknet` ver.
+  
+<details><summary>Unfold to see</summary>
+  
+#### ● original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
++ Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
+~~~shell
+$ cd catkin_workspace/src
+$ git clone https://github.com/leggedrobotics/darknet_ros # up to v3
+$ git clone https://github.com/tom13133/darknet_ros # up to v4
+$ cd darknet_ros/ && git submodule update --init --recursive
+$ cd ~/catkin_workspace
+# before build, check (-O3 -gencode arch=compute_<version>,code=sm_<version>) part in darknet_ros/darknet_ros/CMakeLists.txt if you use CUDA
+# ex) 75 for GTX1650, 86 for RTX3080
+$ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
+~~~
+
+### ● Execution and result
++ Use the proper `.yaml` files and `.launch` files as attached in this repo
+~~~shell
+$ roslaunch darknet_ros darknet_ros_yolov3tiny.launch network_param_file:=darknet_ros_yolov3tiny.yaml
+or
+$ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darknet_ros_yolov4tiny.yaml
+~~~
++ with Logitech c930e Video clip
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="240" border="10" /></a>
+
+---
+
+<br>
+
+</details>
+  
 #### ● `OpenCV(DNN)` ver. (including `OpenVINO` ver.)
+
+<details><summary>Unfold to see</summary>
+
+### ● Available from OpenCV version 4.4.0
+#### ● edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
+
++ Get the code (edited one)
+~~~shell
+$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/ros_opencv_dnn.py
+
+# Before run, check weight, cfg, class files' directory
+# also check topic name, inference rates, etc.
+$ python3 ros_opencv_dnn.py
+or for Python2,
+$ python ros_opencv_dnn.py
+
+or to easily change parameters using .launch file,
+$ chmod +x ros_opencv_dnn.py
+$ mv ros_opencv_dnn.py ~/directory_of_ros_package_you_want/scripts/
+$ gedit ~/directory_of_ros_package_you_want/launch/launch_file_you_want.launch
+edit launch file with <param name="" value=""/>
+~~~
+
++ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
+
+|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
+|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
+| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
+|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
+
+---
+
+<br>
+
+</details>
+  
 #### ● `TensorRT(tkDNN)` ver.
 
+<details><summary>Unfold to see</summary>
+
+## How to install
+
++ Clone my other repo - [link](https://github.com/engcang/tkdnn-ros).
++ And build `tkDNN` first.
+
+~~~shell
+$ cd ~/<your_workspace>/src
+$ git clone --recursive https://github.com/engcang/tkdnn-ros
+$ cd tkdnn-ros/tkDNN
+$ mkdir build 
+$ mkdir installed
+$ cd build
+$ cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../installed
+$ make install
+~~~
+
++ build `ROS` package
+
+~~~shell
+$ cd ~/<your_workspace>
+
+$ catkin build -DtkDNN_DIR=<absolute_path_to_your_workspace>/src/tkdnn-ros/tkDNN/installed/share/tkDNN/cmake
+
+or
+
+$ echo "export tkdnn_DIR=<absolute_path_to_your_workspace>/src/tkdnn-ros/tkDNN/installed/share/tkDNN/cmake" >> ~/.bashrc
+$ . ~/.bashrc
+$ catkin build
+
+or
+
+$ catkin config -DtkDNN_DIR=<absolute_path_to_your_workspace>/src/tkdnn-ros/tkDNN/installed/share/tkDNN/cmake
+$ catkin build
+~~~
+
++ Do not forget to register `tkDNN` libraries into `LD_LIBRARY_PATH`
+
+~~~shell
+$ cd ~/<your_workspace>
+$ echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/src/tkdnn-ros/tkDNN/installed/lib" >> ~/.bashrc
+$ . ~/.bashrc
+~~~
+
+<br>
+
+## How to run
+
++ Make sure you have `.rt` files, refer above section!!!
+
++ change parameters in `main.launch` file
+
++ run the code
+~~~shell
+$ roslaunch tkdnn-ros main.launch
+~~~
+  
+  
+---
+
+<br>
+
+</details>
+
+  
 ## 5. How to train for custom data
 #### ● Get data and `labeling`
 
@@ -640,6 +828,30 @@ $ cd Yolo_mark && ./linux_mark.sh
 
 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 # 3. Installation
 ### ● Darknet ver.
 
@@ -740,55 +952,11 @@ $ make
   + cuDNN version is too recent. Apply [this patch](https://github.com/ceccocats/tkDNN/issues/74#issuecomment-659093110)
   + `$ cd tkdnn && patch -p1 < ./tkDNN_cudnn8support.patch`
 + **Please set them or make sure they are set and tested correctly in the CMake files: CUDA_cublas_device_LIBRARY (ADVANCED)**
-  + (Almost cases) `Cmake version` is not met. Go to [here](#-cmake-version-upgrade-upper-than-313-for-openvino-upper-than-315-for-tensorrttkdnn-upper-than-3128-for-train-custom-data). Please check `Prerequisites` first!!!!!
-  + (Less cases) CUDA libraries are not installed (libcublas, etc...)
+  + (Usual cases) `Cmake version` is not met. Go to [here](#-cmake-version-upgrade-upper-than-313-for-openvino-upper-than-315-for-tensorrttkdnn-upper-than-3128-for-train-custom-data). Please check `Prerequisites` first!!!
+  + (Unusual cases) CUDA libraries are not installed (libcublas, etc...)
   
 
-### ● prepare `.rt file` ★much work to do★
-+ Export `weight` and `cfg` file into `.bin` files as [original repo](https://github.com/ceccocats/tkDNN#how-to-export-weights)
-~~~shell
-Get the darknet (only for export, not used for detection)
-$ git clone https://git.hipert.unimore.it/fgatti/darknet.git
-If this darknet repo does not work, try with this one: 
-              https://github.com/AlexeyAB/darknet/issues/6116#issuecomment-655483646
-              https://github.com/AlexeyAB/darknet/files/4890564/darknet-master.zip
-$ cd darknet
-$ make
-$ mkdir layers debug
-$ ./darknet export <path-to-cfg-file> <path-to-weights> layers
--> .bin files are generated in debug and layers folders
-~~~
 
-+ Build `.rt` file, which can generate `executable file`
-~~~shell
-$ cd tkDNN/tests/darknet
-$ cp yolo4.cpp <name_you_want>.cpp
-$ gedit <name_you_want>.cpp
-~~~
-~~~cpp
-std::string bin_path = "path from tkDNN/build folder"; //edit
-
-// Edit here with output layer, check exported 'layers' folder
-// e.g., for yolo v4 tiny, exported .bin file with name 'g' are 'g30.bin' and 'g37.bin'
-// files starting with 'g' are output layer
-std::vector<std::string> output_bins = {
-    bin_path + "/debug/layer30_out.bin",
-    bin_path + "/debug/layer37_out.bin"
-};
-
-// also check .cfg and .names (.txt) files directory
-std::string cfg_path  = std::string(TKDNN_PATH) + "/tests/darknet/cfg/yolo4tiny.cfg";
-std::string name_path = std::string(TKDNN_PATH) + "/tests/darknet/names/coco.names";
-~~~
-~~~shell
-$ cd tkdnn/build
-$ cmake .. && make
-
-# executable file name with <name_you_want> is generated.
-# Excute it to generate .rt file
-### it reads the .cfg and .bin files written in <name_you_want>.cpp file, so directories should be accurate
-$ ./test_<name_you_want> 
-~~~
 
 ### ● Execution, refer [here](https://github.com/ceccocats/tkDNN/blob/master/docs/demo.md) for more detail
 ~~~shell
@@ -813,142 +981,4 @@ and re-generate .rt file as above before execute.
 
 <br><br><br>
 
-# 4. Installation for ROS version
-### ● Darknet ver.
-<details><summary>[CLICK HERE To See]</summary>
-  
-#### ● original repo - upto [v4 : here](https://github.com/tom13133/darknet_ros), upto [v3 : here](https://github.com/leggedrobotics/darknet_ros)
-+ Get and build Darknet_ROS version from upto [v4 : here](https://github.com/tom13133/darknet_ros) upto v3 [here](https://github.com/leggedrobotics/darknet_ros)
-~~~shell
-$ cd catkin_workspace/src
-$ git clone https://github.com/leggedrobotics/darknet_ros # up to v3
-$ git clone https://github.com/tom13133/darknet_ros # up to v4
-$ cd darknet_ros/ && git submodule update --init --recursive
-$ cd ~/catkin_workspace
-# before build, check (-O3 -gencode arch=compute_<version>,code=sm_<version>) part in darknet_ros/darknet_ros/CMakeLists.txt if you use CUDA
-# ex) 75 for GTX1650, 86 for RTX3080
-$ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
-~~~
 
-### ● Execution and result
-+ Use the proper `.yaml` files and `.launch` files as attached in this repo
-~~~shell
-$ roslaunch darknet_ros darknet_ros_yolov3tiny.launch network_param_file:=darknet_ros_yolov3tiny.yaml
-or
-$ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darknet_ros_yolov4tiny.yaml
-~~~
-+ with Logitech c930e Video clip
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=nfPVkNXSs-A" target="_blank"><img src="yolo_v3_capture_20200620.png" alt="IMAGE ALT TEXT" width="240" border="10" /></a>
-
----
-
-<br>
-
-</details>
-
-### ● OpenCV(DNN) ver. / OpenVINO ver.
-
-
-<details><summary>[CLICK HERE To See]</summary>
-
-### ● Available from OpenCV version 4.4.0
-#### ● edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
-
-+ Get the code (edited one)
-~~~shell
-$ wget https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/ros_opencv_dnn.py
-
-# Before run, check weight, cfg, class files' directory
-# also check topic name, inference rates, etc.
-$ python3 ros_opencv_dnn.py
-or for Python2,
-$ python ros_opencv_dnn.py
-
-or to easily change parameters using .launch file,
-$ chmod +x ros_opencv_dnn.py
-$ mv ros_opencv_dnn.py ~/directory_of_ros_package_you_want/scripts/
-$ gedit ~/directory_of_ros_package_you_want/launch/launch_file_you_want.launch
-edit launch file with <param name="" value=""/>
-~~~
-
-+ Read the comment in the code, choose a proper pair of `DNN_BACKEND` and `DNN_TARGET`. refer [here](https://docs.opencv.org/4.5.2/d6/d0f/group__dnn.html)
-
-|  Remark |                 OpenCV with CUDA enabled                |    OpenCV with only CPU    |               OpenVINO               |
-|:-------:|:-------------------------------------------------------:|:--------------------------:|:------------------------------------:|
-| BACKEND |                 cv2.dnn.DNN_BACKEND_CUDA                | cv2.dnn.DNN_BACKEND_OPENCV | cv2.dnn.DNN_BACKEND_INFERENCE_ENGINE |
-|  TARGET | cv2.dnn.DNN_TARGET_CUDA<br>cv2.dnn.DNN_TARGET_CUDA_FP16 |   cv2.dnn.DNN_TARGET_CPU   |        cv2.dnn.DNN_TARGET_CPU        |
-
----
-
-<br>
-
-</details>
-
-### ● TensorRT(tkDNN) ver.
-
-<details><summary>[CLICK HERE To See]</summary>
-
-## How to install
-
-+ Clone my other repo - [link](https://github.com/engcang/tkdnn-ros).
-+ And build `tkDNN` first.
-
-~~~shell
-$ cd ~/<your_workspace>/src
-$ git clone --recursive https://github.com/engcang/tkdnn-ros
-$ cd tkdnn-ros/tkDNN
-$ mkdir build 
-$ mkdir installed
-$ cd build
-$ cmake .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../installed
-$ make install
-~~~
-
-+ build `ROS` package
-
-~~~shell
-$ cd ~/<your_workspace>
-
-$ catkin build -DtkDNN_DIR=<absolute_path_to_your_workspace>/src/tkdnn-ros/tkDNN/installed/share/tkDNN/cmake
-
-or
-
-$ echo "export tkdnn_DIR=<absolute_path_to_your_workspace>/src/tkdnn-ros/tkDNN/installed/share/tkDNN/cmake" >> ~/.bashrc
-$ . ~/.bashrc
-$ catkin build
-
-or
-
-$ catkin config -DtkDNN_DIR=<absolute_path_to_your_workspace>/src/tkdnn-ros/tkDNN/installed/share/tkDNN/cmake
-$ catkin build
-~~~
-
-+ Do not forget to register `tkDNN` libraries into `LD_LIBRARY_PATH`
-
-~~~shell
-$ cd ~/<your_workspace>
-$ echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/src/tkdnn-ros/tkDNN/installed/lib" >> ~/.bashrc
-$ . ~/.bashrc
-~~~
-
-<br>
-
-## How to run
-
-+ Make sure you have `.rt` files, refer [here, within repo](https://github.com/engcang/ros-yolo-sort/tree/master/YOLO_and_ROS_ver#-tensorrttkdnn-ver-2)
-
-+ change parameters in `main.launch` file
-
-+ run the code
-~~~shell
-$ roslaunch tkdnn-ros main.launch
-~~~
-  
-  
----
-
-<br>
-
-</details>
-
-  
