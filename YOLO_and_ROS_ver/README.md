@@ -128,18 +128,25 @@
 
 ---
 
+  <br>
+  
 </details>
 
 #### ● `.onnx` files for YOLOv5, v6, v7
 
 <details><summary>Unfold to see</summary>
+  
+  ---
+  
+  <br>
+  
 </details>
 
-#### `.rt` file from `.weights` and `.cfg`: for `TensorRT(tkDNN)` version
+#### ● `.rt` file from `.weights` and `.cfg`: for `TensorRT(tkDNN)` version
 
 <details><summary>Unfold to see</summary>
   
-### ● prepare `.rt file` ★much work to do★
+#### ● prepare `.rt file` ★much work to do★
 + Export `weight` and `cfg` file into `.bin` files as [original repo](https://github.com/ceccocats/tkDNN#how-to-export-weights)
 ~~~shell
 Get the darknet (only for export, not used for detection)
@@ -185,7 +192,19 @@ $ cmake .. && make
 $ ./test_<name_you_want> 
 ~~~
   
+#### ● Changing inference data type: **re-generate `.rt file` after export tkdnn mode**
+~~~shell
+type one of belows: (TKDNN_MODE=FP32 is default before change)
+                                                           
+$ export TKDNN_MODE=FP16
+$ export TKDNN_MODE=INT8
+
+and re-generate .rt file as above before execute.
+~~~
+  
   ---
+  
+  <br>
   
 </details>
 
@@ -213,8 +232,7 @@ $ cmake --version
 
 <details><summary>Unfold to see</summary>
 
-### ● Install **CUDA** and **Graphic Driver**: 
-+ Install CUDA and Graphic Driver
++ Install `CUDA` and `Graphic Driver`
 ~~~shell
     $ sudo apt install gcc make
     get the right version of CUDA(with graphic driver) .deb file at https://developer.nvidia.com/cuda-downloads
@@ -574,7 +592,8 @@ $ cd .. && catkin build cv_bridge
 
 <details><summary>Unfold to see cv_bridge with OpenCV 4.X version</summary>
 
-+ If OpenCV with CUDA were built manually, build cv_bridge manually also
+### ● CV_bridge with OpenCV 4.X version - ROS2
+
 ~~~bash
 $ cd ~/colcon_ws/src && git clone https://github.com/ros-perception/vision_opencv
 $ cd vision_opencv
@@ -586,6 +605,8 @@ $ source install/setup.bash
 ~~~
 
   ---
+  
+  <br>
   
 </details>
 
@@ -617,6 +638,8 @@ $ dpkg -l | grep TensorRT
 
   ---
   
+  <br>
+  
 </details>
 
 #### ● `OpenVINO`
@@ -642,17 +665,61 @@ $ sudo ./install_prerequisites.sh
 
 ---
   
+  <br>
+  
 </details>
 
 
 ## 3. Installation
 #### ● `Darknet` ver.
+  
+<details><summary>Unfold to see</summary>
+
+#### ● Install darknet
++ Clone and make
+~~~shell
+  $ git clone https://github.com/AlexeyAB/darknet
+  $ cd darknet
+  $ gedit Makefile # => Edit if you want to use option 
+     # OPENCV=1 is needed to watch GUI result
+  # uncomment proper line "ARCH= -gencode arch=compute....." for your GPU
+  $ make
+~~~
+
+#### ● Execution
++ Using on Test data (Image)
+~~~shell
+  $ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg #or any other image files
+  $ ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg  #V3 tiny
+~~~
++ Using on Test data (Video, Live)
+~~~shell
+# Video
+  $ ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights any_video.mp4
+
+# Live camera
+  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights -c 1 # 1 is camera number, as onboard camera is 0, usb camera is 1
+  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights /dev/video1 #same here
+~~~
+
+#### ● Trouble shooting
++ *No such file lib....* when **execute**
+~~~shell
+  $ sudo ldconfig
+~~~
+
+---
+
+<br>
+
+</details>
+  
 #### ● `OpenCV(DNN)` ver. (including `OpenVINO` ver.)
 
 <details><summary>Unfold to see .weight .cfg - v3, v4, v7</summary>
 
-  ### ● Available from OpenCV version 4.4.0
-#### ● original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br> ● edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py)
+#### ● original [python and c++ code](https://raw.githubusercontent.com/engcang/ros-yolo-sort/master/YOLO_and_ROS_ver/OpenCV_dnn.py) <br>
+  ● Edited [python code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/OpenCV_dnn.py) in this repo
 
 + Get the code (edited one)
 ~~~shell
@@ -687,6 +754,48 @@ $ python OpenCV_dnn.py
 
 #### ● `TensorRT(tkDNN)` ver.
 
+<details><summary>Unfold to see</summary>
+
+#### ● install tkDNN
+
+~~~shell
+$ git clone https://github.com/ceccocats/tkDNN
+$ cd tkDNN
+$ mkdir build && cd build
+$ cmake ..
+$ make
+~~~
+#### Fuxxing ★Trouble★ shooting
++ **error: ‘CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST’ was not declared in this scope**
+  + cuDNN version is too recent. Apply [this patch](https://github.com/ceccocats/tkDNN/issues/74#issuecomment-659093110)
+  + `$ cd tkdnn && patch -p1 < ./tkDNN_cudnn8support.patch`
++ **Please set them or make sure they are set and tested correctly in the CMake files: CUDA_cublas_device_LIBRARY (ADVANCED)**
+  + (Usual cases) `Cmake version` is not met. Go to [here](#-cmake-version-upgrade-upper-than-313-for-openvino-upper-than-315-for-tensorrttkdnn-upper-than-3128-for-train-custom-data). Please check `Prerequisites` first!!!
+  + (Unusual cases) CUDA libraries are not installed (libcublas, etc...)
+  
+
+#### ● Execution, refer [here](https://github.com/ceccocats/tkDNN/blob/master/docs/demo.md) for more detail
+~~~shell
+$ cd tkdnn/build
+
+Edit the paths in the demoConfig.yaml file before!
+$ ./demo ../demo/demoConfig.yaml
+~~~
+
+#### ● Changing inference data type: **re-generate `.rt file` after export tkdnn mode**
+~~~shell
+type one of belows: (TKDNN_MODE=FP32 is default before change)
+                                                           
+$ export TKDNN_MODE=FP16
+$ export TKDNN_MODE=INT8
+
+and re-generate .rt file as above before execute.
+~~~
+
+---
+
+</details>
+  
 ## 4. Installation for ROS version
 #### ● `Darknet` ver.
   
@@ -705,7 +814,7 @@ $ cd ~/catkin_workspace
 $ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
 ~~~
 
-### ● Execution and result
+#### ● Execution and result
 + Use the proper `.yaml` files and `.launch` files as attached in this repo
 ~~~shell
 $ roslaunch darknet_ros darknet_ros_yolov3tiny.launch network_param_file:=darknet_ros_yolov3tiny.yaml
@@ -725,8 +834,7 @@ $ roslaunch darknet_ros darknet_ros_yolov4tiny.launch network_param_file:=darkne
 
 <details><summary>Unfold to see .weights + .cfg - v3, v4, v7</summary>
 
-### ● Available from OpenCV version 4.4.0
-#### ● edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
+#### ● Edited [python ros code](https://github.com/engcang/ros-yolo-sort/blob/master/YOLO_and_ROS_ver/ros_opencv_dnn.py)
 
 + Get the code (edited one)
 ~~~shell
@@ -764,13 +872,15 @@ edit launch file with <param name="" value=""/>
   
   ---
   
+  <br>
+  
 </details>
   
 #### ● `TensorRT(tkDNN)` ver.
 
 <details><summary>Unfold to see</summary>
 
-## How to install
+### ● How to install
 
 + Clone my other repo - [link](https://github.com/engcang/tkdnn-ros).
 + And build `tkDNN` first.
@@ -813,9 +923,7 @@ $ echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/src/tkdnn-ros/tkDNN/insta
 $ . ~/.bashrc
 ~~~
 
-<br>
-
-## How to run
+### ● How to run
 
 + Make sure you have `.rt` files, refer above section!!!
 
@@ -870,131 +978,3 @@ $ cd Yolo_mark && ./linux_mark.sh
 ---
 
 <br><br><br><br>
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-# 3. Installation
-### ● Darknet ver.
-
-<details><summary>[CLICK HERE To See]</summary>
-
-### ● Install darknet
-+ Clone and make
-~~~shell
-  $ git clone https://github.com/AlexeyAB/darknet
-  $ cd darknet
-  $ gedit Makefile # => Edit if you want to use option 
-     # OPENCV=1 is needed to watch GUI result
-  # uncomment proper line "ARCH= -gencode arch=compute....." for your GPU
-  $ make
-~~~
-
-### ● Execution
-+ Using on Test data (Image)
-~~~shell
-  $ ./darknet detect cfg/yolov3.cfg yolov3.weights data/dog.jpg #or any other image files
-  $ ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg  #V3 tiny
-~~~
-+ Using on Test data (Video, Live)
-~~~shell
-# Video
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights any_video.mp4
-
-# Live camera
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights -c 1 # 1 is camera number, as onboard camera is 0, usb camera is 1
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights /dev/video1 #same here
-~~~
-+ Using onboard camera of TX2 development kit (Live), *tiny*
-~~~shell
-  $ ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights "nvcamerasrc ! video/x-raw(memory:NVMM), width=(int)1280, height=(int)720,format=(string)I420, framerate=(fraction)30/1 ! nvvidconv flip-method=0 ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
-~~~
-
-### ● Trouble shooting
-+ *No such file lib....* when **execute**
-~~~shell
-  $ sudo ldconfig
-~~~
-
----
-
-<br>
-
-</details>
-
-
-### ● TensorRT(tkDNN) ver.
-
-<details><summary>[CLICK HERE To See]</summary>
-
-<br>
-
-### ● A lot referred from [here](https://github.com/Keunyoung-Jung/Yolov4-tkdnn)
-
-### ● install tkDNN
-
-~~~shell
-$ git clone https://github.com/ceccocats/tkDNN
-$ cd tkDNN
-$ mkdir build && cd build
-$ cmake ..
-$ make
-~~~
-#### Fucking ★Trouble★ shooting
-+ **error: ‘CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST’ was not declared in this scope**
-  + cuDNN version is too recent. Apply [this patch](https://github.com/ceccocats/tkDNN/issues/74#issuecomment-659093110)
-  + `$ cd tkdnn && patch -p1 < ./tkDNN_cudnn8support.patch`
-+ **Please set them or make sure they are set and tested correctly in the CMake files: CUDA_cublas_device_LIBRARY (ADVANCED)**
-  + (Usual cases) `Cmake version` is not met. Go to [here](#-cmake-version-upgrade-upper-than-313-for-openvino-upper-than-315-for-tensorrttkdnn-upper-than-3128-for-train-custom-data). Please check `Prerequisites` first!!!
-  + (Unusual cases) CUDA libraries are not installed (libcublas, etc...)
-  
-
-
-
-### ● Execution, refer [here](https://github.com/ceccocats/tkDNN/blob/master/docs/demo.md) for more detail
-~~~shell
-$ cd tkdnn/build
-
-Edit the paths in the demoConfig.yaml file before!
-$ ./demo ../demo/demoConfig.yaml
-~~~
-
-### ● Changing inference data type: **re-generate `.rt file` after export tkdnn mode**
-~~~shell
-type one of belows: (TKDNN_MODE=FP32 is default before change)
-$ export TKDNN_MODE=FP16
-$ export TKDNN_MODE=INT8
-
-and re-generate .rt file as above before execute.
-~~~
-
----
-
-</details>
-
-<br><br><br>
-
-
