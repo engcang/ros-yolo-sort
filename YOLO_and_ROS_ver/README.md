@@ -137,6 +137,12 @@
 
 <details><summary>Unfold to see</summary>
   
+  #### ● Refer this repo - https://github.com/linghu8812/tensorrt_inference
+  + YOLOv4 `.onnx` - https://github.com/linghu8812/tensorrt_inference/tree/master/project/Yolov4
+  + YOLOv5 `.onnx` - https://github.com/linghu8812/tensorrt_inference/tree/master/project/yolov5 
+  + YOLOv6 `.onnx` - https://github.com/linghu8812/tensorrt_inference/tree/master/project/YOLOv6
+  + YOLOv7 `.onnx` - https://github.com/linghu8812/tensorrt_inference/tree/master/project/yolov7
+  
   ---
   
   <br>
