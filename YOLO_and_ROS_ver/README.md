@@ -2,9 +2,10 @@
 + Darknet version: [recent github](https://github.com/AlexeyAB/darknet), [old homepage](https://pjreddie.com/darknet/), [old github](https://github.com/pjreddie/darknet)
 + OpenCV(DNN) version: [original code gist](https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49)
   + [OpenCV-dnn benchmark and discuss](https://github.com/AlexeyAB/darknet/issues/6245), [OpenCV-dnn benchmark](https://github.com/AlexeyAB/darknet/issues/6067)
-+ OpenVINO version: this repo used `OpenVINO's prebuilt OpenCV + dnn` but there are other versions: [v4 and v4tiny](https://github.com/TNTWEN/OpenVINO-YOLOV4), [v3 and v3tiny](https://github.com/PINTO0309/OpenVINO-YoloV3)
-+ TensorRT(tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
-+ other versions: [other versions links in original github](https://github.com/AlexeyAB/darknet#yolo-v4-in-other-frameworks)
++ OpenVINO version: this repo used `OpenVINO's prebuilt OpenCV + dnn`
+  + But there are other versions: [v4 and v4tiny](https://github.com/TNTWEN/OpenVINO-YOLOV4), [v3 and v3tiny](https://github.com/PINTO0309/OpenVINO-YoloV3)
++ TensorRT (tkDNN) version - [github](https://github.com/ceccocats/tkDNN)
++ TensorRT (direct) version - [github](https://github.com/engcang/TensorRT_YOLOv9_ROS)
 
 <br>
 
@@ -15,6 +16,8 @@
 | OpenCV-dnn<br>+ CUDA/cuDNN | OpenCV ver from 4.4.0 |   utilized  |           -          |          O         |   v3, v4, v5, v6, v7  |
 |          OpenVINO          |       Intel only      |      O      |           -          | Only for GPU stick |   v3, v4, v5, v6, v7  |
 |       TensorRT(tkDNN)      |        need GPU       |   utilized  |           -          |          O         | v3, v4, v7(only tiny) |
+|          Pytorch           |  .pt -> .onnx -> .engine | O        |           -          |          O         |        from v5        |
+|       TensorRT(direct)     |      .engine file     |   utilized  |           -          |          O         |        from v5        |
 
 
 | YOLO<br>Version |       Default<br>Implementation      |   Supported<br>Implementation<br>within this repository  |                       Necessary files                       |                                   Remarks                                  |
@@ -22,6 +25,9 @@
 |      v3, v4     | Darknet<br>(.c code, .weights, .cfg) | OpenCV-dnn<br>(w/ w/o CUDA, OpenVINO)<br>TensorRT(tkDNN) |     OpenCV-dnn: (.weights+.cfg)<br>TensorRT(tkDNN): .rt     |                                      -                                     |
 |      v5, v6     |         Pytorch<br>(.py, .pt)        |           OpenCV-dnn<br>(w/ w/o CUDA, OpenVINO)          |          OpenCV-dnn: .onnx<br>TensorRT(tkDNN): .rt          |                                      -                                     |
 |        v7       |         Pytorch<br>(.py, .pt)        | OpenCV-dnn<br>(w/ w/o CUDA, OpenVINO)<br>TensorRT(tkDNN) | OpenCV-dnn: .onnx / (.weights+.cfg)<br>TensorRT(tkDNN): .rt | (.weights+.cfg) shows poorer performance<br>**TensorRT: only v7-tiny yet** |
+|    from v5      |              .pt -> .onnx            |                   TensorRT,<br>Pytorch                   |       Pytorch with .pt, .onnx<br>TensorRT with .engine      |       **From v5 on, this will be general usage (I guess)**                 |
+
+#### To check recent TensorRT version, check here - https://github.com/engcang/TensorRT_YOLOv9_ROS
 
 <br>
 
